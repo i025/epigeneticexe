@@ -1,0 +1,231 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  padding: 25px 14px;
+  border: 1px solid rgba(211, 229, 251, 0.9);
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(249, 252, 255, 0.88), rgba(230, 244, 255, 0.84)),
+    linear-gradient(135deg, rgba(216, 243, 255, 0.32), rgba(230, 237, 255, 0.22));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.76),
+    0 18px 34px rgba(111, 167, 230, 0.16);
+  backdrop-filter: blur(14px);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.title {
+  margin: 0;
+  color: #1f61d8;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 0;
+  color: #7a94b4;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.menu {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.buttonReset {
+  width: 100%;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.homeButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(215, 234, 251, 0.9);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(238, 248, 255, 0.92), rgba(226, 242, 255, 0.94));
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.homeButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(86, 153, 223, 0.12);
+}
+
+.homeButtonCurrent {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 8px 18px rgba(86, 153, 223, 0.12);
+}
+
+.homeButton:focus-visible,
+.groupButton:focus-visible {
+  outline: 3px solid rgba(26, 100, 216, 0.2);
+  outline-offset: 3px;
+}
+
+.currentDot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2e72dd;
+}
+
+.homeLabel {
+  color: #1e61d8;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.group {
+  --group-accent: #77c2ff;
+  --group-surface: #f7fbff;
+  --group-border: #e2edf9;
+  --group-title: #1e61d8;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.groupBlue {
+  --group-accent: #77c2ff;
+  --group-surface: #f7fbff;
+  --group-border: #e2edf9;
+  --group-title: #1e61d8;
+}
+
+.groupAmber {
+  --group-accent: #f0b14c;
+  --group-surface: #fffaf2;
+  --group-border: #f0e0bf;
+  --group-title: #a96c00;
+}
+
+.groupCyan {
+  --group-accent: #5ecde8;
+  --group-surface: #f3fcff;
+  --group-border: #ddeff6;
+  --group-title: #1687a4;
+}
+
+.groupViolet {
+  --group-accent: #8b85f0;
+  --group-surface: #f7f5ff;
+  --group-border: #e5e4fa;
+  --group-title: #655be0;
+}
+
+.groupTitle {
+  margin: 0;
+  color: var(--group-title);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.groupItems {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.groupButton {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid var(--group-border);
+  border-radius: 14px;
+  background: var(--group-surface);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.groupButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(95, 143, 197, 0.1);
+}
+
+.groupButtonCurrent {
+  border-color: var(--group-accent);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(239, 248, 255, 0.94)),
+    var(--group-surface);
+  box-shadow: 0 12px 24px rgba(95, 143, 197, 0.1);
+}
+
+.groupDot {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: var(--group-accent);
+}
+
+.groupLabel {
+  color: #6b839f;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.18;
+  white-space: pre-line;
+}
+
+.groupButtonCurrent .groupLabel {
+  color: var(--group-title);
+  font-weight: 700;
+}
+
+.locationCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding: 12px 10px;
+  border: 1px solid #dceaf8;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(249, 253, 255, 0.96), rgba(239, 247, 255, 0.96)),
+    linear-gradient(135deg, rgba(216, 247, 255, 0.35), rgba(238, 240, 255, 0.35));
+}
+
+.locationTitle {
+  margin: 0;
+  color: #1f61d8;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.locationDescription {
+  margin: 0;
+  color: #6b839f;
+  font-size: 11px;
+  line-height: 1.25;
+  white-space: pre-line;
+}

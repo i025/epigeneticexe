@@ -1,0 +1,44 @@
+:root {
+  color-scheme: light;
+  font-family: "DM Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --app-sidebar-width: 148px;
+  --app-shell-gap: 24px;
+  --app-shell-pad-top: 28px;
+  --app-shell-pad-x: 30px;
+  --app-shell-pad-bottom: 36px;
+  --shell-background:
+    radial-gradient(circle at top left, rgba(143, 217, 255, 0.26), transparent 24%),
+    radial-gradient(circle at 82% 14%, rgba(46, 120, 255, 0.12), transparent 18%),
+    linear-gradient(180deg, #f7fbff 0%, #edf5ff 48%, #e8f1fe 100%);
+  --shell-surface: rgba(255, 255, 255, 0.82);
+  --shell-border: rgba(196, 221, 245, 0.92);
+  --shell-text: #17314f;
+  background: var(--shell-background);
+  color: var(--shell-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--shell-background);
+  color: var(--shell-text);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}

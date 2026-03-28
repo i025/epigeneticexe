@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表观遗传双胞胎实验</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../shared/chat-widget.css">
+    <script src="../shared/chat-widget.js" defer></script>
+</head>
+<body data-chat-url="https://www.xianjianaiedu.com/tech/CozeEmbed/?config=JTdCJTIydGl0bGUlMjIlM0ElMjIlRTglOTMlOUQlRTYlOTklQjYlRTUlOEQlOUElRTUlQTMlQUIlMjIlMkMlMjJzdWJ0aXRsZSUyMiUzQSUyMiVFNSU4RiU4QyVFOCU4MyU5RSVFOCU4MyU4RSVFNSVBRiVCOSVFNiVBRiU5NCVFNSVBRSU5RSVFOSVBQSU4QyVFNSVCMCU4RiVFNSU4QSVBOSVFNiU4OSU4QiUyMiUyQyUyMmRlc2NyaXB0aW9uJTIyJTNBJTIyJUU3JTk0JUE4JUU0JUJBJThFJUUzJTgwJThBJUU3JTk0JTlGJUU1JTkxJUJEJUU3JTlBJTg0JUU1JThGJTk4JUU1JUE1JThGJUVGJUJDJTlBJUU4JUE3JUEzJUU3JUEwJTgxJUU4JUExJUE4JUU4JUE3JTgyJUU5JTgxJTk3JUU0JUJDJUEwJUUzJTgwJThCJUU1JUJFJUFFJUU4JUFGJUJFJUU3JTlBJTg0JUU1JThGJThDJUU4JTgzJTlFJUU4JTgzJThFJUU1JUFGJUI5JUU2JUFGJTk0JUU1JUFFJTlFJUU5JUFBJThDJUU1JUIwJThGJUU1JThBJUE5JUU2JTg5JThCJTIyJTJDJTIyYm90SWQlMjIlM0ElMjI3NjE2NTQ4MDIyODg1MTU0ODY4JTIyJTJDJTIyb2F1dGhBcHBJZCUyMiUzQSUyMjExMjkyNzEyNzk0NDAlMjIlMkMlMjJvYXV0aEtpZCUyMiUzQSUyMjVVeUNYbGJibWFrX0pNZFRUNFhoR2VLUDgxUTdwWWhiaFpVTjZFYkxwU2clMjIlMkMlMjJvYXV0aFByaXZhdGVLZXklMjIlM0ElMjItLS0tLUJFR0lOJTIwUFJJVkFURSUyMEtFWS0tLS0tJTVDbk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRRE8lMkJzNGhqNUIlMkZIYWkxJTVDbmI5VlJFWmt6QkltN3lwdDI5ZmN3a25sbDh4SWNUdE1KMUF5VjBMMEZ3OGNZYnppQTNyR3dFRldQNGhrZ01WNDglNUNuM3lZZVJVRTl6Z3dDbnZwbSUyRmVjVXlFNSUyQnhoWUpCcGdCWlRGcyUyQlJDTE9nSlQyOEpmT1gyOGg4djNCT1Q3WjVPeSU1Q24wZm5xSmpTSVN0JTJGTU5nMFR4cGVmOGZTc3JOc3RPUnJOZUthR0lLWHBWbUFyJTJCNTZyQ2d4Z0JFNFJ6SHVOWGQycSU1Q252elBrNkpIZDRXbUE2JTJCT1lMcldtRXREWElDR1hXR2ExRyUyRmd5V1FMRXl5QktOTURWcDA3UldTYk9qQTU0WXpxdSU1Q25RV1YlMkJhQ2NXNlRFZk1laGdHTmpwJTJGSTVqY1dMcEZDUTJTSjhUOFhJWDN4SFphc1BqQWZEalRhRkJMdFR6cVdLciU1Q25UaCUyRkJpbFpKQWdNQkFBRUNnZ0VBR055SFpnQ1ltcXcxVjVYWFNhV1RnVTFLUGdSWUtESGpQekpZNHFZUHh0YXglNUNuQXIwMXhja002MlJZeGRhV011U004MWtDN2dWNmZ5TnU3bURmYzBOZVVzNHRJeU4xY0dtUEdDJTJGM1BjTU5Zb2dvJTVDbk9nS3RyU2s5azN1a1MlMkI1WnFwWjlRJTJCZ0wxOSUyRiUyQm9UUVB5YXJ2R2ZEODNtSWYlMkY2ZCUyQmFxR3dGTVk3WFlKbDBVaVQlNUNuWWpub1NCOWhyS3clMkIwWlVjQlNOblNYaiUyRmFpc0lycnlsUmIzMlI5djFtb3ZEbkIlMkIyT0FnMG9sems0MU95M21TcSU1Q242ME50d3VWV1c4JTJCOXJPNHpRJTJCRFM5ekRPYnUwSTdmRURIR3YlMkYzOFdNUnQwNURwVjd3bmsyRE9Ib0RkaGtJVVlUJTVDbmhaRWxUd3RjNll4YnZmd2R4V0MlMkJ0N25RMGJpQW9kVFNlbTdYcmZDOEFRS0JnUURvblZYMjglMkZScSUyRnZheUEzbEUlNUNucjdwbU9KTGw1UXlnb1VKZUpOVklBNTJnY2xGM2RTbzI0ck9UcW16OEhVTlNEaXhCVHpzeUMlMkZXdE5VSmFJZ2wlMkYlNUNuS01NTTJWbm1lWk1TMGs3WWhLZXZCRE9CM0c2MnZrZzVOVVBDdFFkU3pYNVlBRkNsd25jdjlRcEpoNjNERzdmUSU1Q240VksybnZwTkx1a2JMMWVsSmR4Y21OSDdoUUtCZ1FEanliZ3lvSDRmZDNNVU5tNGpBNmV6UTRnRElQWmxpQWdkJTVDbm45TW9ER2dwN0k3MiUyRmg2OGxsQU4zZkNGb1NERmxPVVVPcjZvemxvd0QxWCUyQmRkVGdUcFJzNVNTSUpVQURHTCUyQkolNUNuUlRUajRoZ244bDFYcHpSR1VyeGFzUTZSY28yRDFLak5LY2UyNjE1eHhQYmI3dCUyRlYwZHppRG5SWjhLc2MwQndCJTVDbnRVVjNTOVFnOVFLQmdEJTJGdGRZR2YlMkIlMkIwbjB1NkxTOW1YbmRlWDlxOGRxc0clMkJiN25sejRPeUVyRFVtaFVGYXl1WSU1Q25WQmZoJTJGMyUyQnVIeUUlMkI2ZVNzJTJGS3k5WXJCT2NjVEprJTJCaVJjRUZvdm04N3ZES3clMkY2QTduTVhabHJvNnRXYWRsc1c2JTVDbklMd3klMkJpZEVlRk9CQ3FqemI4UUxTTjk2WFVQQXExekpmJTJCeldkaDJlSmN3bHo2V0FhVFk5ZlglMkZ0QW9HQVI1dFElNUNuRmtveG03NjNKSEYlMkY2ZTNxT0FaUXFYc2hPZ1dyVjNTNHNteEVDbm5jNzNRdlFXV1hRT1MyQ2F2JTJGVzExVkxpalIlNUNuYXN1RHVudjNzb2hrSlNkT3JYVFRLU0Zjb0J5VmlaZUI2dWxXWXFoa0Ezd0NpT0RWYVVVanFVRnpqeSUyQjQ2TlhyJTVDbmZHczlRMUtCcjkzRjY3ZVBVbGpzNXFFcmlXRTZqS2JwY1hrYTlFa0NnWUVBc0lrZXA3clklMkY5TTN0ZWxmRDBlYyU1Q24wbVRSV2FReSUyQks5bG5YWjJDTU1GNU43OEdod2Z4ZnFnTHJWajE5dTdpaFUySVlrVmpmN3QlMkJadHFZcmUzS1RidSU1Q25hZjVpUFYzT2s5TzRvRmhQdUhaUU9zWnhtTEJ4Z0JZcVclMkZWVGdZM0g4eEozTHpzclNCeW1kYzY2RGxScE9KZkglNUNuWk9UYk4wOWpSYXQlMkY2T2RTcmJHV3ZOYyUzRCU1Q24tLS0tLUVORCUyMFBSSVZBVEUlMjBLRVktLS0tLSUyMiUyQyUyMmNoYXRUaXRsZSUyMiUzQSUyMiVFOCU5MyU5RCVFNiU5OSVCNiVFNSU4RCU5QSVFNSVBMyVBQiUyMCVFNSU4RiU4QyVFOCU4MyU5RSVFOCU4MyU4RSVFNSVBRiVCOSVFNiVBRiU5NCVFNSVBRSU5RSVFOSVBQSU4QyVFNSVCMCU4RiVFNSU4QSVBOSVFNiU4OSU4QiUyMiU3RA==">
+    <header>
+        <h1>表观遗传双胞胎对照实验</h1>
+    </header>
+
+    <section id="body-map" class="landing">
+        <h2>点击部位开始对比</h2>
+        <div class="body-container">
+            <svg viewBox="0 0 200 400" class="body-svg">
+                <g id="brain-region" class="body-part" data-section="brain">
+                    <circle cx="100" cy="40" r="35" fill="#e0e7ff" stroke="#4e54c8" stroke-width="2"/>
+                    <text x="100" y="45" text-anchor="middle" font-size="10" fill="#333" font-weight="bold" style="pointer-events: none;">大脑</text>
+                </g>
+                <g id="metabolism-region" class="body-part" data-section="metabolism">
+                    <ellipse cx="100" cy="150" rx="45" ry="65" fill="#e0e7ff" stroke="#4e54c8" stroke-width="2"/>
+                    <text x="100" y="155" text-anchor="middle" font-size="10" fill="#333" font-weight="bold" style="pointer-events: none;">代谢</text>
+                </g>
+                <g id="immune-region" class="body-part" data-section="immune">
+                    <path d="M100 95 L120 105 L120 125 L100 135 L80 125 L80 105 Z" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+                    <text x="100" y="120" text-anchor="middle" font-size="9" fill="#065f46" font-weight="bold" style="pointer-events: none;">免疫</text>
+                </g>
+                <g id="skin-region" class="body-part" data-section="skin">
+                    <rect x="15" y="110" width="20" height="90" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="2"/>
+                    <rect x="165" y="110" width="20" height="90" rx="10" fill="#ffedd5" stroke="#f97316" stroke-width="2"/>
+                    <text x="25" y="160" text-anchor="middle" font-size="10" fill="#9a3412" font-weight="bold" transform="rotate(-90 25,160)" style="pointer-events: none;">皮肤</text>
+                </g>
+                <g id="aging-region" class="body-part" data-section="aging">
+                    <rect x="75" y="240" width="22" height="130" rx="10" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+                    <rect x="103" y="240" width="22" height="130" rx="10" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+                    <text x="100" y="300" text-anchor="middle" font-size="10" fill="#6b21a8" font-weight="bold" style="pointer-events: none;">老化</text>
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    <section id="brain">
+        <div class="section-header"><h2>🧠 大脑与压力 (Brain)</h2></div>
+        <div class="twin-container">
+            <div class="col col-a">
+                <h3>双胞胎 A</h3>
+                <div class="interactive-container">
+                    <div class="input-group">
+                        <label>睡眠质量 (小时):</label>
+                        <input type="range" id="sleep-a" min="0" max="10" value="7" step="0.5">
+                        <span id="sleep-value-a" class="value-badge">7h</span>
+                    </div>
+                    <div class="input-group">
+                        <label>感知压力水平 (0-100):</label>
+                        <input type="range" id="stress-level-a" min="0" max="100" value="50">
+                        <span id="stress-value-a" class="value-badge">50%</span>
+                    </div>
+                    <div class="input-group">
+                        <label>冥想/正念 (分钟/天):</label>
+                        <input type="range" id="mindfulness-a" min="0" max="60" value="0" step="5">
+                        <span id="mindfulness-value-a" class="value-badge">0m</span>
+                    </div>
+                    <div class="meter-container">
+                        <p class="meter-label">压力反应:</p>
+                        <div class="meter"><div class="meter-fill" id="stress-meter-a"></div></div>
+                    </div>
+                    <div class="result" id="stress-result-a">...</div>
+                </div>
+            </div>
+            <div class="col col-b">
+                <h3>双胞胎 B</h3>
+                <div class="interactive-container">
+                    <div class="input-group">
+                        <label>睡眠质量 (小时):</label>
+                        <input type="range" id="sleep-b" min="0" max="10" value="5" step="0.5">
+                        <span id="sleep-value-b" class="value-badge">5h</span>
+                    </div>
+                    <div class="input-group">
+                        <label>感知压力水平 (0-100):</label>
+                        <input type="range" id="stress-level-b" min="0" max="100" value="80">
+                        <span id="stress-value-b" class="value-badge">80%</span>
+                    </div>
+                    <div class="input-group">
+                        <label>冥想/正念 (分钟/天):</label>
+                        <input type="range" id="mindfulness-b" min="0" max="60" value="0" step="5">
+                        <span id="mindfulness-value-b" class="value-badge">0m</span>
+                    </div>
+                    <div class="meter-container">
+                        <p class="meter-label">压力反应:</p>
+                        <div class="meter"><div class="meter-fill" id="stress-meter-b"></div></div>
+                    </div>
+                    <div class="result" id="stress-result-b">...</div>
+                </div>
+            </div>
+        </div>
+        <div class="science-note">
+            <strong>科学原理:</strong>
+            慢性压力会改变 <em>FKBP5</em> 基因的甲基化水平，影响皮质醇调节。正念冥想和充足睡眠已被证明可以逆转这种表观遗传标记。
+        </div>
+    </section>
+
+    <section id="metabolism">
+        <div class="section-header"><h2>⚡ 新陈代谢 (Metabolism)</h2></div>
+        <div class="twin-container">
+            <div class="col col-a">
+                <h3>双胞胎 A</h3>
+                <div class="interactive-container">
+                    <div class="input-group">
+                        <label>每周运动 (小时):</label>
+                        <input type="range" id="exercise-a" min="0" max="14" value="5">
+                        <span id="exercise-value-a" class="value-badge">5h</span>
+                    </div>
+                    <div class="input-group">
+                        <label>饮食质量 (%):</label>
+                        <input type="range" id="diet-a" min="0" max="100" value="80">
+                        <span id="diet-value-a" class="value-badge">80%</span>
+                    </div>
+                    <div class="input-group">
+                        <label>饮食时间表:</label>
+                        <select id="circadian-a">
+                            <option value="regular">规律 (白天进食)</option>
+                            <option value="irregular">不规律 (吃宵夜)</option>
+                            <option value="shift">倒班/熬夜工作</option>
+                        </select>
+                    </div>
+                    <div class="dial-container">
+                        <div class="dial"><div class="dial-needle" id="metabolism-needle-a"></div></div>
+                        <p>代谢健康度</p>
+                    </div>
+                    <div class="result" id="metabolism-result-a">...</div>
+                </div>
+            </div>
+            <div class="col col-b">
+                <h3>双胞胎 B</h3>
+                <div class="interactive-container">
+                    <div class="input-group">
+                        <label>每周运动 (小时):</label>
+                        <input type="range" id="exercise-b" min="0" max="14" value="1">
+                        <span id="exercise-value-b" class="value-badge">1h</span>
+                    </div>
+                    <div class="input-group">
+                        <label>饮食质量 (%):</label>
+                        <input type="range" id="diet-b" min="0" max="100" value="30">
+                        <span id="diet-value-b" class="value-badge">30%</span>
+                    </div>
+                    <div class="input-group">
+                        <label>饮食时间表:</label>
+                        <select id="circadian-b">
+                            <option value="regular">规律 (白天进食)</option>
+                            <option value="irregular">不规律 (吃宵夜)</option>
+                            <option value="shift" selected>倒班/熬夜工作</option>
+                        </select>
+                    </div>
+                    <div class="dial-container">
+                        <div class="dial"><div class="dial-needle" id="metabolism-needle-b"></div></div>
+                        <p>代谢健康度</p>
+                    </div>
+                    <div class="result" id="metabolism-result-b">...</div>
+                </div>
+            </div>
+        </div>
+        <div class="science-note">
+            <strong>科学原理:</strong>
+            运动会使 <em>PPARGC1A</em> 基因去甲基化，增强脂肪代谢。轮班工作和夜间进食会干扰 <em>CLOCK</em> 基因及其下游的代谢调节。
+        </div>
+    </section>
+
+    <section id="immune">
+        <div class="section-header"><h2>🛡️ 免疫与炎症 (Immune)</h2></div>
+        <div class="twin-container">
+            <div class="col col-a">
+                <h3>双胞胎 A</h3>
+                <div class="interactive-container">
+                    <div class="checkbox-group" id="immune-a">
+                        <label><input type="checkbox" class="neg"> 城市/污染地区</label>
+                        <label><input type="checkbox" class="neg"> 吸烟/电子烟</label>
+                        <label><input type="checkbox" class="neg"> 季节性过敏</label>
+                        <label><input type="checkbox" class="neg"> 长期压力</label>
+                        <label class="positive-factor"><input type="checkbox" class="pos" checked> 接触自然 / 养宠物</label>
+                    </div>
+                    <div class="gauge-container">
+                        <p class="meter-label">炎症倾向:</p>
+                        <div class="gauge"><div class="gauge-fill" id="immune-gauge-a"></div></div>
+                    </div>
+                    <div class="result" id="immune-result-a">...</div>
+                </div>
+            </div>
+            <div class="col col-b">
+                <h3>双胞胎 B</h3>
+                <div class="interactive-container">
+                    <div class="checkbox-group" id="immune-b">
+                        <label><input type="checkbox" class="neg" checked> 城市/污染地区</label>
+                        <label><input type="checkbox" class="neg" checked> 吸烟/电子烟</label>
+                        <label><input type="checkbox" class="neg"> 季节性过敏</label>
+                        <label><input type="checkbox" class="neg" checked> 长期压力</label>
+                        <label class="positive-factor"><input type="checkbox" class="pos"> 接触自然 / 养宠物</label>
+                    </div>
+                    <div class="gauge-container">
+                        <p class="meter-label">炎症倾向:</p>
+                        <div class="gauge"><div class="gauge-fill" id="immune-gauge-b"></div></div>
+                    </div>
+                    <div class="result" id="immune-result-b">...</div>
+                </div>
+            </div>
+        </div>
+        <div class="science-note">
+            <strong>科学原理:</strong>
+            环境污染（如 PM2.5）和吸烟会影响炎症基因（如 <em>IL-6</em>）的组蛋白修饰，导致免疫系统长期处于“高度戒备”的炎症状态。
+        </div>
+    </section>
+
+    <section id="skin">
+        <div class="section-header"><h2>☀️ 皮肤 (Skin)</h2></div>
+        <div class="twin-container">
+            <div class="col col-a">
+                <h3>双胞胎 A</h3>
+                <div class="interactive-container">
+                    <div class="input-group">
+                        <label>紫外线暴露 (UV):</label>
+                        <select id="uv-a">
+                            <option value="low">低 (注意防晒)</option>
+                            <option value="moderate">中等</option>
+                            <option value="high">高 (经常暴晒)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>睡眠质量:</label>
+                        <select id="skin-sleep-a">
+                            <option value="poor">差</option>
+                            <option value="moderate">一般</option>
+                            <option value="good" selected>好</option>
+                        </select>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="skin-visual" id="current-skin-a"></div>
+                        <p id="current-age-a">视觉年龄: <span>--</span></p>
+                    </div>
+                    <div class="result" id="skin-result-a">...</div>
+                </div>
+            </div>
+            <div class="col col-b">
+                <h3>双胞胎 B</h3>
+                <div class="interactive-container">
+                    <div class="input-group">
+                        <label>紫外线暴露 (UV):</label>
+                        <select id="uv-b">
+                            <option value="low">低 (注意防晒)</option>
+                            <option value="moderate">中等</option>
+                            <option value="high" selected>高 (经常暴晒)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>睡眠质量:</label>
+                        <select id="skin-sleep-b">
+                            <option value="poor" selected>差</option>
+                            <option value="moderate">一般</option>
+                            <option value="good">好</option>
+                        </select>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="skin-visual" id="current-skin-b"></div>
+                        <p id="current-age-b">视觉年龄: <span>--</span></p>
+                    </div>
+                    <div class="result" id="skin-result-b">...</div>
+                </div>
+            </div>
+        </div>
+        <div class="science-note">
+            <strong>科学原理:</strong>
+            紫外线辐射不仅损伤 DNA，还会改变皮肤细胞的 DNA 甲基化模式（光老化），这种表观遗传变化即使在皮肤愈合后仍会残留。
+        </div>
+    </section>
+
+    <section id="aging">
+        <div class="section-header"><h2>⏰ 生物学老化 (Aging)</h2></div>
+        <div class="twin-container">
+            <div class="col col-a">
+                <h3>双胞胎 A</h3>
+                <div class="interactive-container">
+                    <div class="input-group">
+                        <label>实际年龄:</label>
+                        <input type="number" id="chrono-age-a" value="30" min="10" max="90">
+                    </div>
+                    <div class="input-group">
+                        <label>作息规律性:</label>
+                        <input type="range" class="aging-factor-a" value="80">
+                        <span id="sleep-reg-value-a" class="value-badge">80%</span>
+                    </div>
+                    <div class="input-group">
+                        <label>运动坚持度:</label>
+                        <input type="range" class="aging-factor-a" value="80">
+                        <span id="training-value-a" class="value-badge">80%</span>
+                    </div>
+                    <div class="input-group">
+                        <label>压力管理:</label>
+                        <input type="range" class="aging-factor-a" value="80">
+                        <span id="stress-mgmt-value-a" class="value-badge">80%</span>
+                    </div>
+                    <div class="clock-display">
+                        <div class="clock-wrapper">
+                            <div class="clock purple-clock">
+                                <div class="clock-face">
+                                    <div class="clock-hand" id="bio-clock-hand-a"></div>
+                                    <div class="clock-center"></div>
+                                </div>
+                            </div>
+                            <p>生物年龄: <span id="bio-age-display-a">30</span></p>
+                        </div>
+                    </div>
+                    <div class="result" id="aging-result-a">...</div>
+                </div>
+            </div>
+            <div class="col col-b">
+                <h3>双胞胎 B</h3>
+                <div class="interactive-container">
+                    <div class="input-group">
+                        <label>实际年龄:</label>
+                        <input type="number" id="chrono-age-b" value="30" min="10" max="90">
+                    </div>
+                    <div class="input-group">
+                        <label>作息规律性:</label>
+                        <input type="range" class="aging-factor-b" value="20">
+                        <span id="sleep-reg-value-b" class="value-badge">20%</span>
+                    </div>
+                    <div class="input-group">
+                        <label>运动坚持度:</label>
+                        <input type="range" class="aging-factor-b" value="20">
+                        <span id="training-value-b" class="value-badge">20%</span>
+                    </div>
+                    <div class="input-group">
+                        <label>压力管理:</label>
+                        <input type="range" class="aging-factor-b" value="20">
+                        <span id="stress-mgmt-value-b" class="value-badge">20%</span>
+                    </div>
+                    <div class="clock-display">
+                        <div class="clock-wrapper">
+                            <div class="clock purple-clock">
+                                <div class="clock-face">
+                                    <div class="clock-hand" id="bio-clock-hand-b"></div>
+                                    <div class="clock-center"></div>
+                                </div>
+                            </div>
+                            <p>生物年龄: <span id="bio-age-display-b">30</span></p>
+                        </div>
+                    </div>
+                    <div class="result" id="aging-result-b">...</div>
+                </div>
+            </div>
+        </div>
+        <div class="science-note">
+            <strong>科学原理:</strong>
+            表观遗传时钟（如 Horvath Clock）通过检测全基因组的甲基化水平来精准测算生物学年龄，它能反映出比日历年龄更真实的衰老程度。
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="ai-tutor.js"></script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>高中生物：表观遗传动态知识图谱 (双案例适配版)</title>
+    <link rel="stylesheet" href="../shared/chat-widget.css">
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="../shared/chat-widget.js" defer></script>
+    <style>
+        :root { --primary: #2c3e50; --bg: #f0f2f5; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); overflow: hidden; position: relative; }
+        
+        /* 🔥 左上角悬浮开关按钮 */
+        #toggle-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1001; 
+            background: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-weight: bold;
+            color: var(--primary);
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        #toggle-btn:hover { background: #f8f9fa; }
+
+        /* 🔥 侧边栏：PC端使用 margin 彻底释放物理空间 */
+        #sidebar { 
+            width: 280px; 
+            background: white; 
+            padding: 20px; 
+            padding-top: 65px; 
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05); 
+            z-index: 1000; 
+            display: flex; 
+            flex-direction: column; 
+            border-right: 1px solid #e1e4e8;
+            flex-shrink: 0;
+            margin-left: 0;
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        
+        /* PC 端折叠状态 */
+        #sidebar.collapsed { 
+            margin-left: -280px; 
+        }
+        
+        /* 按钮美化 */
+        .control-btn { width: 100%; padding: 12px 15px; margin-bottom: 12px; border: none; border-radius: 8px; cursor: pointer; text-align: left; font-weight: 600; font-size: 14px; transition: all 0.2s; position: relative; overflow: hidden; }
+        .control-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .control-btn:active { transform: translateY(0); }
+        
+        .btn-all { background: #e9ecef; color: #495057; }
+        .btn-mech { background: #ffe3e3; color: #c92a2a; border-left: 5px solid #ff6b6b; }
+        .btn-mice { background: #fff3bf; color: #f08c00; border-left: 5px solid #fcc419; }
+        .btn-flower { background: #d3f9d8; color: #2b8a3e; border-left: 5px solid #51cf66; }
+
+        /* 🔥 新增：底部独立的悬浮信息面板 */
+        #bottom-info-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) scale(1);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid #e1e4e8;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease-out;
+        }
+
+        .info-title { font-weight: 700; color: var(--primary); margin-bottom: 8px; font-size: 1.1em; border-bottom: 2px solid #e1e4e8; padding-bottom: 5px;}
+        .info-text { font-size: 0.9em; color: #555; line-height: 1.6; max-height: 100px; overflow-y: auto; }
+        
+        /* 图谱容器 */
+        #network-container { 
+            flex-grow: 1; 
+            background: #ffffff; 
+            background-image: radial-gradient(#e1e4e8 1px, transparent 1px); 
+            background-size: 20px 20px; 
+            width: 100%; 
+        }
+        
+        /* 调整图例位置到右上角防遮挡 */
+        .legend { 
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            background: rgba(255,255,255,0.9); 
+            padding: 12px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            font-size: 13px; 
+            line-height: 1.8; 
+            pointer-events: none;
+            z-index: 998;
+        }
+        .dot { width: 10px; height: 10px; display: inline-block; border-radius: 50%; margin-right: 8px; }
+
+        /* 🔥 移动端响应式适配 */
+        @media (max-width: 768px) {
+            #sidebar {
+                position: absolute; 
+                height: 100%;
+                left: 0;
+                top: 0;
+                margin-left: 0; 
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 10px 0 20px rgba(0,0,0,0.2);
+            }
+            #sidebar.collapsed {
+                margin-left: 0;
+                transform: translateX(-100%); 
+            }
+            #bottom-info-panel {
+                bottom: 15px;
+                width: 95%;
+                padding: 12px 15px;
+            }
+            .legend {
+                top: 60px; 
+                right: 10px;
+                padding: 8px;
+                font-size: 11px;
+            }
+            #toggle-btn {
+                top: 10px; left: 10px;
+            }
+        }
+    </style>
+</head>
+<body data-chat-url="https://www.xianjianaiedu.com/tech/CozeEmbed/?config=JTdCJTIydGl0bGUlMjIlM0ElMjIlRTglOTMlOUQlRTYlOTklQjYlRTUlOEQlOUElRTUlQTMlQUIlMjIlMkMlMjJzdWJ0aXRsZSUyMiUzQSUyMiVFNyU5RiVBNSVFOCVBRiU4NiVFNSU5QiVCRSVFOCVCMCVCMSVFNSVCMCU4RiVFNSU4QSVBOSVFNiU4OSU4QiUyMiUyQyUyMmRlc2NyaXB0aW9uJTIyJTNBJTIyJUU3JTk0JUE4JUU0JUJBJThFJUUzJTgwJThBJUU3JTk0JTlGJUU1JTkxJUJEJUU3JTlBJTg0JUU1JThGJTk4JUU1JUE1JThGJUVGJUJDJTlBJUU4JUE3JUEzJUU3JUEwJTgxJUU4JUExJUE4JUU4JUE3JTgyJUU5JTgxJTk3JUU0JUJDJUEwJUUzJTgwJThCJUU1JUJFJUFFJUU4JUFGJUJFJUU3JTlBJTg0JUU3JTlGJUE1JUU4JUFGJTg2JUU1JTlCJUJFJUU4JUIwJUIxJUU1JUIwJThGJUU1JThBJUE5JUU2JTg5JThCJTIyJTJDJTIyYm90SWQlMjIlM0ElMjI3NjE2NTQ4MjgyMTQzODAxNDA3JTIyJTJDJTIyb2F1dGhBcHBJZCUyMiUzQSUyMjExNjA0Nzg2MDQwMTIlMjIlMkMlMjJvYXV0aEtpZCUyMiUzQSUyMnJFVTRPNEQteXpyN2pRZ1dxVmYwRVp5U2hUNmlrY0VwOWdHemtUQ3RWTXMlMjIlMkMlMjJvYXV0aFByaXZhdGVLZXklMjIlM0ElMjItLS0tLUJFR0lOJTIwUFJJVkFURSUyMEtFWS0tLS0tJTVDbk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRRE9vRiUyQmM1ZyUyQkpCZHIlMkYlNUNuRjNNJTJGOUo5Tk14VyUyQkM1eEQlMkJsSEFRZ1dKR2EyZ3NqODNsWEJyaVF1T0VodldzQTlVaERLWDYlMkJCWTlzVzJOVXJmJTVDbkVZWDFvbjQwOUVhTnM5VHZXclJ5Qkg0cWxtSG5KNVlxc2hTU29yJTJCTEk4SW1xSGNTM3R4RGY0QVloN09EJTJGa3VNJTVDbjYySFZ1VHNjS1ZzdUliNVhwek1VcmpDZ1N4UnVSeSUyQlRDOXBNYVFXNk1yUFJxM2k2cmhoUUZqNDc5SUtIaEdXeCU1Q25FRXlNajJCYUIzeXFMZHZ6YnhOdmNhT3Z0cjV1TkxObjNndEpwbmgzT0VycG1uc0VadkFrYzlNWDFGdDBzNWQ2JTVDbjZGWmo3b24wNFh2YzM4UHNZVkpmdiUyRlkxemtNTWZJWm8wR01KcU9wVlB3ckdoemJOQ01JJTJGREFWbFlZUzVEeDV5JTVDbkp5eERDdFZ4QWdNQkFBRUNnZ0VBQ040SURHY3hIbnZDV0xVc2JIJTJCMmdHMGpUenNYVXpHQVphUlBzWUVKR3Y3YiU1Q25TS3JnbnJUTWFxWHJUT3pVVTVleXhpTkl4dmljSm9RbCUyQk9tN0duNEZOWWVRS1klMkJnb1Q3JTJCeEclMkZkN0R6MDZhTWclNUNueGlkTFM3bXhSNnJhcjZjR0tTaW9RanRNQjRGM1drQkZCTUNyTzYxTjFKa1B3U3lRaXhseFR6OWtkZFNUQldKeiU1Q244ZUpuMHNnT2hrNVlQUyUyRnN0Sm5wRVYxUVZPSzdJdnk0OVJHVXRYSGpQSU5JTjJlVWhycHRjSWpHamhGMERVWFAlNUNuU2pRdjNRQXNjTlp5OWVlamdxdGtsSVlzbHFLRmQlMkJUd3A2eEVtRk5XSUJZdVFvaklEJTJGZHdvb3dZTE1HTzZzd0YlNUNuWEhua0tIbVZiVEZ6a1ZRU1pzRnAzbFZFenF6eFl3VmFSTTE0b1lGZm9RS0JnUURvZTE4TmJ0TGo5aEF2ZUIlMkZ5JTVDbnljcFY3bDRJRWNiRXUlMkZyZjRHWW5IckdOSzJYZ2RVZGlWeXVnT0hQOWFoajBpWHJiZTAlMkZCZTZQRGU3R0lsSmxiJTVDbjU4MTdQY3RYdGdOaGlzQUQ0U2VCTThUaHFCUnozaHNtNGRWMUh1ZElra1pUNktBaklWUzdYaXMlMkY4JTJGblBJbWQlMkYlNUNudWFuVlF0NHN3SWslMkJDWHQyM2IlMkZlb2UwcHlRS0JnUURqaDJzYjJ4Z2hHSkhnNnA2YUpVTXVRM2NvaWUybzRyY1YlNUNubW94bTludHAxVDdyMVljTFptSHRYcjk1STU1cU5XSmRpeDVlMEZRS1olMkJYOG1YMVVQWnFTV3JBMVowU0ZBT1c4JTVDbm1JZ09WM0h1JTJGRnJibWk5SVhqSVB4WlRZdExhRmtVWjF0aVNnSUpHblpZT2EzdElOWVdUSkRlcDZIMWFFck42dCU1Q25Fb25hSzNnaWFRS0JnSGc5bHVQenRjJTJCQnJNMWdhJTJCVyUyQnlJJTJCNVFaa2EySnRZUG1FY1JybGslMkZwJTJGdEdqd0ZiRzVJJTVDbmQ1JTJGZWt0ODJ5TUZ4ZWNHYSUyRlowc3ZYNlZzelRZNXBqS1ExVENtVEU4U25OZ3QlMkY5SnJJeiUyQm9ZMjB5UjlFZVBhYiU1Q25SelBVVCUyRnNRN0o3cGFpbkJTM205TXRGWTlwTlRVQVNYbW1kYXRsNmZGbHludXR1M3hVejRveGxCQW9HQkFKOXAlNUNudUt5cW84eEVaNmpiR1VaTXh6WDV4Tm5kVVdzYmRVVW9wQ2hibDNvJTJCRXppdXdWQkdhbVFpRnlzcnZva1JZQnJFJTVDbkp3SXRHa1MwS05vRFBHRXlURU13VVBjSnBHTSUyRmpyYkZjOFlBbEczcDEwcTNTMXQ3eTcxckpHOTBwZEVOU1AyZSU1Q25JU2tqeUlrdFFialhWdnBTJTJCNGMyUGN0VWU0eTNoY2hqRGJ5UzZqZkpBb0dBUlY5SERFNlZNa2FIbzNoOEhleXElNUNuUlRkb3NkM0ExSEQ1SjNjZUM4TyUyRmhYdGZNa2VFbDUyMkw2Y3FLOTJxdXhJbVQ1Vzl5ckQ3UTdEOUtxJTJCTlh0VFIlNUNudXp2RkZoVW5KY2tpRTQ3U24wN2JxR1pjJTJGRHJPcEhBQnFGYlBUbSUyQnZ0WCUyQmJlSDBmdzFVSE9oczFWVTJ1dlRFWSU1Q25SajZ0SXNnMkdoYk1UaGJGQWszWjlubyUzRCU1Q24tLS0tLUVORCUyMFBSSVZBVEUlMjBLRVktLS0tLSUyMiUyQyUyMmNoYXRUaXRsZSUyMiUzQSUyMiVFOCU5MyU5RCVFNiU5OSVCNiVFNSU4RCU5QSVFNSVBMyVBQi0tJUU3JTlGJUE1JUU4JUFGJTg2JUU1JTlCJUJFJUU4JUIwJUIxJUU1JUIwJThGJUU1JThBJUE5JUU2JTg5JThCJTIyJTdE">
+
+<button id="toggle-btn" onclick="toggleSidebar()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    <span>菜单</span>
+</button>
+
+<div id="sidebar">
+    <h3 style="color:#2c3e50; margin-top:0;">🧬 案例控制台</h3>
+    <p style="font-size:13px; color:#888; margin-bottom: 20px;">点击下方按钮切换教学场景：</p>
+    
+    <button class="control-btn btn-all" onclick="setScenario('all')">🌐 全景知识网络</button>
+    <button class="control-btn btn-mech" onclick="setScenario('mech')">🔬 微观机制 (Mechanism)</button>
+    <button class="control-btn btn-mice" onclick="setScenario('mice')">🐁 Agouti小鼠 (饮食)</button>
+    <button class="control-btn btn-flower" onclick="setScenario('flower')">🌸 柳穿鱼花型 (突变)</button>
+</div>
+
+<div id="network-container">
+    <div class="legend">
+        <div><span class="dot" style="background:#FFC107"></span>环境因素</div>
+        <div><span class="dot" style="background:#63CCCA"></span>分子结构</div>
+        <div><span class="dot" style="background:#FF6B6B"></span>表观机制</div>
+        <div><span class="dot" style="background:#4AD295"></span>表型结果</div>
+    </div>
+</div>
+
+<div id="bottom-info-panel">
+    <div class="info-title" id="node-title">👋 准备就绪</div>
+    <div class="info-text" id="node-desc">图谱已载入。点击图谱中任意节点可查看详细解析，或打开左上角菜单切换特定实验案例。</div>
+</div>
+
+<script>
+    const nodes = [
+        { id: 1, label: "孕鼠富甲基饮食\n(叶酸/B12)", group: "env", detail: "富含叶酸、维生素B12的饮食能为DNA甲基化提供充足的'甲基供体'，促进甲基化修饰。" },
+        { id: 2, label: "孕鼠缺甲基饮食\n(或接触双酚A)", group: "env", detail: "缺乏甲基供体，或接触有害环境内分泌干扰物（如BPA），会阻碍正常的DNA甲基化建立。" },
+        { id: 10, label: "DNA序列\n(CpG岛)", group: "mol", shape: "database", detail: "富含胞嘧啶(C)和鸟嘌呤(G)的DNA片段，通常位于基因启动子区域，是甲基化发生的主要位点。" },
+        { id: 11, label: "DNMT\n(甲基转移酶)", group: "mol", shape: "diamond", detail: "DNA甲基转移酶，负责将甲基基团催化加到DNA分子的胞嘧啶上。" }, 
+        { id: 12, label: "转录因子", group: "mol", detail: "与启动子结合从而开启基因转录的蛋白质。如果遇到物理阻碍，则无法启动基因表达。" },
+        { id: 13, label: "Lcyc基因\n(柳穿鱼)", group: "mol", shape: "database", detail: "控制柳穿鱼花型对称性的关键基因。其DNA序列在野生型和突变型中完全一致。" },
+        { id: 14, label: "Avy基因\n(小鼠)", group: "mol", shape: "database", detail: "控制小鼠黄色素合成的基因。其前端插入了一段容易受甲基化调控的转座子序列。" },
+        { id: 20, label: "高甲基化", group: "mech", shape: "box", detail: "基因启动子区域被添加了大量的甲基基团，这是一种抑制性的表观遗传标记。" },
+        { id: 21, label: "低甲基化", group: "mech", shape: "box", detail: "甲基化水平很低或未被甲基化，通常意味着该区域处于活跃开放状态。" },
+        { id: 22, label: "染色质高度致密", group: "mech", detail: "高甲基化常招募去乙酰化酶，导致DNA与组蛋白缠绕得极为紧密，形成异染色质。" },
+        { id: 23, label: "染色质结构松散", group: "mech", detail: "缺乏甲基化阻碍，染色质保持松散状态（常染色质），暴露出DNA序列。" },
+        { id: 30, label: "基因沉默\n(OFF)", group: "phe", shape: "ellipse", detail: "转录受阻，导致mRNA无法合成，基因失去功能。" },
+        { id: 31, label: "基因表达\n(ON)", group: "phe", shape: "ellipse", detail: "基因被正常转录和翻译，发挥其原本的生物学功能。" },
+        { id: 40, label: "健康小鼠\n(棕毛/匀称)", group: "phe", color: "#8d6e63", font: {color:"white"}, detail: "Avy基因被关闭，小鼠表现出正常的棕色皮毛，体重正常，患病风险低。" },
+        { id: 41, label: "疾病小鼠\n(黄毛/肥胖)", group: "phe", color: "#f8c471", detail: "Avy基因被异常开启，持续合成黄色素并干扰代谢，导致小鼠毛色变黄、极度肥胖且易患糖尿病。" },
+        { id: 42, label: "辐射对称花\n(变异型)", group: "phe", color: "#d7bde2", detail: "由于Lcyc基因沉默，花朵无法发育成正常的两侧对称形态，变成了辐射对称（像管子一样）。" },
+        { id: 43, label: "两侧对称花\n(野生型)", group: "phe", color: "#a2d9ce", detail: "Lcyc基因正常表达，花朵发育出复杂且适应昆虫传粉的两侧对称形态。" }
+    ];
+
+    const edges = [
+        { from: 10, to: 20, label: "被修饰", id: "m1", arrows:"to" },
+        { from: 11, to: 20, label: "催化加基", id: "m2", dashes: true },
+        { from: 20, to: 22, label: "导致", id: "m3", arrows:"to" },
+        { from: 22, to: 12, label: "物理阻碍", id: "m4", color:{color:'#e74c3c'}, arrows:"to" },
+        { from: 12, to: 30, label: "无法结合", id: "m5", arrows:"to" },
+        { from: 10, to: 21, label: "无修饰", id: "m6", arrows:"to" },
+        { from: 21, to: 23, label: "维持", id: "m7", arrows:"to" },
+        { from: 23, to: 12, label: "暴露启动子", id: "m8", arrows:"to" },
+        { from: 12, to: 31, label: "成功结合", id: "m9", arrows:"to" },
+        { from: 1, to: 20, label: "提供甲基供体", arrows:"to", id: "a1", width:3, color:{color:'#27ae60'} },
+        { from: 14, to: 20, label: "前端序列", arrows:"to", id: "a2" },
+        { from: 20, to: 30, label: "抑制表达", arrows:"to", id: "a3" },
+        { from: 30, to: 40, label: "决定性状", arrows:"to", id: "a4" },
+        { from: 2, to: 21, label: "导致不足", arrows:"to", id: "a5", width:3, color:{color:'#e74c3c'} },
+        { from: 14, to: 21, label: "前端序列", arrows:"to", id: "a6" },
+        { from: 21, to: 31, label: "异常转录", arrows:"to", id: "a7" },
+        { from: 31, to: 41, label: "决定性状", arrows:"to", id: "a8" },
+        { from: 13, to: 20, label: "突变株发生", arrows:"to", id: "f1" },
+        { from: 20, to: 30, label: "基因沉默", arrows:"to", id: "f2" },
+        { from: 30, to: 42, label: "改变花型", arrows:"to", id: "f3" },
+        { from: 13, to: 21, label: "野生型正常", arrows:"to", id: "f4" },
+        { from: 21, to: 31, label: "正常表达", arrows:"to", id: "f5" },
+        { from: 31, to: 43, label: "维持形态", arrows:"to", id: "f6" }
+    ];
+
+    const container = document.getElementById('network-container');
+    const data = { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+    
+    const options = {
+        nodes: { 
+            margin: 12, shape: 'dot', size: 25, 
+            font: { size: 15, strokeWidth: 2, strokeColor:'#ffffff' },
+            shadow: { enabled: true, color: 'rgba(0,0,0,0.1)', size: 10, x: 5, y: 5 }
+        },
+        edges: { 
+            width: 2, smooth: { type: 'dynamic' },
+            font: { align: 'middle', size: 12, background: 'white', strokeWidth: 0 } 
+        },
+        groups: {
+            env: { color: { background:'#FFC107', border:'#d35400' }, shape: 'hexagon', size:35 },
+            mol: { color: { background:'#63CCCA', border:'#16a085' }, shape: 'diamond' },
+            mech: { color: { background:'#FF6B6B', border:'#c0392b' }, shape: 'box', margin:10, font:{color:'white', strokeWidth: 0} },
+            phe: { color: { background:'#4AD295', border:'#27ae60' }, font:{face:'bold', color:'white', strokeWidth: 0} }
+        },
+        physics: {
+            enabled: true,
+            barnesHut: { centralGravity: 0.3, springLength: 260, springConstant: 0.04, damping: 0.09, avoidOverlap: 1 }
+        },
+        interaction: { hover: true, tooltipDelay: 200 }
+    };
+    
+    const network = new vis.Network(container, data, options);
+
+    // --- 侧边栏交互逻辑 ---
+    const sidebar = document.getElementById('sidebar');
+    
+    // 初始化：如果在手机端打开，默认折叠侧边栏
+    if (window.innerWidth <= 768) {
+        sidebar.classList.add('collapsed');
+    }
+
+    // 切换侧边栏状态
+    window.toggleSidebar = function() {
+        sidebar.classList.toggle('collapsed');
+        // 等待侧边栏物理空间完全让出，通知底层画布自适应放大并重新居中
+        setTimeout(() => { network.fit({animation: {duration: 500}}); }, 300);
+    };
+
+    // 场景切换逻辑 (逻辑未变)
+    window.setScenario = function(type) {
+        let showNodes = [], showEdges = [];
+        if (type === 'all') {
+            showNodes = nodes.map(n => n.id); showEdges = edges.map(e => e.id);
+        } else if (type === 'mech') {
+            showNodes = [10, 11, 20, 21, 22, 23, 12, 30, 31];
+            showEdges = ['m1','m2','m3','m4','m5','m6','m7','m8','m9'];
+        } else if (type === 'mice') {
+            showNodes = [1, 2, 14, 20, 21, 30, 31, 40, 41]; 
+            showEdges = ['a1','a2','a3','a4','a5','a6','a7','a8']; 
+        } else if (type === 'flower') {
+            showNodes = [13, 20, 21, 30, 31, 42, 43];
+            showEdges = ['f1','f2','f3','f4','f5','f6'];
+        }
+
+        data.nodes.update(nodes.map(n => ({id: n.id, hidden: !showNodes.includes(n.id)})));
+        data.edges.update(edges.map(e => ({id: e.id, hidden: !showEdges.includes(e.id)})));
+        network.fit({animation: {duration: 800, easingFunction: "easeInOutQuad"}});
+        
+        const desc = {
+            'all': '当前展示全貌。节点间距已优化，您可以随意拖拽节点整理布局，观察表观遗传的多层级调控网。',
+            'mech': '聚焦微观：观察甲基化如何导致染色质致密，产生“物理阻碍”使转录因子无法结合，从而沉默基因。',
+            'mice': '经典案例：孕鼠的饮食环境（是否富含甲基）直接决定了后代 Avy 基因的甲基化程度，进而影响小鼠一生的健康。',
+            'flower': '经典案例：Lcyc 基因序列完全不变，仅仅是因为发生高度甲基化而被沉默，就导致了柳穿鱼花型发生巨大变异。'
+        };
+        document.getElementById('node-title').innerText = "📍 场景介绍";
+        document.getElementById('node-desc').innerText = desc[type];
+
+        if (window.innerWidth <= 768) {
+            sidebar.classList.add('collapsed');
+        }
+    };
+
+    // 点击节点逻辑：不再弹出侧边栏，而是让底部的卡片更新并轻微跳动提示
+    network.on("click", function (params) {
+        if (params.nodes.length) {
+            const node = nodes.find(n => n.id === params.nodes[0]);
+            document.getElementById('node-title').innerText = node.label.replace('\n', ' ');
+            document.getElementById('node-desc').innerText = node.detail || "暂无详细描述。";
+            
+            // 底部面板跳动动画
+            const panel = document.getElementById('bottom-info-panel');
+            panel.style.transform = 'translateX(-50%) scale(1.03)';
+            setTimeout(() => {
+                panel.style.transform = 'translateX(-50%) scale(1)';
+            }, 200);
+        }
+    });
+    
+    setScenario('all');
+</script>
+
+<script src="ai-tutor.js"></script>
+
+</body>
+</html>

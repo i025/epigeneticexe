@@ -1,0 +1,109 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    font-family: 'Poppins', 'Noto Sans SC', sans-serif; 
+    color: #4a5568; 
+    background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); 
+    line-height: 1.6; 
+    padding-bottom: 2rem; /* 给底部留一点呼吸空间 */
+}
+header { text-align: center; padding: 3rem 1rem; background: rgba(255,255,255,0.95); margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+header h1 { color: #4e54c8; font-size: 2.2rem; margin-bottom: 0.5rem; }
+
+/* 身体地图 */
+.landing { background: white; padding: 2rem; margin: 0 auto 3rem; max-width: 600px; border-radius: 20px; text-align: center; }
+.body-svg { max-width: 300px; width: 100%; height: auto; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); margin: 1rem 0; }
+.body-part { cursor: pointer; transition: 0.3s; }
+.body-part:hover { opacity: 0.8; transform: scale(1.02); transform-origin: center; }
+.body-part:hover circle, .body-part:hover ellipse, .body-part:hover rect, .body-part:hover path { stroke: #3f2b96; stroke-width: 3; filter: brightness(1.05); }
+
+/* 版块布局 */
+section { max-width: 1000px; margin: 0 auto 3rem; background: white; padding: 2.5rem; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+h2 { color: #4e54c8; border-bottom: 2px solid #eef2ff; padding-bottom: 0.5rem; margin-bottom: 1rem; text-align: center; }
+
+.twin-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+.col {
+    flex: 1;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+}
+.col h3 { text-align: center; margin-bottom: 1rem; color: #4e54c8; font-size: 1.2rem; }
+.col-a { border-top: 5px solid #4e54c8; } /* 蓝色系 */
+.col-b { border-top: 5px solid #db2777; } /* 粉色系 */
+.col-b h3 { color: #db2777; }
+
+/* 科学原理框 (新增样式，模仿上传图片) */
+.science-note {
+    background: #fffbeb; /* 浅黄色背景 */
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+    border: 1px solid #fcd34d; /* 黄色边框 */
+    color: #92400e; /* 深橙褐色字体 */
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.science-note strong {
+    color: #d97706; /* 标题加深颜色 */
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 1.05rem;
+}
+.science-note em {
+    font-style: italic;
+    font-weight: 600;
+}
+
+/* 交互控件 */
+.interactive-container { padding: 0.5rem; }
+.input-group { margin-bottom: 1.5rem; }
+label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: #334155; font-size: 0.9rem; }
+input[type=range] { width: 100%; height: 8px; border-radius: 4px; background: #cbd5e1; outline: none; -webkit-appearance: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; background: #4e54c8; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.col-b input[type=range]::-webkit-slider-thumb { background: #db2777; }
+
+.value-badge { background: #4e54c8; color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.85rem; float: right; }
+.col-b .value-badge { background: #db2777; }
+select { width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid #cbd5e1; background: white; font-size: 0.9rem; }
+
+/* 复选框 */
+.checkbox-group label { display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: white; border-radius: 10px; margin-bottom: 0.6rem; cursor: pointer; border: 1px solid #e2e8f0; font-size: 0.85rem; }
+.checkbox-group label:hover { background: #f1f5f9; }
+.checkbox-group label.positive-factor { background: #f0fdf4; border-color: #86efac; border-left: 5px solid #22c55e; }
+input[type=checkbox] { width: 18px; height: 18px; accent-color: #4e54c8; }
+
+/* 仪表盘和图形 */
+.meter-container, .gauge-container { margin: 1.5rem 0; }
+.meter, .gauge { width: 100%; height: 20px; background: #e2e8f0; border-radius: 12px; overflow: hidden; position: relative; }
+.meter-fill, .gauge-fill { height: 100%; width: 0%; transition: width 0.5s; border-radius: 12px; }
+.meter-fill { background: linear-gradient(90deg, #22c55e, #eab308, #ef4444); } 
+.gauge-fill { background: linear-gradient(90deg, #22c55e, #eab308, #ef4444); }
+
+.dial-container { text-align: center; margin: 1.5rem 0; }
+.dial { width: 120px; height: 60px; background: linear-gradient(to right, #ef4444, #eab308, #22c55e); border-radius: 60px 60px 0 0; position: relative; margin: 0 auto; }
+.dial-needle { width: 3px; height: 55px; background: #1e293b; position: absolute; bottom: 0; left: 50%; transform-origin: bottom; transform: translateX(-50%) rotate(-90deg); transition: 0.5s; border-radius: 2px; }
+
+/* 皮肤 Visual */
+.skin-visual { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 0.5rem; background: #e0b090; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: background 0.5s; }
+.comparison-item { text-align: center; background: white; padding: 1rem; border-radius: 12px; margin-bottom: 1rem; }
+
+/* 时钟 Aging */
+.clock-display { display: flex; justify-content: center; margin: 1.5rem 0; }
+.clock { width: 80px; height: 80px; border-radius: 50%; position: relative; background: white; border: 4px solid #4e54c8; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
+.col-b .clock { border-color: #db2777; }
+.clock-hand { width: 2px; height: 35px; background: #333; position: absolute; bottom: 50%; left: 50%; transform-origin: bottom; transition: 1s cubic-bezier(0.4, 0, 0.2, 1); }
+.clock-center { width: 6px; height: 6px; background: #333; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* 结果文字 */
+.result { background: white; padding: 0.8rem; border-radius: 8px; border-left: 5px solid #cbd5e1; font-size: 0.85rem; color: #334155; }
+
+/* 手机适配 */
+@media (max-width: 768px) {
+    .twin-container { flex-direction: column; }
+    .col { width: 100%; margin-bottom: 1rem; }
+}

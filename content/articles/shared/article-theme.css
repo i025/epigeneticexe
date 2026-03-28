@@ -1,0 +1,194 @@
+:root {
+  --epi-shell-background:
+    radial-gradient(circle at top left, rgba(143, 217, 255, 0.26), transparent 24%),
+    radial-gradient(circle at 82% 14%, rgba(46, 120, 255, 0.12), transparent 18%),
+    linear-gradient(180deg, #f7fbff 0%, #edf5ff 48%, #e8f1fe 100%);
+  --epi-reader-surface: rgba(255, 255, 255, 0.96);
+  --epi-reader-border: rgba(198, 221, 245, 0.92);
+  --epi-reader-text: #17314f;
+  --epi-reader-shadow:
+    0 20px 44px rgba(83, 123, 177, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  --epi-accent-strong: #1a64d8;
+  --epi-accent: #2e7ff0;
+  --epi-accent-soft: #e6f2ff;
+  --epi-accent-shadow: rgba(79, 169, 255, 0.18);
+}
+
+body[data-epi-page="article"][data-epi-group="extension"] {
+  --epi-accent-strong: #655be0;
+  --epi-accent: #7c72ef;
+  --epi-accent-soft: #efecff;
+  --epi-accent-shadow: rgba(125, 114, 239, 0.18);
+}
+
+html,
+body[data-epi-page="article"] {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+body[data-epi-page="article"] {
+  position: fixed !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+  background: var(--epi-shell-background) !important;
+  color: var(--epi-reader-text) !important;
+  font-family: "DM Sans", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+}
+
+body[data-epi-page="article"]::before,
+body[data-epi-page="article"]::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 999px;
+}
+
+body[data-epi-page="article"]::before {
+  top: -112px;
+  left: -72px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle at center, rgba(143, 217, 255, 0.24) 0%, rgba(143, 217, 255, 0) 72%);
+}
+
+body[data-epi-page="article"]::after {
+  right: -84px;
+  bottom: 12px;
+  width: 284px;
+  height: 284px;
+  background: radial-gradient(circle at center, rgba(46, 120, 255, 0.14) 0%, rgba(46, 120, 255, 0) 74%);
+}
+
+body[data-epi-page="article"] .reader-nav-panel,
+body[data-epi-page="article"] .qr-code-box,
+body[data-epi-page="article"] qrcode,
+body[data-epi-page="article"] .qrcode,
+body[data-epi-page="article"] .global-docker {
+  display: none !important;
+}
+
+body[data-epi-page="article"] .reader-booklet-container,
+body[data-epi-page="article"] .reader-booklet-container > .tn-reader-booklet,
+body[data-epi-page="article"] .tn-reader-booklet {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+body[data-epi-page="article"] .tn-page-slot .tn-page,
+body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner {
+  background: var(--epi-reader-surface) !important;
+  border: 1px solid var(--epi-reader-border) !important;
+  border-radius: 28px !important;
+  box-shadow: var(--epi-reader-shadow) !important;
+  color: var(--epi-reader-text) !important;
+}
+
+body[data-epi-page="article"] .tn-page-slot .tn-page::before,
+body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 22px;
+  right: 22px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--epi-accent-strong) 0%, var(--epi-accent) 18%, rgba(255, 255, 255, 0) 76%);
+  opacity: 0.84;
+  pointer-events: none;
+}
+
+body[data-epi-page="article"] .tn-page-slot .tn-page a,
+body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner a {
+  color: var(--epi-accent-strong) !important;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+body[data-epi-page="article"] .tn-page-slot .tn-page a:hover,
+body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner a:hover {
+  color: var(--epi-accent) !important;
+}
+
+body[data-epi-page="article"] .tn-page-slot .tn-page img,
+body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 18px;
+}
+
+body[data-epi-page="article"] .tn-page-slot .tn-page::-webkit-scrollbar,
+body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner::-webkit-scrollbar {
+  width: 10px;
+}
+
+body[data-epi-page="article"] .tn-page-slot .tn-page::-webkit-scrollbar-thumb,
+body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  background: linear-gradient(180deg, var(--epi-accent-soft) 0%, rgba(120, 163, 214, 0.82) 100%);
+}
+
+body[data-epi-page="article"] .tn-page-slot .tn-page::-webkit-scrollbar-track,
+body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner::-webkit-scrollbar-track {
+  background: rgba(232, 241, 252, 0.72);
+}
+
+@media (min-width: 1024px) {
+  body[data-epi-page="article"] .reader-booklet-container {
+    top: 0 !important;
+    left: 31.916817359855333% !important;
+    width: 36.166365280289334% !important;
+    height: 100% !important;
+  }
+
+  body[data-epi-page="article"] .reader-booklet-container,
+  body[data-epi-page="article"] .reader-booklet-container > .tn-reader-booklet,
+  body[data-epi-page="article"] .tn-reader-booklet,
+  body[data-epi-page="article"] .tn-page-slot {
+    height: 100% !important;
+  }
+
+  body[data-epi-page="article"] .tn-page-slot .tn-page,
+  body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner {
+    height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  body[data-epi-page="article"]::before,
+  body[data-epi-page="article"]::after {
+    display: none;
+  }
+
+  body[data-epi-page="article"] .reader-booklet-container {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  body[data-epi-page="article"] .reader-booklet-container,
+  body[data-epi-page="article"] .reader-booklet-container > .tn-reader-booklet,
+  body[data-epi-page="article"] .tn-reader-booklet,
+  body[data-epi-page="article"] .tn-page-slot {
+    height: 100% !important;
+  }
+
+  body[data-epi-page="article"] .tn-page-slot .tn-page,
+  body[data-epi-page="article"] .tn-page-slot .tn-page.tn-vertical-scrolling-turner {
+    border-radius: 22px !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+}

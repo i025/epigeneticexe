@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>表观遗传学习平台</title>
+  <link rel="stylesheet" href="./app.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h2>学习导航</h2>
+
+      <div class="group">
+        <div class="group-title">01 导学</div>
+        <button class="nav-btn" data-page="./content/articles/pre-study/index.html">预习推文</button>
+      </div>
+
+      <div class="group">
+        <div class="group-title">02 视频学习</div>
+        <button class="nav-btn" data-page="./content/video/video.html">观看视频</button>
+      </div>
+
+      <div class="group">
+        <div class="group-title">03 互动实验</div>
+        <button class="nav-btn" data-page="./pages/knowledge-graph/index.html">动态知识图谱</button>
+        <button class="nav-btn" data-page="./pages/methylation-mini/index.html">甲基化小游戏</button>
+        <button class="nav-btn" data-page="./pages/twin/index.html">双胞胎对比实验</button>
+        <button class="nav-btn" data-page="./pages/exercises/index.html">练习系统</button>
+      </div>
+
+      <div class="group">
+        <div class="group-title">04 拓展案例</div>
+        <button class="nav-btn" data-page="./content/articles/cpg/index.html">CpG 案例</button>
+        <button class="nav-btn" data-page="./content/articles/famine/index.html">荷兰饥荒案例</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h1>表观遗传学习平台</h1>
+      </div>
+      <iframe id="viewer" src="./content/articles/pre-study/index.html"></iframe>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

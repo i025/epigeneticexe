@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>表观遗传仿真</title>
+    <link rel="stylesheet" href="../shared/chat-widget.css">
+    <script src="../shared/chat-widget.js" defer></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            user-select: none;
+            color: #2f3542;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+
+        #container {
+            position: relative;
+            max-width: 1100px; 
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap; /* 允许换行 */
+            overflow: hidden;
+            border: 1px solid #dcdde1;
+        }
+
+        /* 🔴 修复 2：控制台调换到上方/左侧 */
+        #panel {
+            flex-grow: 1;
+            flex-basis: 280px; 
+            background: #2f3542;
+            color: #dfe4ea;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            /* 当在上方时加个底边框，在左侧时加个右边框 */
+            border-bottom: 2px solid #1e242d;
+        }
+
+        @media (min-width: 820px) {
+            #panel { border-bottom: none; border-right: 2px solid #1e242d; }
+        }
+
+        h3 { margin-top: 0; color: #7bed9f; border-bottom: 1px solid #57606f; padding-bottom: 10px; font-size: 16px;}
+        
+        .status-box { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+        .meter-label { font-size: 12px; display: flex; justify-content: space-between; }
+        .meter-bar { height: 10px; background: #57606f; border-radius: 5px; margin-top: 5px; overflow: hidden; position: relative; }
+        .meter-fill { height: 100%; width: 0%; background: #ffa502; transition: width 0.3s; }
+        .threshold-line { position: absolute; left: 25%; top: 0; bottom: 0; width: 2px; background: #ff4757; z-index: 2; }
+
+        .legend-box {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+        .legend-box h4 { margin: 0 0 8px 0; color: #a4b0be; font-size: 13px; }
+        .legend-list { list-style: none; padding: 0; margin: 0; }
+        .legend-list li { display: flex; align-items: center; margin-bottom: 8px; }
+        .icon { width: 14px; height: 14px; margin-right: 8px; border-radius: 3px; display: inline-block;}
+        
+        .i-dna { background: linear-gradient(to right, #95a5a6, #bdc3c7); height: 4px; margin-top: 5px; border-radius: 2px;}
+        .i-cpg { background: rgba(46, 204, 113, 0.3); border: 1px solid #27ae60; border-radius: 2px;}
+        .i-promoter { border-top: 2px dashed rgba(52, 152, 219, 0.8); height:0; width: 18px; margin-top: 6px;}
+        .i-ch3 { background: radial-gradient(circle at 30% 30%, #ffeaa7, #f1c40f 60%, #e67e22); border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .i-tf { background: linear-gradient(135deg, #a29bfe, #6c5ce7); border-radius: 6px 6px 2px 6px; box-shadow: 1px 1px 3px rgba(0,0,0,0.4); clip-path: none; }
+
+        button {
+            background: #ff4757; color: white; border: none; padding: 12px;
+            border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: auto;
+            transition: 0.2s; font-size: 15px;
+        }
+        button:hover { background: #ff6b81; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2);}
+        
+        .feedback-text { font-size: 13px; line-height: 1.5; min-height: 60px; color: #ced6e0; margin-bottom: 10px;}
+
+        /* 🔴 修复 1：彻底移除 max-width，让空白被填满 */
+        canvas {
+            background: linear-gradient(to bottom, #ffffff 0%, #f1f2f6 100%);
+            cursor: pointer;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 820 / 600; /* 保持画面内容比例不被挤压 */
+            touch-action: none; 
+            flex-grow: 999; /* 用绝对优先级占满剩余的右侧或下侧空间 */
+        }
+    </style>
+</head>
+<body data-chat-url="https://www.xianjianaiedu.com/tech/CozeEmbed/?config=JTdCJTIydGl0bGUlMjIlM0ElMjIlRTglOTMlOUQlRTYlOTklQjYlRTUlOEQlOUElRTUlQTMlQUIlMjIlMkMlMjJzdWJ0aXRsZSUyMiUzQSUyMiVFNyU5NCVCMiVFNSU5RiVCQSVFNSU4QyU5NiVFNSVBRSU5RSVFOSVBQSU4QyVFNSVCMCU4RiVFNSU4QSVBOSVFNiU4OSU4QiUyMiUyQyUyMmRlc2NyaXB0aW9uJTIyJTNBJTIyJUU3JTk0JUE4JUU0JUJBJThFJUUzJTgwJThBJUU3JTk0JTlGJUU1JTkxJUJEJUU3JTlBJTg0JUU1JThGJTk4JUU1JUE1JThGJUVGJUJDJTlBJUU4JUE3JUEzJUU3JUEwJTgxJUU4JUExJUE4JUU4JUE3JTgyJUU5JTgxJTk3JUU0JUJDJUEwJUUzJTgwJThCJUU1JUJFJUFFJUU4JUFGJUJFJUU3JTlBJTg0JUU3JTk0JUIyJUU1JTlGJUJBJUU1JThDJTk2JUU1JUFFJTlFJUU5JUFBJThDJUU1JUIwJThGJUU1JThBJUE5JUU2JTg5JThCJTIyJTJDJTIyYm90SWQlMjIlM0ElMjI3NjE2NTQ4Njg3MjUwNTIyMTIxJTIyJTJDJTIyb2F1dGhBcHBJZCUyMiUzQSUyMjExMzQ4MjY5NTQ4OTElMjIlMkMlMjJvYXV0aEtpZCUyMiUzQSUyMlJTS0J4d21pcEJ6SjdXQzFxZXowMlhrVmtrYzhjWTBfaHBjN1E5bDFTTjQlMjIlMkMlMjJvYXV0aFByaXZhdGVLZXklMjIlM0ElMjItLS0tLUJFR0lOJTIwUFJJVkFURSUyMEtFWS0tLS0tJTVDbk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRQzQ3dkJ2cWd2azdtMTQlNUNuVWtJcDhQRm9BTjdkbW1VbzBCdmY1eGZIcjlwMEZyREs3bmd5Z1BaOHNSJTJGbmpYQlU3d2YwMWY5UENnM1NSa0wxJTVDblNXeDEwTk5WWmNuNiUyQkpYOFhZTnhhb0FyZDE1RkpZT3lSSXcxWW52dHNSb3o2Q0kzY0oxemE3cUhlOVZpanRkQyU1Q25zbWNBc1NuYXRSWkN3aWt2dkpTZ21Dck14SlptRFA2bUZGMCUyQmN2OEI2UWolMkY0UVFQbXpJJTJGZ0NscGJvWkFHOTFqJTVDbmQ0dzAzcjE5cElMTURJWkpyZ3d4SGp3a2Y1JTJCM3JUYzhnY0IlMkZmVVpIZVg3TzV4aHlNUlE5WTEwYlI2aTJWWlJCJTVDbmo4RmVpbDZTeVpjdVp0Nk94NHlNU1VpVnZpaiUyQjA0b3d5YVhvclVaU1VrRUdzWmZPT1p5c1BEVUhUa3hJbEttZyU1Q25hcjB2RFlYJTJGQWdNQkFBRUNnZ0VBQnM1S0I4c2klMkIzNlJGJTJCMTk2WktvU05tMUVOWnhEY0dad3JxeW5PbXpiYlJIJTVDbmYlMkJtR2Y3JTJCWlFGazVpcVN6d09XVHFZYVdDZ3RVUDc1aWY1ZVJ1aUJBa2plTzZZRnNOeEhUcWh4dmFJV0hwJTJCZUMlNUNuaCUyRlVnJTJGcTFqVU1ERXlNOWpldm42dUVXeVBxZWVjdVE5YmN3NnM1N1JmamdFdDBkaEhZSXl2WDdYakdPaWxMOFklNUNuUEh4OFZ1endmYVZ0WWpjMGc5MUk3Y0ozajZHSzRMOXlnRFFBVm1NZVFrUTRndHVPdEJEdGJjWEVZbGttTVY0MCU1Q25MNFVZbFlMSHYzRml2Y3hDSmhBOWZ5WUZEZktCNWZhMUE0ZXZZUTNHTnR1TWRWcVkzY2U5TzNjUGFOS1pkVnUxJTVDblo1dmNyV1dFWkU5UEhmOXBJb2lDMnBBJTJCbjh3OUJrcGUydVpMRWpKVk1RS0JnUURjQnB2Z1RFUVpzVzJyenpIeiU1Q25xUmolMkZvJTJCaGRLTlY5dnNkJTJCakxUVzhPQmhKd2NnUm5rZ1A2NVM4dXdNZmVseFNjNHlud3FycjFXR2FIVEF2VExYJTVDbjdRN25KUXZrVmFaWU4yOTFmS0tiYkdKN3hJMkJGZHBLVGR6ZFloMWdmdGl0d0Nhc2VSMXk1MUkwN2FnMzNaOSUyQiU1Q25sb1g1ejJTZ2NiUEZPcFlHMWpaZDR0Vnlwd0tCZ1FEWEs0QjNuRVR4dnliSDF5UzJwR1ZGNjhPaGd4ZXV5TDUwJTVDbnZjZHRWZkdsWWxDNmJmbCUyQlQwMnphQm40RktGQTh2MzdydGUwaWM0UDZMbFU0TG9nTiUyRmpuTmxNOEgyMXhRa0g3JTVDbks5Y3IxMzl3cHBmT0lHbTE4NXg0b2FRNWYzSVRMelRNZ1A4SklLSEVHREtjV09LRWZPWUhJUDE3emFHSllRJTJGbyU1Q25EcE1sTDVmMDZRS0JnRTZRU1k1Z2pSeURmejZPNEM0NTNnUkNHWkZTS0ZFYkV3NjczVUsyaGRnSzRIJTJCRXluRmElNUNuYTd1UW8lMkZxZDV3SWRzWFBmMkNhUGw4RkRnUlRsT2NkaURTVTUxREkyNXd1dTE2eWkwVWtmJTJGVlptUzRTaE1lM0ElNUNuT2JJTyUyQjZCZUNxNlg0dmRJMDl3WWZ3RUpMenlyZE96MWdHYyUyRng1V0dwQU16dFNoQnl1M2hOZ2dYQW9HQkFJUGclNUNuSnFtb2ZsMElRaFdEViUyRjRVJTJGZmolMkZ5ZlFvcTVBMWV2MkQlMkYwR1V4amtONjlxSFlyMjJqekhoSU9GNmkyYUtSMzVGJTVDbkolMkZGJTJGOEdxeHdUMHpTd0JLTGVSUDJHM2wlMkJTYk1iRElzS1lHMlgyWkV4SSUyRlNMOWdUeWhmcFFnVDNob3daaDZ1NyU1Q25lQlE1Q3N4cjVFRU0lMkZUQWtlTHR2emN4ZU9KNUJmZ1ZGUVl3dUFsMVpBb0dCQUpUMiUyQiUyQnZCc25QR0ZQQ1dUTk5pJTVDbmllaXRoMlY1WEYyQ3BweEJVZ05vVjZ5V1FKWk50VjkxZ3picUdOanB3dSUyRko2RnV0NzIlMkZlakpFNjhHNyUyRm4lMkJ2eCU1Q245ZTNIRTNsZHMlMkZGOE56N3BUM21Gdk9xMURRZHE1ZzRSTGNjcER1dWZkQ0xNTU14MEZHTGtrWU1qWlclMkJhRU52TyU1Q25qRk1pVTNiNjlFazRYdkRIR25oRVEydFYlNUNuLS0tLS1FTkQlMjBQUklWQVRFJTIwS0VZLS0tLS0lMjIlMkMlMjJjaGF0VGl0bGUlMjIlM0ElMjIlRTglOTMlOUQlRTYlOTklQjYlRTUlOEQlOUElRTUlQTMlQUItLSVFNyU5NCVCMiVFNSU5RiVCQSVFNSU4QyU5NiVFNSVBRSU5RSVFOSVBQSU4QyVFNSVCMCU4RiVFNSU4QSVBOSVFNiU4OSU4QiUyMiU3RA==">
+
+<div id="container">
+    
+    <div id="panel">
+        <h3>🧬 实验控制台 </h3>
+        
+        <div class="status-box">
+            <div class="meter-label"><span>CpG甲基化计数</span><span id="methyl-count">0 / 8</span></div>
+            <div class="meter-bar">
+                <div class="threshold-line" title="阻断阈值 (≥2)"></div>
+                <div class="meter-fill" id="meter-fill"></div>
+            </div>
+            <div style="font-size:10px; color:#aaa; margin-top:4px; text-align: right;">红线 = 阻断阈值 (2个)</div>
+        </div>
+
+        <div class="status-box" style="border:1px solid #7bed9f; padding: 8px;">
+            <div style="font-weight:bold; font-size: 12px;">基因表达状态</div>
+            <div id="gene-status" style="font-size:20px; color:#7bed9f; text-align: center;">OFF</div>
+        </div>
+
+        <div class="legend-box">
+            <h4>📊 图例说明</h4>
+            <ul class="legend-list">
+                <li><span class="icon i-dna"></span> 双链 DNA (骨架)</li>
+                <li><span class="icon i-cpg"></span> CpG 岛 (高密度CG区)</li>
+                <li><span class="icon i-promoter"></span> 启动子 (识别区域)</li>
+                <li><span class="icon i-ch3"></span> 甲基基团 (CH3)</li>
+                <li><span class="icon i-tf"></span> 转录因子 (TF)</li>
+            </ul>
+        </div>
+
+        <div class="feedback-text" id="feedback">加载中...</div>
+
+        <button onclick="resetSim()">🔄 重置实验</button>
+    </div>
+
+    <canvas id="simCanvas"></canvas>
+
+</div>
+
+<script>
+    const canvas = document.getElementById('simCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    const HD_SCALE = 3; 
+    const cssWidth = 820;
+    const cssHeight = 600;
+    
+    canvas.width = cssWidth * HD_SCALE;
+    canvas.height = cssHeight * HD_SCALE;
+    ctx.scale(HD_SCALE, HD_SCALE);
+
+    const elGeneStatus = document.getElementById('gene-status');
+    const elMethylCount = document.getElementById('methyl-count');
+    const elMeterFill = document.getElementById('meter-fill');
+    const elFeedback = document.getElementById('feedback');
+
+    const DNA_Y = 300;
+    const BASE_WIDTH = 18; 
+    const SEQ_START_X = 30;
+    const THRESHOLD = 2; // 阻断阈值
+
+    const SEQ_LEFT = "AGCTTAGCATTGACA"; 
+    const SEQ_ISLAND = "CGCGCGCGATCGCCGC"; 
+    const SEQ_RIGHT = "TGCAATCGTAGCTAG"; 
+    
+    const SEQUENCE_STR = SEQ_LEFT + SEQ_ISLAND + SEQ_RIGHT;
+    const TOTAL_BASES = SEQUENCE_STR.length;
+
+    const ISLAND_START_IDX = SEQ_LEFT.length;
+    const ISLAND_END_IDX = ISLAND_START_IDX + SEQ_ISLAND.length;
+
+    const CPG_VISUAL_X = SEQ_START_X + ISLAND_START_IDX * BASE_WIDTH;
+    const CPG_VISUAL_W = (ISLAND_END_IDX - ISLAND_START_IDX) * BASE_WIDTH;
+    
+    const PROMOTER_X = CPG_VISUAL_X - 30;
+    const PROMOTER_W = CPG_VISUAL_W + 60;
+
+    let state = {
+        methylSites: [], 
+        methylCount: 0,
+        isTFBound: false,
+        dragging: null,
+        dragPos: {x:0, y:0}
+    };
+
+    function initSites() {
+        state.methylSites = [];
+        for (let i = 0; i < TOTAL_BASES; i++) {
+            if (i >= ISLAND_START_IDX && i < ISLAND_END_IDX && SEQUENCE_STR[i] === 'C') {
+                state.methylSites.push({
+                    x: SEQ_START_X + i * BASE_WIDTH,
+                    y: DNA_Y - 25,
+                    occupied: false,
+                    id: i
+                });
+            }
+        }
+    }
+
+    const SOURCE_CH3 = { x: 720, y: 100, r: 15 };
+    const SOURCE_TF = { x: 720, y: 220, w: 70, h: 50 };
+
+    function drawLabel(x, y, text, color="#666", align="left") {
+        ctx.font = "bold 11px sans-serif";
+        ctx.fillStyle = color;
+        ctx.textAlign = align;
+        ctx.fillText(text, x, y);
+    }
+
+    function drawMethyl(x, y, alpha = 1) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        
+        ctx.shadowColor = 'rgba(0,0,0,0.3)';
+        ctx.shadowBlur = 4 * HD_SCALE;
+        ctx.shadowOffsetY = 2 * HD_SCALE;
+
+        let radGrad = ctx.createRadialGradient(x - 3, y - 3, 1, x, y, 11);
+        radGrad.addColorStop(0, '#ffeaa7'); 
+        radGrad.addColorStop(0.6, '#f1c40f'); 
+        radGrad.addColorStop(1, '#e67e22'); 
+
+        ctx.fillStyle = radGrad;
+        ctx.beginPath(); 
+        ctx.arc(x, y, 11, 0, Math.PI*2); 
+        ctx.fill();
+
+        ctx.shadowColor = 'transparent';
+        ctx.fillStyle = "#2c3e50"; 
+        ctx.font = "bold 9px sans-serif"; 
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("CH3", x, y + 1);
+        ctx.restore();
+    }
+
+    function drawTFShape(x, y, alpha = 1) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.globalAlpha = alpha;
+        
+        ctx.shadowColor = 'rgba(0,0,0,0.4)';
+        ctx.shadowBlur = 8 * HD_SCALE;
+        ctx.shadowOffsetY = 4 * HD_SCALE;
+
+        let grad = ctx.createLinearGradient(-35, -25, 35, 20);
+        grad.addColorStop(0, '#a29bfe');
+        grad.addColorStop(1, '#6c5ce7');
+        ctx.fillStyle = grad;
+
+        ctx.beginPath();
+        ctx.moveTo(-30, -20);
+        ctx.bezierCurveTo(-10, -30, 10, -30, 30, -20); 
+        ctx.bezierCurveTo(45, -5, 40, 20, 25, 20);   
+        ctx.bezierCurveTo(15, 20, 10, 5, 0, 5);      
+        ctx.bezierCurveTo(-10, 5, -15, 20, -25, 20); 
+        ctx.bezierCurveTo(-40, 20, -45, -5, -30, -20); 
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.shadowColor = 'transparent';
+        ctx.fillStyle = "white"; 
+        ctx.font = "bold 14px sans-serif"; 
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("TF", 0, 0);
+        ctx.restore();
+    }
+
+    function drawDNA() {
+        const DNA_END_X = SEQ_START_X + TOTAL_BASES * BASE_WIDTH;
+        const baseColors = {'A':'#ff7675', 'T':'#74b9ff', 'C':'#55efc4', 'G':'#ffeaa7'};
+
+        let bgGrad = ctx.createLinearGradient(CPG_VISUAL_X, 0, CPG_VISUAL_X + CPG_VISUAL_W, 0);
+        bgGrad.addColorStop(0, "rgba(255,255,255,0)");
+        bgGrad.addColorStop(0.1, "rgba(46, 204, 113, 0.15)");
+        bgGrad.addColorStop(0.9, "rgba(46, 204, 113, 0.15)");
+        bgGrad.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(CPG_VISUAL_X - 10, DNA_Y - 45, CPG_VISUAL_W + 20, 90);
+        
+        ctx.strokeStyle = "rgba(52, 152, 219, 0.6)";
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(PROMOTER_X, DNA_Y - 60); ctx.lineTo(PROMOTER_X + PROMOTER_W, DNA_Y - 60);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        ctx.fillStyle = "#3498db";
+        ctx.beginPath();
+        ctx.moveTo(PROMOTER_X, DNA_Y - 60); ctx.lineTo(PROMOTER_X, DNA_Y - 80);
+        ctx.lineTo(PROMOTER_X + 25, DNA_Y - 70); ctx.lineTo(PROMOTER_X, DNA_Y - 60);
+        ctx.fill();
+        drawLabel(PROMOTER_X + 5, DNA_Y - 85, "Promoter", "#3498db");
+
+        let backboneGrad = ctx.createLinearGradient(0, DNA_Y - 20, 0, DNA_Y - 16);
+        backboneGrad.addColorStop(0, '#95a5a6'); backboneGrad.addColorStop(1, '#bdc3c7');
+        ctx.strokeStyle = backboneGrad;
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(SEQ_START_X - 20, DNA_Y - 20); ctx.lineTo(DNA_END_X + 20, DNA_Y - 20); 
+        ctx.moveTo(SEQ_START_X - 20, DNA_Y + 20); ctx.lineTo(DNA_END_X + 20, DNA_Y + 20); 
+        ctx.stroke();
+        drawLabel(SEQ_START_X - 10, DNA_Y + 60, "5'", "#a4b0be");
+        drawLabel(DNA_END_X + 10, DNA_Y + 60, "3'", "#a4b0be");
+
+        ctx.font = "bold 13px monospace";
+        ctx.textAlign = "center";
+
+        for (let i = 0; i < TOTAL_BASES; i++) {
+            let x = SEQ_START_X + i * BASE_WIDTH;
+            let charTop = SEQUENCE_STR[i];
+            let charBot = getComplement(charTop);
+            let isIsland = (i >= ISLAND_START_IDX && i < ISLAND_END_IDX);
+
+            ctx.strokeStyle = "rgba(189, 195, 199, 0.6)";
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([2, 2]);
+            ctx.beginPath(); ctx.moveTo(x, DNA_Y - 10); ctx.lineTo(x, DNA_Y + 10); ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = baseColors[charTop] || "#a4b0be";
+            ctx.fillText(charTop, x, DNA_Y - 24);
+            ctx.fillStyle = baseColors[charBot] || "#a4b0be";
+            ctx.fillText(charBot, x, DNA_Y + 34);
+
+            if (charTop === 'C' && isIsland) {
+                let site = state.methylSites.find(s => s.id === i);
+                if (site && !site.occupied) {
+                    ctx.strokeStyle = "rgba(241, 196, 15, 0.6)";
+                    ctx.setLineDash([2, 2]);
+                    ctx.beginPath(); ctx.arc(x, DNA_Y - 45, 4, 0, Math.PI*2); ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            }
+        }
+        
+        drawLabel(SEQ_START_X + 20, DNA_Y + 80, "普通区域", "#a4b0be");
+        drawLabel(CPG_VISUAL_X + CPG_VISUAL_W/2, DNA_Y + 80, "CpG 岛 (高密度CG区)", "#27ae60", "center");
+        drawLabel(DNA_END_X - 20, DNA_Y + 80, "普通区域", "#a4b0be", "right");
+    }
+
+    function drawObjects() {
+        ctx.textAlign = "center";
+        
+        drawMethyl(SOURCE_CH3.x, SOURCE_CH3.y);
+        drawLabel(SOURCE_CH3.x, SOURCE_CH3.y - 25, "拖拽：甲基", "#7f8c8d", "center");
+
+        drawTFShape(SOURCE_TF.x, SOURCE_TF.y);
+        drawLabel(SOURCE_TF.x, SOURCE_TF.y - 35, "拖拽：转录因子", "#7f8c8d", "center");
+
+        state.methylSites.forEach(site => {
+            if (site.occupied) {
+                ctx.strokeStyle = "rgba(241, 196, 15, 0.6)";
+                ctx.lineWidth = 2;
+                ctx.beginPath(); 
+                ctx.moveTo(site.x, site.y - 5); 
+                ctx.lineTo(site.x, DNA_Y - 35); 
+                ctx.stroke();
+                drawMethyl(site.x, site.y - 18);
+            }
+        });
+
+        if (state.dragging === 'CH3') {
+            drawMethyl(state.dragPos.x, state.dragPos.y, 0.8);
+            highlightNearestSite(state.dragPos.x, state.dragPos.y);
+        } else if (state.dragging === 'TF') {
+            drawTFShape(state.dragPos.x, state.dragPos.y, 0.8);
+        }
+
+        if (state.isTFBound) {
+            drawTFShape(PROMOTER_X + PROMOTER_W/2, DNA_Y - 2);
+            
+            let expressGrad = ctx.createLinearGradient(PROMOTER_X + PROMOTER_W/2, 0, PROMOTER_X + PROMOTER_W + 150, 0);
+            expressGrad.addColorStop(0, "rgba(46, 213, 115, 0.8)");
+            expressGrad.addColorStop(1, "rgba(46, 213, 115, 0)");
+            
+            ctx.fillStyle = expressGrad;
+            ctx.beginPath();
+            ctx.moveTo(PROMOTER_X + PROMOTER_W/2, DNA_Y - 5);
+            ctx.lineTo(PROMOTER_X + PROMOTER_W + 150, DNA_Y - 15);
+            ctx.lineTo(PROMOTER_X + PROMOTER_W + 150, DNA_Y + 15);
+            ctx.lineTo(PROMOTER_X + PROMOTER_W/2, DNA_Y + 5);
+            ctx.fill();
+            
+            ctx.shadowBlur = 5 * HD_SCALE;
+            ctx.fillStyle = "#2ecc71";
+            ctx.font = "italic bold 14px sans-serif";
+            ctx.textAlign = "left";
+            ctx.shadowColor = 'rgba(46, 204, 113, 0.5)';
+            ctx.fillText("mRNA 转录中 >>>", PROMOTER_X + PROMOTER_W + 20, DNA_Y);
+            ctx.shadowColor = 'transparent'; 
+        }
+    }
+
+    function getComplement(char) {
+        const map = {'A':'T', 'T':'A', 'C':'G', 'G':'C'};
+        return map[char] || '?';
+    }
+
+    function highlightNearestSite(x, y) {
+        let nearest = null; let minDist = 1000;
+        state.methylSites.forEach(site => {
+            if(!site.occupied) {
+                let d = Math.hypot(site.x - x, (site.y - 20) - y);
+                if (d < 40 && d < minDist) { minDist = d; nearest = site; }
+            }
+        });
+        if (nearest) {
+            ctx.strokeStyle = "#e74c3c"; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(nearest.x, nearest.y - 18, 14, 0, Math.PI*2); ctx.stroke();
+            
+            ctx.strokeStyle = "rgba(231, 76, 60, 0.5)";
+            ctx.beginPath();
+            ctx.moveTo(x, y); ctx.lineTo(nearest.x, nearest.y - 18); ctx.stroke();
+        }
+        return nearest;
+    }
+
+    function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawDNA();
+        drawObjects();
+        requestAnimationFrame(render);
+    }
+
+    function getMousePos(evt) {
+        const rect = canvas.getBoundingClientRect();
+        return { 
+            x: (evt.clientX - rect.left) * (cssWidth / rect.width), 
+            y: (evt.clientY - rect.top) * (cssHeight / rect.height)
+        };
+    }
+
+    canvas.addEventListener('pointerdown', (e) => {
+        canvas.setPointerCapture(e.pointerId);
+        const pos = getMousePos(e);
+        
+        if (Math.hypot(pos.x - SOURCE_CH3.x, pos.y - SOURCE_CH3.y) < 30) {
+            if (state.isTFBound) updateUI("CH3_BLOCKED_BY_TF"); 
+            else state.dragging = 'CH3';
+        }
+        else if (Math.hypot(pos.x - SOURCE_TF.x, pos.y - SOURCE_TF.y) < 50) {
+            if (state.methylCount >= THRESHOLD) updateUI("TF_BLOCKED_DRAG");
+            else if (!state.isTFBound) state.dragging = 'TF';
+        }
+        state.dragPos = pos;
+    });
+
+    canvas.addEventListener('pointermove', (e) => {
+        if (state.dragging) state.dragPos = getMousePos(e);
+    });
+
+    canvas.addEventListener('pointerup', (e) => {
+        canvas.releasePointerCapture(e.pointerId);
+        if (!state.dragging) return;
+        
+        if (state.dragging === 'CH3') {
+            let nearest = highlightNearestSite(state.dragPos.x, state.dragPos.y);
+            if (nearest) {
+                nearest.occupied = true; 
+                state.methylCount++; 
+                updateUI("CH3_ADDED");
+            }
+        } else if (state.dragging === 'TF') {
+            let inZone = (state.dragPos.x > PROMOTER_X && state.dragPos.x < PROMOTER_X + PROMOTER_W && Math.abs(state.dragPos.y - DNA_Y) < 60);
+            if (inZone) {
+                state.isTFBound = true; 
+                updateUI("TF_SUCCESS"); 
+            }
+        }
+        state.dragging = null;
+    });
+
+    function updateUI(event) {
+        const maxSites = state.methylSites.length;
+        elMethylCount.innerText = `${state.methylCount} / ${maxSites}`;
+        elMeterFill.style.width = `${(state.methylCount / maxSites) * 100}%`;
+        elMeterFill.style.background = state.methylCount >= THRESHOLD ? "#ff4757" : "#ffa502";
+
+        elGeneStatus.innerText = state.isTFBound ? "ON 🟢" : "OFF 🔴";
+        elGeneStatus.style.color = state.isTFBound ? "#2ed573" : "#ff4757";
+
+        let msg = "";
+        switch (event) {
+            case "INIT": msg = "✅ 布局已优化。<br>请长按拖拽右侧素材到 DNA 链上进行实验。"; break;
+            case "CH3_ADDED": msg = state.methylCount < THRESHOLD ? `✅ 添加 1 个甲基。未达到阻断阈值，TF 仍可结合。` : `⚠️ 甲基化达到阈值(≥${THRESHOLD})！启动子空间受阻。`; break;
+            case "TF_SUCCESS": msg = state.methylCount > 0 ? `✅ 识别成功！尽管有少量甲基，转录因子依然完成了结合。` : `✅ 完美结合！CpG 岛无甲基化，转录通畅。`; break;
+            case "TF_BLOCKED_DRAG": msg = `⛔ 无法拖拽：甲基过多 (≥${THRESHOLD}) 产生了空间位阻，转录因子无法靠近！`; break;
+            case "CH3_BLOCKED_BY_TF": msg = `🛡️ 保护机制生效：转录因子已占据启动子空间，新的甲基基团无法接入！`; break;
+            case "RESET": msg = "🔄 实验已重置。请重新操作。"; break;
+        }
+        if(msg) elFeedback.innerHTML = msg;
+    }
+
+    function resetSim() {
+        state.methylSites.forEach(s => s.occupied = false);
+        state.methylCount = 0; 
+        state.isTFBound = false;
+        updateUI("RESET");
+    }
+
+    initSites();
+    updateUI("INIT"); 
+    render();
+</script>
+
+<script src="ai-tutor.js"></script>
+</body>
+</html>

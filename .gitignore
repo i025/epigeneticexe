@@ -1,0 +1,19 @@
+node_modules/
+dist/
+
+# Local browser/runtime probe artifacts
+.edge-*/
+
+# Local screenshots and debug captures
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# Local temp probe files
+*-runtime-probe.html
+*-runtime-mini.html
+
+# OS/editor noise
+.DS_Store
+Thumbs.db

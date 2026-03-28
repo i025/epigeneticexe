@@ -1,0 +1,61 @@
+{
+  "name": "epigenetics",
+  "version": "2.0.0",
+  "description": "Epigenetics desktop learning app",
+  "main": "main.js",
+  "scripts": {
+    "generate:agent-sequence": "python .\\scripts\\generate-agent-sequence.py",
+    "build:homepage": "npm --prefix pencil-new-react run build",
+    "gui:verify-articles": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\gui-verify-articles.ps1",
+    "repair:articles": "node .\\scripts\\repair-article-text.cjs",
+    "start": "npm run build:homepage && electron .",
+    "clean": "rimraf dist",
+    "dist": "npm run clean && npm run build:homepage && electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^40.8.0",
+    "electron-builder": "^26.8.1",
+    "rimraf": "^6.1.3"
+  },
+  "build": {
+    "appId": "com.yhy.epigenetics",
+    "productName": "Epigenetics",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "app.css",
+      "app.js",
+      "pencil-new-react/dist/**/*",
+      "pages/**/*",
+      "content/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

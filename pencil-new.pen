@@ -1,0 +1,4084 @@
+{
+  "version": "2.9",
+  "children": [
+    {
+      "type": "frame",
+      "id": "cN516",
+      "x": 8340,
+      "y": 0,
+      "name": "V5 中央 Live2D 舞台版",
+      "width": 1720,
+      "height": 1120,
+      "fill": [
+        {
+          "type": "gradient",
+          "gradientType": "linear",
+          "enabled": true,
+          "rotation": 160,
+          "size": {
+            "height": 1
+          },
+          "colors": [
+            {
+              "color": "#F1F8FF",
+              "position": 0
+            },
+            {
+              "color": "#DCEEFF",
+              "position": 0.44
+            },
+            {
+              "color": "#C6E4FF",
+              "position": 1
+            }
+          ]
+        },
+        {
+          "type": "mesh_gradient",
+          "opacity": 0.3,
+          "enabled": true,
+          "columns": 2,
+          "rows": 2,
+          "colors": [
+            "#FBFDFF",
+            "#C9E5FF",
+            "#DEE8FF",
+            "#C7F0FF"
+          ],
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "type": "mesh_gradient",
+          "opacity": 0.12,
+          "enabled": true,
+          "columns": 2,
+          "rows": 2,
+          "colors": [
+            "#F8FCFF",
+            "#DCEEFF",
+            "#E9F6FF",
+            "#D3E8F5"
+          ],
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "type": "gradient",
+          "gradientType": "linear",
+          "enabled": true,
+          "opacity": 0.08,
+          "rotation": 35,
+          "size": {
+            "height": 1
+          },
+          "colors": [
+            {
+              "color": "#FFFFFF",
+              "position": 0
+            },
+            {
+              "color": "#D7EAF7",
+              "position": 0.52
+            },
+            {
+              "color": "#F5FBFF",
+              "position": 1
+            }
+          ]
+        }
+      ],
+      "layout": "vertical",
+      "gap": 24,
+      "padding": [
+        28,
+        30,
+        36,
+        30
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "DJ1DD",
+          "name": "homeShell",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "wdBcs",
+              "x": 1280,
+              "y": -410,
+              "name": "cornerGlowTR",
+              "opacity": 0.24,
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1,
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#002b42",
+                    "position": 0
+                  },
+                  {
+                    "color": "#2a7aebab",
+                    "position": 1
+                  }
+                ]
+              },
+              "width": 820,
+              "height": 820,
+              "effect": [
+                {
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#FFFFFF00"
+                },
+                {
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#00000040",
+                  "offset": {
+                    "x": 0,
+                    "y": 4
+                  },
+                  "blur": 4
+                },
+                {
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#00000040",
+                  "offset": {
+                    "x": 0,
+                    "y": 4
+                  },
+                  "blur": 4
+                },
+                {
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#00000040",
+                  "offset": {
+                    "x": 0,
+                    "y": 4
+                  },
+                  "blur": 4
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "t7NrN",
+              "x": 0,
+              "y": 0,
+              "name": "sideRail",
+              "width": 148,
+              "height": 1056,
+              "fill": [
+                {
+                  "type": "gradient",
+                  "gradientType": "linear",
+                  "enabled": true,
+                  "rotation": 180,
+                  "size": {
+                    "height": 1
+                  },
+                  "colors": [
+                    {
+                      "color": "#F9FCFFDD",
+                      "position": 0
+                    },
+                    {
+                      "color": "#E6F4FFDD",
+                      "position": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "gradient",
+                  "gradientType": "linear",
+                  "enabled": true,
+                  "opacity": 0.34,
+                  "rotation": 135,
+                  "size": {
+                    "height": 1
+                  },
+                  "colors": [
+                    {
+                      "color": "#D8F3FF",
+                      "position": 0
+                    },
+                    {
+                      "color": "#E6EDFF",
+                      "position": 1
+                    }
+                  ]
+                }
+              ],
+              "cornerRadius": 32,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#D3E5FB"
+              },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#6FA7E62A",
+                "offset": {
+                  "x": 0,
+                  "y": 18
+                },
+                "blur": 34
+              },
+              "layout": "vertical",
+              "padding": [
+                25,
+                14
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ZfgLc",
+                  "name": "navHeaderComp",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qsF3o",
+                      "fill": "#1F61D8",
+                      "content": "学习导航",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "yGIbs",
+                      "fill": "#7A94B4",
+                      "content": "学习路径总览",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "fip9E",
+                  "name": "navTopFlex",
+                  "width": "fill_container",
+                  "height": "fill_container"
+                },
+                {
+                  "type": "frame",
+                  "id": "AXke3",
+                  "name": "navMenuComp",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 22,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FYLAL",
+                      "name": "navMainStack",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 22,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "xnwA2",
+                          "name": "homeBtn",
+                          "width": "fill_container",
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 90,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#EEF8FF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#E2F2FF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 16,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "#D7EAFB"
+                          },
+                          "gap": 8,
+                          "padding": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "sPqZn",
+                              "width": 8,
+                              "height": 8,
+                              "fill": "#2E72DD",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "text",
+                              "id": "FUoo4",
+                              "fill": "#1E61D8",
+                              "content": "首页",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 19,
+                              "fontWeight": "bold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "3IKTB",
+                          "name": "group01",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "AALdr",
+                              "fill": "#1E61D8",
+                              "content": "01 导学",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 18,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "XjMtl",
+                              "width": "fill_container",
+                              "fill": "#F7FBFF",
+                              "cornerRadius": 14,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#E2EDF9"
+                              },
+                              "gap": 6,
+                              "padding": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "jmUIs",
+                                  "width": 6,
+                                  "height": 6,
+                                  "fill": "#77C2FF",
+                                  "cornerRadius": 999
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "jMHjA",
+                                  "fill": "#5C7B9C",
+                                  "content": "预习推文",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "8zIXq",
+                          "name": "group02",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "emo01",
+                              "fill": "#A96C00",
+                              "content": "02 视频学习",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 18,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "UjvXu",
+                              "width": "fill_container",
+                              "fill": "#FFFAF2",
+                              "cornerRadius": 14,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#F0E0BF"
+                              },
+                              "gap": 6,
+                              "padding": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "lclBn",
+                                  "width": 6,
+                                  "height": 6,
+                                  "fill": "#F0B14C",
+                                  "cornerRadius": 999
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "7e4S5",
+                                  "fill": "#A96C00",
+                                  "content": "观看视频",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 14,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "fGyfY",
+                          "name": "group03",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "z0Nim",
+                              "fill": "#1687A4",
+                              "content": "03 互动实验",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 18,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "GPVV1",
+                              "width": "fill_container",
+                              "fill": "#F3FCFF",
+                              "cornerRadius": 14,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#DDEFF6"
+                              },
+                              "gap": 6,
+                              "padding": [
+                                7,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "1b2bB",
+                                  "width": 6,
+                                  "height": 6,
+                                  "fill": "#5ECDE8",
+                                  "cornerRadius": 999
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "cgCU6",
+                                  "fill": "#6B839F",
+                                  "textGrowth": "fixed-width",
+                                  "width": 86,
+                                  "content": "知识图谱",
+                                  "lineHeight": 1.18,
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 16,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "iuJz7",
+                              "width": "fill_container",
+                              "fill": "#F3FCFF",
+                              "cornerRadius": 14,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#DDEFF6"
+                              },
+                              "gap": 6,
+                              "padding": [
+                                7,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "8Zmo9",
+                                  "width": 6,
+                                  "height": 6,
+                                  "fill": "#5ECDE8",
+                                  "cornerRadius": 999
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "UOJio",
+                                  "fill": "#6B839F",
+                                  "textGrowth": "fixed-width",
+                                  "width": 86,
+                                  "content": "岁月留痕\n（DNA甲基化实验）",
+                                  "lineHeight": 1.18,
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 16,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "3ZQ1d",
+                              "width": "fill_container",
+                              "fill": "#F3FCFF",
+                              "cornerRadius": 14,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#DDEFF6"
+                              },
+                              "gap": 6,
+                              "padding": [
+                                7,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "pPfXr",
+                                  "width": 6,
+                                  "height": 6,
+                                  "fill": "#5ECDE8",
+                                  "cornerRadius": 999
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "h678B",
+                                  "fill": "#6B839F",
+                                  "textGrowth": "fixed-width",
+                                  "width": 86,
+                                  "content": "镜像人生\n（双胞胎\n对比实验）",
+                                  "lineHeight": 1.18,
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 16,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "QyMOP",
+                              "width": "fill_container",
+                              "fill": "#F3FCFF",
+                              "cornerRadius": 14,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#DDEFF6"
+                              },
+                              "gap": 6,
+                              "padding": [
+                                7,
+                                8
+                              ],
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "3qUeT",
+                                  "width": 6,
+                                  "height": 6,
+                                  "fill": "#5ECDE8",
+                                  "cornerRadius": 999
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "qaj2W",
+                                  "fill": "#6B839F",
+                                  "content": "练习系统",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 16,
+                                  "fontWeight": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ZV9Kj",
+                      "name": "navTail",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "wz9Zj",
+                          "fill": "#655BE0",
+                          "content": "04 拓展阅读",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 18,
+                          "fontWeight": "bold"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "krCIs",
+                          "width": "fill_container",
+                          "fill": "#F7F5FF",
+                          "cornerRadius": 14,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "#E5E4FA"
+                          },
+                          "gap": 6,
+                          "padding": [
+                            7,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "FeifP",
+                              "width": 6,
+                              "height": 6,
+                              "fill": "#8B85F0",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "text",
+                              "id": "oOV9e",
+                              "fill": "#6B839F",
+                              "content": "CpG 案例",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 16,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "SBzcB",
+                          "width": "fill_container",
+                          "fill": "#F7F5FF",
+                          "cornerRadius": 14,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "#E5E4FA"
+                          },
+                          "gap": 6,
+                          "padding": [
+                            7,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "j8rOb",
+                              "width": 6,
+                              "height": 6,
+                              "fill": "#8B85F0",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "text",
+                              "id": "ilu3T",
+                              "fill": "#6B839F",
+                              "textGrowth": "fixed-width",
+                              "width": 86,
+                              "content": "荷兰饥荒\n案例",
+                              "lineHeight": 1.18,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 16,
+                              "fontWeight": "medium"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "BSNK2",
+                  "name": "navBottomFlex",
+                  "width": "fill_container",
+                  "height": "fill_container"
+                },
+                {
+                  "type": "frame",
+                  "id": "j2Gi2",
+                  "name": "navLocationComp",
+                  "width": "fill_container",
+                  "fill": [
+                    {
+                      "type": "gradient",
+                      "gradientType": "linear",
+                      "enabled": true,
+                      "rotation": 180,
+                      "size": {
+                        "height": 1
+                      },
+                      "colors": [
+                        {
+                          "color": "#F9FDFF",
+                          "position": 0
+                        },
+                        {
+                          "color": "#EFF7FF",
+                          "position": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "gradient",
+                      "gradientType": "linear",
+                      "enabled": true,
+                      "opacity": 0.35,
+                      "rotation": 135,
+                      "size": {
+                        "height": 1
+                      },
+                      "colors": [
+                        {
+                          "color": "#D8F7FF",
+                          "position": 0
+                        },
+                        {
+                          "color": "#EEF0FF",
+                          "position": 1
+                        }
+                      ]
+                    }
+                  ],
+                  "cornerRadius": 22,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#DCEAF8"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "3T9BI",
+                      "name": "footTitle",
+                      "fill": "#1F61D8",
+                      "content": "当前位置",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 12,
+                      "fontWeight": "bold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nL3lX",
+                      "name": "footText",
+                      "fill": "#6B839F",
+                      "content": "首页已高亮\n中段为课堂主路径\n底部为拓展案例",
+                      "lineHeight": 1.25,
+                      "fontFamily": "DM Sans",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "l3wcZ",
+              "x": 172,
+              "y": 0,
+              "name": "stageArea",
+              "width": 1488,
+              "height": 1056,
+              "layout": "vertical",
+              "gap": 22,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "sAmet",
+                  "name": "headerLayer",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Tcjkf",
+                      "name": "topRow",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "end",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "A814Y",
+                          "name": "brandGroup",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hcPs1",
+                              "name": "pageTitle",
+                              "fill": {
+                                "type": "gradient",
+                                "gradientType": "linear",
+                                "enabled": true,
+                                "rotation": 20,
+                                "size": {
+                                  "height": 1
+                                },
+                                "colors": [
+                                  {
+                                    "color": "#0F3D91",
+                                    "position": 0
+                                  },
+                                  {
+                                    "color": "#2E78FF",
+                                    "position": 0.38
+                                  },
+                                  {
+                                    "color": "#3ec2ff",
+                                    "position": 0.62
+                                  },
+                                  {
+                                    "color": "#16457D",
+                                    "position": 1
+                                  }
+                                ]
+                              },
+                              "content": "生命的变奏——解码表观遗传",
+                              "fontFamily": "Bricolage Grotesque",
+                              "fontSize": 46,
+                              "fontWeight": "800"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "7l58K",
+                          "name": "pageSub",
+                          "fill": "#62809F",
+                          "content": "从问题出发，沿着建议路径进入预习、视频、互动与拓展的学习舞台。",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "medium"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "9EPi8",
+                          "name": "metaGroup",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "bs2e8",
+                              "name": "crumb",
+                              "fill": "#FFFFFFCC",
+                              "cornerRadius": 999,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#D8E8F7"
+                              },
+                              "padding": [
+                                8,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "BDJVQ",
+                                  "name": "crumbText",
+                                  "fill": "#5E7E9F",
+                                  "content": "首页 / 蓝晶博士主入口 / 表观遗传",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 12,
+                                  "fontWeight": "bold"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "6JTsr",
+                      "name": "pathBar",
+                      "width": "fill_container",
+                      "fill": {
+                        "type": "gradient",
+                        "gradientType": "linear",
+                        "enabled": true,
+                        "rotation": 90,
+                        "size": {
+                          "height": 1
+                        },
+                        "colors": [
+                          {
+                            "color": "#FFFFFFEE",
+                            "position": 0
+                          },
+                          {
+                            "color": "#EEF7FFEE",
+                            "position": 1
+                          }
+                        ]
+                      },
+                      "cornerRadius": 24,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#D4E6FA"
+                      },
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#72AEE61A",
+                        "offset": {
+                          "x": 0,
+                          "y": 8
+                        },
+                        "blur": 22
+                      },
+                      "gap": 18,
+                      "padding": [
+                        16,
+                        22
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "inDRg",
+                          "name": "pathLabel",
+                          "fill": "#F1F8FF",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "#D5E7FA"
+                          },
+                          "padding": [
+                            8,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "V3jxi",
+                              "name": "pathLabelText",
+                              "fill": "#59789D",
+                              "content": "建议学习路径",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 15,
+                              "fontWeight": "bold"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ejX65",
+                          "name": "step1",
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 90,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#E3F1FF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#D0E8FF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "#7FD9E8"
+                          },
+                          "effect": {
+                            "type": "shadow",
+                            "shadowType": "outer",
+                            "color": "#06B6D438",
+                            "blur": 16
+                          },
+                          "padding": [
+                            12,
+                            18
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "qqURP",
+                              "name": "step1Text",
+                              "fill": "#1B63D8",
+                              "content": "01 预习",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 21,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "5vTgM",
+                          "name": "link12dash",
+                          "width": 46,
+                          "height": 8,
+                          "gap": 4,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Aytq8",
+                              "name": "dash12a",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "IUoz8",
+                              "name": "dash12b",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "9O3G1",
+                              "name": "dash12c",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "chkmZ",
+                              "name": "dash12d",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "7DTLl",
+                          "name": "step2",
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 90,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#FFF9EE",
+                                "position": 0
+                              },
+                              {
+                                "color": "#FFF0D8",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 999,
+                          "padding": [
+                            12,
+                            18
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "NOJtH",
+                              "name": "step2Text",
+                              "fill": "#A96C00",
+                              "content": "02 视频",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 21,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "SiCxB",
+                          "name": "link23dash",
+                          "width": 46,
+                          "height": 8,
+                          "gap": 4,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "EZDHl",
+                              "name": "dash23a",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "WBgrM",
+                              "name": "dash23b",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Wf0wn",
+                              "name": "dash23c",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "oAZq7",
+                              "name": "dash23d",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "tZixI",
+                          "name": "step3",
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 90,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#EDF9FF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#DDF5FF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 999,
+                          "padding": [
+                            12,
+                            18
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Z2Tnj",
+                              "name": "step3Text",
+                              "fill": "#177DB1",
+                              "content": "03 互动",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 21,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "k83R7",
+                          "name": "link34dash",
+                          "width": 46,
+                          "height": 8,
+                          "gap": 4,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "hvGDy",
+                              "name": "dash34a",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "UJlH6",
+                              "name": "dash34b",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "sYIWh",
+                              "name": "dash34c",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "frame",
+                              "id": "dhNBQ",
+                              "name": "dash34d",
+                              "width": 8,
+                              "height": 2,
+                              "fill": "#3B82F635",
+                              "cornerRadius": 999
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "IIh6R",
+                          "name": "step4",
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 90,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#F3F4FF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#E7EAFF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 999,
+                          "padding": [
+                            12,
+                            18
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "w8PFX",
+                              "name": "step4Text",
+                              "fill": "#4E67D0",
+                              "content": "04 拓展",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 21,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "IwkH5",
+                  "name": "contentLayer",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "uBqRn",
+                      "name": "leftInputRail",
+                      "width": 274,
+                      "height": 865,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "hV9Zp",
+                          "x": 0,
+                          "y": 0,
+                          "name": "leftRoute",
+                          "width": 236,
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            8,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ibDoX",
+                              "name": "leftRouteText",
+                              "fill": "#7A8FAA",
+                              "content": "输入轨道 · 导入 → 深入",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "QV801",
+                          "x": 0,
+                          "y": 52,
+                          "name": "previewCard",
+                          "width": 236,
+                          "height": 244,
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 180,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#FFFFFF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#EDF7FF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 30,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "#CFE4FF"
+                          },
+                          "effect": {
+                            "type": "shadow",
+                            "shadowType": "outer",
+                            "color": "#79B9FF2E",
+                            "offset": {
+                              "x": 0,
+                              "y": 18
+                            },
+                            "blur": 34
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "hOQaJ",
+                              "x": 18,
+                              "y": 18,
+                              "fill": "#EAF4FF",
+                              "cornerRadius": 999,
+                              "padding": [
+                                8,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Ef916",
+                                  "fill": "#1A4FC4",
+                                  "content": "输入 01",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "yfJFe",
+                              "x": 18,
+                              "y": 60,
+                              "fill": "#1A4FC4",
+                              "content": "预习",
+                              "fontFamily": "Bricolage Grotesque",
+                              "fontSize": 34,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "koxxg",
+                              "x": 18,
+                              "y": 118,
+                              "fill": "#7B8FA7",
+                              "textGrowth": "fixed-width",
+                              "width": 200,
+                              "content": "导学推文保持原内容机制不变，只优化外层阅读容器与进入路径。",
+                              "lineHeight": 1.75,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 16,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "MX5Q7",
+                              "x": 18,
+                              "y": 202,
+                              "name": "preAction",
+                              "width": 200,
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "f8Bil",
+                                  "fill": "#E9F4FF",
+                                  "cornerRadius": 999,
+                                  "padding": [
+                                    8,
+                                    12
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "9LPTz",
+                                      "fill": "#1A4FC4",
+                                      "content": "进入 ↗",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 13,
+                                      "fontWeight": "bold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "9wQTU",
+                              "x": 144,
+                              "y": 55,
+                              "name": "preLens",
+                              "fill": "#FFFFFF00",
+                              "width": 44,
+                              "height": 44,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#78CDE05C"
+                              }
+                            },
+                            {
+                              "type": "frame",
+                              "id": "LmekL",
+                              "x": 176,
+                              "y": 91,
+                              "name": "preHandle",
+                              "rotation": 42,
+                              "width": 20,
+                              "height": 2,
+                              "fill": "#78CDE05C",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "path",
+                              "id": "g9iFO",
+                              "x": 154,
+                              "y": 61,
+                              "name": "preDnaA",
+                              "geometry": "M2 0c8 6 8 12 0 18-6 4-6 8 0 10",
+                              "width": 12,
+                              "height": 28,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#78CDE05C"
+                              }
+                            },
+                            {
+                              "type": "path",
+                              "id": "hPw2U",
+                              "x": 166,
+                              "y": 61,
+                              "name": "preDnaB",
+                              "geometry": "M10 0c-8 6-8 12 0 18 6 4 6 8 0 10",
+                              "width": 12,
+                              "height": 28,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#78CDE05C"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "cdctr",
+                          "x": 5,
+                          "y": 291,
+                          "name": "leftSpacer",
+                          "width": 236,
+                          "height": 331,
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 90,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#FFFFFF00",
+                                "position": 0
+                              },
+                              {
+                                "color": "#E7F5FF66",
+                                "position": 0.3
+                              },
+                              {
+                                "color": "#CFEAFF88",
+                                "position": 0.72
+                              },
+                              {
+                                "color": "#FFFFFF00",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "BbplH",
+                              "x": 176,
+                              "y": 169,
+                              "name": "leftGlowV5",
+                              "width": 58,
+                              "height": 6,
+                              "fill": {
+                                "type": "gradient",
+                                "gradientType": "linear",
+                                "enabled": true,
+                                "rotation": 90,
+                                "size": {
+                                  "height": 1
+                                },
+                                "colors": [
+                                  {
+                                    "color": "#5EB5FF",
+                                    "position": 0
+                                  },
+                                  {
+                                    "color": "#C2E5FF",
+                                    "position": 0.42
+                                  },
+                                  {
+                                    "color": "#FFFFFF00",
+                                    "position": 1
+                                  }
+                                ]
+                              },
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "path",
+                              "id": "21LDA",
+                              "x": 68,
+                              "y": 17,
+                              "name": "leftPathV5",
+                              "geometry": "M12 0c24 18 24 46 4 76-14 22-2 52 22 84 16 24 14 54-14 112",
+                              "width": 99,
+                              "height": 289,
+                              "stroke": {
+                                "thickness": 4,
+                                "fill": "#8FC4FF"
+                              }
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "OwkZM",
+                              "x": 108,
+                              "y": 88,
+                              "name": "leftNodeTop",
+                              "fill": "#EDF9FF",
+                              "width": 22,
+                              "height": 21,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#79C8F4"
+                              }
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "E7pjL",
+                              "x": 154,
+                              "y": 162,
+                              "name": "leftNodeMid",
+                              "fill": "#9FCFFF",
+                              "width": 6,
+                              "height": 6
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "JisYx",
+                              "x": 114,
+                              "y": 143,
+                              "name": "leftNodeBottom",
+                              "fill": "#FFF6EA",
+                              "width": 20,
+                              "height": 19,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#E4B05D"
+                              }
+                            },
+                            {
+                              "type": "polygon",
+                              "polygonCount": 3,
+                              "id": "8FL9V",
+                              "x": 148,
+                              "y": 272,
+                              "name": "leftArrowMini",
+                              "rotation": 180,
+                              "fill": "#EDC06A",
+                              "width": 14,
+                              "height": 14
+                            },
+                            {
+                              "type": "text",
+                              "id": "pYPIM",
+                              "x": 148,
+                              "y": 88,
+                              "name": "leftTagTop",
+                              "fill": "#4B98C5",
+                              "textGrowth": "fixed-width-height",
+                              "width": 40,
+                              "height": 28,
+                              "content": "导入",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 20,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "DTBrj",
+                              "x": 87.5786548376127,
+                              "y": 156.47617601782724,
+                              "name": "leftTagBottom",
+                              "rotation": 0.9804884972108957,
+                              "fill": "#C38A2A",
+                              "textGrowth": "fixed-width-height",
+                              "width": 40,
+                              "height": 29,
+                              "content": "深入",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 20,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "path",
+                              "id": "f140m",
+                              "x": 88,
+                              "y": 18.668543917230977,
+                              "name": "leftPathV5",
+                              "rotation": -359.03429241452903,
+                              "geometry": "M12 0c24 18 24 46 4 76-14 22-2 52 22 84 16 24 14 54-14 112",
+                              "width": 99,
+                              "height": 289,
+                              "stroke": {
+                                "thickness": 4,
+                                "fill": "#8FC4FF"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "QSEvs",
+                          "x": 42,
+                          "y": 610,
+                          "name": "videoCard",
+                          "width": 236,
+                          "height": 244,
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 180,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#F8FCFF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#EAF4FF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 30,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#D7E7FF"
+                          },
+                          "effect": {
+                            "type": "shadow",
+                            "shadowType": "outer",
+                            "color": "#8DB7FF2A",
+                            "offset": {
+                              "x": 0,
+                              "y": 18
+                            },
+                            "blur": 34
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "pD3qM",
+                              "x": 18,
+                              "y": 18,
+                              "fill": "#FFF7E8",
+                              "cornerRadius": 999,
+                              "padding": [
+                                8,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "OXdQi",
+                                  "fill": "#A96C00",
+                                  "content": "深入 02",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "T2lMt",
+                              "x": 18,
+                              "y": 60,
+                              "fill": "#A96C00",
+                              "content": "视频",
+                              "fontFamily": "Bricolage Grotesque",
+                              "fontSize": 34,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "3RYaZ",
+                              "x": 18,
+                              "y": 118,
+                              "fill": "#7B8FA7",
+                              "textGrowth": "fixed-width",
+                              "width": 200,
+                              "content": "保留原视频播放机制，在统一外层页头中强化课堂可视性与触控操作。",
+                              "lineHeight": 1.75,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 16,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "2YEDx",
+                              "x": 18,
+                              "y": 202,
+                              "name": "videoAction",
+                              "width": 200,
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "b97d8",
+                                  "fill": "#FFF2D9",
+                                  "cornerRadius": 999,
+                                  "padding": [
+                                    8,
+                                    12
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "z1jBK",
+                                      "fill": "#A96C00",
+                                      "content": "进入 ↗",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 13,
+                                      "fontWeight": "bold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "path",
+                              "id": "Nf1R4",
+                              "x": 152,
+                              "y": 64,
+                              "name": "videoPlay",
+                              "geometry": "M4 4l24 13-24 13z",
+                              "width": 34,
+                              "height": 34,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#78CDE05C"
+                              }
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "GndNl",
+                              "x": 138,
+                              "y": 52,
+                              "name": "videoRingA",
+                              "fill": "#FFFFFF00",
+                              "width": 62,
+                              "height": 62,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#78CDE05C"
+                              }
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "FBWls",
+                              "x": 144,
+                              "y": 58,
+                              "name": "videoRingB",
+                              "fill": "#FFFFFF00",
+                              "width": 50,
+                              "height": 50,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "#78CDE05C"
+                              }
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "aJKEL",
+                              "x": 138,
+                              "y": 78,
+                              "name": "videoDotA",
+                              "fill": "#78CDE05C",
+                              "width": 4,
+                              "height": 4
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "Up0Li",
+                              "x": 196,
+                              "y": 80,
+                              "name": "videoDotB",
+                              "fill": "#78CDE05C",
+                              "width": 4,
+                              "height": 4
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "Bshvp",
+                              "x": 168,
+                              "y": 50,
+                              "name": "videoDotC",
+                              "fill": "#78CDE05C",
+                              "width": 4,
+                              "height": 4
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "A3keY",
+                              "x": 168,
+                              "y": 110,
+                              "name": "videoDotD",
+                              "fill": "#78CDE05C",
+                              "width": 4,
+                              "height": 4
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "RYTNT",
+                          "x": 8,
+                          "y": 182,
+                          "name": "preNoteLine",
+                          "rotation": -10,
+                          "width": 26,
+                          "height": 1,
+                          "fill": "#7FAEDB55",
+                          "cornerRadius": 999
+                        },
+                        {
+                          "type": "frame",
+                          "id": "3uhxu",
+                          "x": 18,
+                          "y": 742,
+                          "name": "videoNoteLine",
+                          "rotation": -8,
+                          "width": 24,
+                          "height": 1,
+                          "fill": "#D5B06B55",
+                          "cornerRadius": 999
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "diM2A",
+                      "name": "heroStage",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": [
+                        {
+                          "type": "gradient",
+                          "gradientType": "linear",
+                          "enabled": true,
+                          "rotation": 180,
+                          "size": {
+                            "height": 1
+                          },
+                          "colors": [
+                            {
+                              "color": "#FFFFFF00",
+                              "position": 0
+                            },
+                            {
+                              "color": "#F7FCFF8A",
+                              "position": 0.12
+                            },
+                            {
+                              "color": "#DCEFFF96",
+                              "position": 0.5
+                            },
+                            {
+                              "color": "#C5E4FF2E",
+                              "position": 1
+                            }
+                          ]
+                        },
+                        {
+                          "type": "gradient",
+                          "gradientType": "linear",
+                          "enabled": true,
+                          "opacity": 0.42,
+                          "rotation": 145,
+                          "size": {
+                            "height": 1
+                          },
+                          "colors": [
+                            {
+                              "color": "#B7E2FF",
+                              "position": 0
+                            },
+                            {
+                              "color": "#D6E7FF",
+                              "position": 0.42
+                            },
+                            {
+                              "color": "#FFFFFF00",
+                              "position": 1
+                            }
+                          ]
+                        },
+                        {
+                          "type": "mesh_gradient",
+                          "opacity": 0.12,
+                          "enabled": true,
+                          "columns": 2,
+                          "rows": 2,
+                          "colors": [
+                            "#FFFFFF00",
+                            "#D4ECFF",
+                            "#CFE7FF",
+                            "#FFFFFF00"
+                          ],
+                          "points": [
+                            [
+                              0,
+                              0
+                            ],
+                            [
+                              1,
+                              0
+                            ],
+                            [
+                              0,
+                              1
+                            ],
+                            [
+                              1,
+                              1
+                            ]
+                          ]
+                        },
+                        {
+                          "type": "mesh_gradient",
+                          "opacity": 0.08,
+                          "enabled": true,
+                          "columns": 2,
+                          "rows": 2,
+                          "colors": [
+                            "#E8F7FF",
+                            "#CFE6F8",
+                            "#EAF4FF",
+                            "#F7FCFF"
+                          ],
+                          "points": [
+                            [
+                              0,
+                              0
+                            ],
+                            [
+                              1,
+                              0
+                            ],
+                            [
+                              0,
+                              1
+                            ],
+                            [
+                              1,
+                              1
+                            ]
+                          ]
+                        }
+                      ],
+                      "stroke": {
+                        "thickness": 0,
+                        "fill": "#FFFFFF00"
+                      },
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#FFFFFF00"
+                      },
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": [
+                        10,
+                        8,
+                        0,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "8cgHY",
+                          "name": "heroBody",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 18,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "iGOHA",
+                              "name": "questionBand",
+                              "width": "fill_container",
+                              "gap": 28,
+                              "justifyContent": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "SsHse",
+                                  "name": "questionNest",
+                                  "width": 980,
+                                  "layout": "vertical",
+                                  "gap": 8,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "MPGeJ",
+                                      "fill": "#0F172A",
+                                      "content": "同样的基因，为什么会有不同表现？",
+                                      "lineHeight": 1,
+                                      "fontFamily": "Bricolage Grotesque",
+                                      "fontSize": 60,
+                                      "fontWeight": "800"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "CX7N2",
+                              "name": "centerArena",
+                              "width": 1001,
+                              "height": 663,
+                              "layout": "none",
+                              "children": [
+                                {
+                                  "type": "ellipse",
+                                  "id": "zIOZD",
+                                  "x": 144.5,
+                                  "y": 577,
+                                  "name": "energyBase",
+                                  "fill": "#00adc43b",
+                                  "width": 720,
+                                  "height": 86,
+                                  "stroke": {
+                                    "thickness": 1,
+                                    "fill": "#7FD9E855"
+                                  },
+                                  "effect": {
+                                    "type": "shadow",
+                                    "shadowType": "outer",
+                                    "color": "#06B6D438",
+                                    "offset": {
+                                      "x": 0,
+                                      "y": 10
+                                    },
+                                    "blur": 28
+                                  }
+                                },
+                                {
+                                  "type": "ellipse",
+                                  "id": "xJpE5",
+                                  "x": 253.5,
+                                  "y": 574,
+                                  "name": "energyBase",
+                                  "fill": "#06b5d4ab",
+                                  "width": 501,
+                                  "height": 43,
+                                  "stroke": {
+                                    "thickness": 1,
+                                    "fill": "#7FD9E855"
+                                  },
+                                  "effect": {
+                                    "type": "shadow",
+                                    "shadowType": "outer",
+                                    "color": "#06B6D438",
+                                    "offset": {
+                                      "x": 0,
+                                      "y": 10
+                                    },
+                                    "blur": 28
+                                  }
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "xd38f",
+                                  "x": 206.5,
+                                  "y": 19,
+                                  "name": "stageGlow",
+                                  "width": 588,
+                                  "height": 540,
+                                  "fill": [
+                                    {
+                                      "type": "gradient",
+                                      "gradientType": "linear",
+                                      "enabled": true,
+                                      "rotation": 145,
+                                      "size": {
+                                        "height": 1
+                                      },
+                                      "colors": [
+                                        {
+                                          "color": "#FAFEFF",
+                                          "position": 0
+                                        },
+                                        {
+                                          "color": "#DCEEFF",
+                                          "position": 0.3
+                                        },
+                                        {
+                                          "color": "#D7E6FF",
+                                          "position": 0.72
+                                        },
+                                        {
+                                          "color": "#F2FAFF",
+                                          "position": 1
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "gradient",
+                                      "gradientType": "linear",
+                                      "enabled": true,
+                                      "opacity": 0.22,
+                                      "rotation": 180,
+                                      "size": {
+                                        "height": 1
+                                      },
+                                      "colors": [
+                                        {
+                                          "color": "#FFFFFF",
+                                          "position": 0
+                                        },
+                                        {
+                                          "color": "#FFFFFF00",
+                                          "position": 1
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "cornerRadius": 999,
+                                  "effect": {
+                                    "type": "shadow",
+                                    "shadowType": "outer",
+                                    "color": "#59B3FF2E",
+                                    "offset": {
+                                      "x": 0,
+                                      "y": 14
+                                    },
+                                    "blur": 46
+                                  },
+                                  "layout": "vertical",
+                                  "gap": 6,
+                                  "padding": [
+                                    18,
+                                    0,
+                                    20,
+                                    0
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "nzVg1",
+                                      "name": "dnaCrest",
+                                      "width": 68,
+                                      "height": 62,
+                                      "layout": "vertical",
+                                      "gap": 5,
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "frame",
+                                          "id": "Dvec8",
+                                          "name": "crestTop",
+                                          "width": 16,
+                                          "height": 16,
+                                          "fill": "#1E66D8",
+                                          "cornerRadius": 999
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "q4xxq",
+                                          "name": "crestLine",
+                                          "width": 12,
+                                          "height": 30,
+                                          "fill": {
+                                            "type": "gradient",
+                                            "gradientType": "linear",
+                                            "enabled": true,
+                                            "rotation": 180,
+                                            "size": {
+                                              "height": 1
+                                            },
+                                            "colors": [
+                                              {
+                                                "color": "#1D66D8",
+                                                "position": 0
+                                              },
+                                              {
+                                                "color": "#67B6FF",
+                                                "position": 1
+                                              }
+                                            ]
+                                          },
+                                          "cornerRadius": 999
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "PIBw1",
+                                      "name": "headShell",
+                                      "width": 244,
+                                      "height": 204,
+                                      "fill": {
+                                        "type": "gradient",
+                                        "gradientType": "linear",
+                                        "enabled": true,
+                                        "rotation": 145,
+                                        "size": {
+                                          "height": 1
+                                        },
+                                        "colors": [
+                                          {
+                                            "color": "#48B6EE",
+                                            "position": 0
+                                          },
+                                          {
+                                            "color": "#9FD8FF",
+                                            "position": 0.72
+                                          },
+                                          {
+                                            "color": "#CFEFFF",
+                                            "position": 1
+                                          }
+                                        ]
+                                      },
+                                      "cornerRadius": 999,
+                                      "stroke": {
+                                        "thickness": 2,
+                                        "fill": "#2B6DD8"
+                                      },
+                                      "layout": "vertical",
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "frame",
+                                          "id": "sJlnh",
+                                          "name": "facePlate",
+                                          "width": 134,
+                                          "height": 100,
+                                          "fill": "#FDFEFF",
+                                          "cornerRadius": 32,
+                                          "layout": "vertical",
+                                          "justifyContent": "center",
+                                          "alignItems": "center",
+                                          "children": [
+                                            {
+                                              "type": "frame",
+                                              "id": "tbD7z",
+                                              "name": "eyeRow",
+                                              "gap": 28,
+                                              "alignItems": "center",
+                                              "children": [
+                                                {
+                                                  "type": "frame",
+                                                  "id": "sc6rV",
+                                                  "name": "eyeL",
+                                                  "width": 16,
+                                                  "height": 22,
+                                                  "fill": "#1D4F9D",
+                                                  "cornerRadius": 999
+                                                },
+                                                {
+                                                  "type": "frame",
+                                                  "id": "A0VNy",
+                                                  "name": "eyeR",
+                                                  "width": 16,
+                                                  "height": 22,
+                                                  "fill": "#1D4F9D",
+                                                  "cornerRadius": 999
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "TGHN8",
+                                              "name": "smile",
+                                              "width": 28,
+                                              "height": 6,
+                                              "fill": "#2B6DD8",
+                                              "cornerRadius": 999
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "YGdZY",
+                                          "name": "nodeLeft",
+                                          "width": 14,
+                                          "height": 14,
+                                          "fill": "#64B9F3",
+                                          "cornerRadius": 999
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "i9e3V",
+                                          "name": "nodeRight",
+                                          "width": 14,
+                                          "height": 14,
+                                          "fill": "#64B9F3",
+                                          "cornerRadius": 999
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "2XlPG",
+                                      "name": "body",
+                                      "width": 197,
+                                      "height": 150,
+                                      "fill": {
+                                        "type": "gradient",
+                                        "gradientType": "linear",
+                                        "enabled": true,
+                                        "rotation": 180,
+                                        "size": {
+                                          "height": 1
+                                        },
+                                        "colors": [
+                                          {
+                                            "color": "#FFFFFF",
+                                            "position": 0
+                                          },
+                                          {
+                                            "color": "#EEF5FF",
+                                            "position": 1
+                                          }
+                                        ]
+                                      },
+                                      "cornerRadius": 30,
+                                      "stroke": {
+                                        "thickness": 1,
+                                        "fill": "#CFE3FA"
+                                      },
+                                      "layout": "vertical",
+                                      "gap": 8,
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "frame",
+                                          "id": "JCIsS",
+                                          "name": "coatBand",
+                                          "width": 110,
+                                          "height": 12,
+                                          "fill": "#E4F1FF",
+                                          "cornerRadius": 999
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "T6Ant",
+                                          "name": "dnaStem",
+                                          "width": 16,
+                                          "height": 50,
+                                          "fill": {
+                                            "type": "gradient",
+                                            "gradientType": "linear",
+                                            "enabled": true,
+                                            "rotation": 180,
+                                            "size": {
+                                              "height": 1
+                                            },
+                                            "colors": [
+                                              {
+                                                "color": "#1E66D8",
+                                                "position": 0
+                                              },
+                                              {
+                                                "color": "#67B6FF",
+                                                "position": 1
+                                              }
+                                            ]
+                                          },
+                                          "cornerRadius": 999
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "pnFgO",
+                                      "name": "bootRow",
+                                      "gap": 38,
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "frame",
+                                          "id": "A68hx",
+                                          "name": "bootL",
+                                          "width": 32,
+                                          "height": 16,
+                                          "fill": "#1E66D8",
+                                          "cornerRadius": 999
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "rIy4q",
+                                          "name": "bootR",
+                                          "width": 32,
+                                          "height": 16,
+                                          "fill": "#1E66D8",
+                                          "cornerRadius": 999
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "polygon",
+                                  "polygonCount": 3,
+                                  "id": "gMbyQ",
+                                  "x": 902,
+                                  "y": 613,
+                                  "name": "baseArrowHead",
+                                  "rotation": 76,
+                                  "fill": "#7FAEDB88",
+                                  "width": 12,
+                                  "height": 12
+                                },
+                                {
+                                  "type": "ellipse",
+                                  "id": "Xnqhk",
+                                  "x": 728.1605626235505,
+                                  "y": 499,
+                                  "name": "miniHalo",
+                                  "opacity": 0.12,
+                                  "rotation": -9.851123473997095,
+                                  "fill": {
+                                    "type": "gradient",
+                                    "gradientType": "radial",
+                                    "enabled": true,
+                                    "rotation": 0,
+                                    "size": {
+                                      "width": 1,
+                                      "height": 1
+                                    },
+                                    "colors": [
+                                      {
+                                        "color": "#FFFFFF",
+                                        "position": 0
+                                      },
+                                      {
+                                        "color": "#EEF7FF",
+                                        "position": 0.6
+                                      },
+                                      {
+                                        "color": "#FFFFFF00",
+                                        "position": 1
+                                      }
+                                    ]
+                                  },
+                                  "width": 214,
+                                  "height": 74
+                                },
+                                {
+                                  "type": "ellipse",
+                                  "id": "StDjp",
+                                  "x": 778.1962347459266,
+                                  "y": 514.7934010036447,
+                                  "name": "miniMTop",
+                                  "opacity": 0.88,
+                                  "rotation": -9.851123473997095,
+                                  "fill": {
+                                    "type": "gradient",
+                                    "gradientType": "linear",
+                                    "enabled": true,
+                                    "rotation": 135,
+                                    "size": {
+                                      "height": 1
+                                    },
+                                    "colors": [
+                                      {
+                                        "color": "#C74A3C",
+                                        "position": 0
+                                      },
+                                      {
+                                        "color": "#E6958D",
+                                        "position": 1
+                                      }
+                                    ]
+                                  },
+                                  "width": 34,
+                                  "height": 34
+                                },
+                                {
+                                  "type": "ellipse",
+                                  "id": "2LjQI",
+                                  "x": 875.9136138849608,
+                                  "y": 554.0911593900772,
+                                  "name": "miniMTop",
+                                  "opacity": 0.88,
+                                  "rotation": -9.851123473997095,
+                                  "fill": {
+                                    "type": "gradient",
+                                    "gradientType": "linear",
+                                    "enabled": true,
+                                    "rotation": 135,
+                                    "size": {
+                                      "height": 1
+                                    },
+                                    "colors": [
+                                      {
+                                        "color": "#C74A3C",
+                                        "position": 0
+                                      },
+                                      {
+                                        "color": "#E6958D",
+                                        "position": 1
+                                      }
+                                    ]
+                                  },
+                                  "width": 34,
+                                  "height": 34
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Vuw4n",
+                                  "x": 784.3698717247717,
+                                  "y": 520.1554703648877,
+                                  "name": "miniMTextTop",
+                                  "rotation": -1.8511234739970954,
+                                  "fill": "#FFFFFF",
+                                  "content": "M",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 18,
+                                  "fontWeight": "800"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "t45p4",
+                                  "x": 874.5449044121451,
+                                  "y": 561.9732044533221,
+                                  "name": "miniMTextBottom",
+                                  "rotation": -1.8511234739970954,
+                                  "fill": "#FFFFFF",
+                                  "content": "M",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 18,
+                                  "fontWeight": "800"
+                                },
+                                {
+                                  "type": "path",
+                                  "id": "5rgmI",
+                                  "x": 730.8626878947507,
+                                  "y": 512.6637666482831,
+                                  "name": "miniRibbonBack",
+                                  "rotation": -9.851123473997095,
+                                  "geometry": "M0 25c18 21 36 21 54 0 18-21 36-21 54 0 18 21 36 21 54 0 18-21 34-21 50 0",
+                                  "width": 212,
+                                  "height": 50,
+                                  "stroke": {
+                                    "thickness": 8,
+                                    "fill": "#9FC1FF"
+                                  }
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "A7oOu",
+                                  "x": 739.0928931234757,
+                                  "y": 535.4071991485253,
+                                  "name": "miniPair1",
+                                  "rotation": -9.851123473997095,
+                                  "width": 10,
+                                  "height": 34,
+                                  "fill": "#B9B5E8",
+                                  "cornerRadius": 4
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "wKpQ6",
+                                  "x": 755.6298737270627,
+                                  "y": 545.383584892701,
+                                  "name": "miniPair2",
+                                  "rotation": -9.851123473997095,
+                                  "width": 10,
+                                  "height": 24,
+                                  "fill": "#55C6B8",
+                                  "cornerRadius": 4
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "sF1pl",
+                                  "x": 789.2996539299565,
+                                  "y": 550.2153445192644,
+                                  "name": "miniPair3",
+                                  "rotation": -9.851123473997095,
+                                  "width": 10,
+                                  "height": 30,
+                                  "fill": "#FF8B5C",
+                                  "cornerRadius": 4
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "ozim7",
+                                  "x": 807.4177091621677,
+                                  "y": 545.241807085754,
+                                  "name": "miniPair4",
+                                  "rotation": -9.851123473997095,
+                                  "width": 10,
+                                  "height": 38,
+                                  "fill": "#FFD45B",
+                                  "cornerRadius": 4
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "0C3rd",
+                                  "x": 845.8014023737796,
+                                  "y": 557.9968882472689,
+                                  "name": "miniPair5",
+                                  "rotation": -9.851123473997095,
+                                  "width": 10,
+                                  "height": 30,
+                                  "fill": "#B9B5E8",
+                                  "cornerRadius": 4
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "h4DfA",
+                                  "x": 861.736581184372,
+                                  "y": 559.7490515599957,
+                                  "name": "miniPair6",
+                                  "rotation": -9.851123473997095,
+                                  "width": 10,
+                                  "height": 34,
+                                  "fill": "#55C6B8",
+                                  "cornerRadius": 4
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "c0RWX",
+                                  "x": 894.5509179667533,
+                                  "y": 569.5070893510872,
+                                  "name": "miniPair7",
+                                  "rotation": -9.851123473997095,
+                                  "width": 10,
+                                  "height": 26,
+                                  "fill": "#FF8B5C",
+                                  "cornerRadius": 4
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "ChN6p",
+                                  "x": 910.0141071967464,
+                                  "y": 568.1323970809951,
+                                  "name": "miniPair8",
+                                  "rotation": -9.851123473997095,
+                                  "width": 10,
+                                  "height": 38,
+                                  "fill": "#FFD45B",
+                                  "cornerRadius": 4
+                                },
+                                {
+                                  "type": "path",
+                                  "id": "MrtzL",
+                                  "x": 730.8626878947507,
+                                  "y": 512.6637666482831,
+                                  "name": "miniRibbonFront",
+                                  "rotation": -9.851123473997095,
+                                  "geometry": "M0 25c18-21 36-21 54 0 18 21 36 21 54 0 18-21 36-21 54 0 18 21 34 21 50 0",
+                                  "width": 212,
+                                  "height": 50,
+                                  "stroke": {
+                                    "thickness": 9,
+                                    "fill": "#1F66D1"
+                                  }
+                                },
+                                {
+                                  "type": "ellipse",
+                                  "id": "f5ziu",
+                                  "x": 65.5,
+                                  "y": 49,
+                                  "name": "ch3BubbleLeft",
+                                  "fill": {
+                                    "type": "gradient",
+                                    "gradientType": "radial",
+                                    "enabled": true,
+                                    "rotation": 0,
+                                    "size": {
+                                      "width": 1,
+                                      "height": 1
+                                    },
+                                    "colors": [
+                                      {
+                                        "color": "#F8F7FF",
+                                        "position": 0
+                                      },
+                                      {
+                                        "color": "#D5D2FF",
+                                        "position": 0.68
+                                      },
+                                      {
+                                        "color": "#A5A2E6",
+                                        "position": 1
+                                      }
+                                    ]
+                                  },
+                                  "width": 44,
+                                  "height": 44
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Dbjqm",
+                                  "x": 80.73221310858753,
+                                  "y": 88.35811576966222,
+                                  "name": "ch3StemLeft",
+                                  "rotation": -22.998966609796426,
+                                  "width": 4,
+                                  "height": 42,
+                                  "fill": "#E3E3E3",
+                                  "cornerRadius": 999
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "GbqEO",
+                                  "x": 169.5,
+                                  "y": 536.3467230209015,
+                                  "name": "squareMarker",
+                                  "rotation": 68.6090534293052,
+                                  "width": 24,
+                                  "height": 24,
+                                  "fill": {
+                                    "type": "gradient",
+                                    "gradientType": "linear",
+                                    "enabled": true,
+                                    "rotation": 135,
+                                    "size": {
+                                      "height": 1
+                                    },
+                                    "colors": [
+                                      {
+                                        "color": "#FFF6A8",
+                                        "position": 0
+                                      },
+                                      {
+                                        "color": "#FFD73D",
+                                        "position": 1
+                                      }
+                                    ]
+                                  },
+                                  "cornerRadius": 2
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "4egRm",
+                                  "x": 189.5,
+                                  "y": 542.8778862511435,
+                                  "name": "squareStem",
+                                  "rotation": 28,
+                                  "width": 4,
+                                  "height": 28,
+                                  "fill": "#E3E3E3",
+                                  "cornerRadius": 999
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "CvOpe",
+                              "name": "dialogueDock",
+                              "width": 959,
+                              "height": 79,
+                              "layout": "vertical",
+                              "gap": 31,
+                              "padding": [
+                                5,
+                                0
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "48TqW",
+                                  "name": "dialogueEntry",
+                                  "width": 620,
+                                  "height": 89,
+                                  "fill": [
+                                    {
+                                      "type": "gradient",
+                                      "gradientType": "linear",
+                                      "enabled": true,
+                                      "rotation": 90,
+                                      "size": {
+                                        "height": 1
+                                      },
+                                      "colors": [
+                                        {
+                                          "color": "#F9FCFF",
+                                          "position": 0
+                                        },
+                                        {
+                                          "color": "#E6F2FF",
+                                          "position": 0.6
+                                        },
+                                        {
+                                          "color": "#D6EAFE",
+                                          "position": 1
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "gradient",
+                                      "gradientType": "linear",
+                                      "enabled": true,
+                                      "opacity": 0.18,
+                                      "rotation": 180,
+                                      "size": {
+                                        "height": 1
+                                      },
+                                      "colors": [
+                                        {
+                                          "color": "#FFFFFF",
+                                          "position": 0
+                                        },
+                                        {
+                                          "color": "#FFFFFF00",
+                                          "position": 1
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "cornerRadius": 999,
+                                  "stroke": {
+                                    "thickness": 0,
+                                    "fill": "#FFFFFF00"
+                                  },
+                                  "effect": {
+                                    "type": "shadow",
+                                    "shadowType": "outer",
+                                    "color": "#6CB6FF26",
+                                    "offset": {
+                                      "x": 0,
+                                      "y": 8
+                                    },
+                                    "blur": 20
+                                  },
+                                  "gap": 14,
+                                  "padding": [
+                                    8,
+                                    50
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "8T6kk",
+                                      "fill": "#56789F",
+                                      "content": "向蓝晶博士发问：DNA 为什么会被沉默？",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 20,
+                                      "fontWeight": "900"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "9GzJd",
+                                      "name": "askBtn",
+                                      "fill": {
+                                        "type": "gradient",
+                                        "gradientType": "linear",
+                                        "enabled": true,
+                                        "rotation": 90,
+                                        "size": {
+                                          "height": 1
+                                        },
+                                        "colors": [
+                                          {
+                                            "color": "#1A64D8",
+                                            "position": 0
+                                          },
+                                          {
+                                            "color": "#2E7FF0",
+                                            "position": 0.58
+                                          },
+                                          {
+                                            "color": "#67BFFF",
+                                            "position": 1
+                                          }
+                                        ]
+                                      },
+                                      "cornerRadius": 999,
+                                      "effect": {
+                                        "type": "shadow",
+                                        "shadowType": "outer",
+                                        "color": "#4FA9FF4A",
+                                        "offset": {
+                                          "x": 0,
+                                          "y": 8
+                                        },
+                                        "blur": 20
+                                      },
+                                      "padding": [
+                                        10,
+                                        16
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "XfLgT",
+                                          "fill": "#FFFFFF",
+                                          "content": "进入对话",
+                                          "fontFamily": "DM Sans",
+                                          "fontSize": 22,
+                                          "fontWeight": "700"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "t1Jfl",
+                      "name": "rightExploreRail",
+                      "width": 236,
+                      "height": 865,
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "NvniS",
+                          "x": 0,
+                          "y": 0,
+                          "name": "rightRoute",
+                          "width": 236,
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            8,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "k6SMm",
+                              "name": "rightRouteText",
+                              "fill": "#7A8FAA",
+                              "content": "探索轨道 · 验证 → 迁移",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "JsXar",
+                          "x": -53,
+                          "y": 71,
+                          "name": "interactionCard",
+                          "width": 236,
+                          "height": 244,
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 180,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#F2FDFF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#E4FBFF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 30,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "#BDEEFF"
+                          },
+                          "effect": {
+                            "type": "shadow",
+                            "shadowType": "outer",
+                            "color": "#53D9FF30",
+                            "offset": {
+                              "x": 0,
+                              "y": 22
+                            },
+                            "blur": 38
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "ty4wW",
+                              "x": 18,
+                              "y": 18,
+                              "fill": "#EAFBFF",
+                              "cornerRadius": 999,
+                              "padding": [
+                                8,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "mxchy",
+                                  "fill": "#0F88A9",
+                                  "content": "探索 03",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "7ddW7",
+                              "x": 18,
+                              "y": 60,
+                              "fill": "#0F88A9",
+                              "content": "互动",
+                              "fontFamily": "Bricolage Grotesque",
+                              "fontSize": 34,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "5TFJh",
+                              "x": 18,
+                              "y": 118,
+                              "fill": "#7B8FA7",
+                              "textGrowth": "fixed-width",
+                              "width": 200,
+                              "content": "双胞胎实验、甲基化互动、知识图谱与练习系统保留原逻辑，统一成同一类实验壳。",
+                              "lineHeight": 1.75,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 16,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "lficm",
+                              "x": 18,
+                              "y": 202,
+                              "name": "interAction",
+                              "width": 200,
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "QlEPq",
+                                  "fill": "#DFFBFF",
+                                  "cornerRadius": 999,
+                                  "padding": [
+                                    8,
+                                    12
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "ky0rU",
+                                      "fill": "#0F88A9",
+                                      "content": "进入 ↗",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 13,
+                                      "fontWeight": "bold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "qnbxy",
+                              "x": 142,
+                              "y": 56,
+                              "name": "twinHeadL",
+                              "fill": "#FFFFFF00",
+                              "width": 20,
+                              "height": 20,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#78CDE05C"
+                              }
+                            },
+                            {
+                              "type": "path",
+                              "id": "qfbso",
+                              "x": 138,
+                              "y": 75,
+                              "name": "twinBodyL",
+                              "geometry": "M4 26c0-9 6-14 12-14s12 5 12 14",
+                              "width": 32,
+                              "height": 34,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#78CDE05C"
+                              }
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "8pyzb",
+                              "x": 174,
+                              "y": 60,
+                              "name": "twinHeadR",
+                              "fill": "#FFFFFF00",
+                              "width": 20,
+                              "height": 20,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#78CDE05C"
+                              }
+                            },
+                            {
+                              "type": "path",
+                              "id": "OtxEA",
+                              "x": 170,
+                              "y": 79,
+                              "name": "twinBodyR",
+                              "geometry": "M4 26c0-9 6-14 12-14s12 5 12 14",
+                              "width": 32,
+                              "height": 34,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#78CDE05C"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CDQKZ",
+                          "x": 0,
+                          "y": 290,
+                          "name": "rightSpacer",
+                          "width": 236,
+                          "height": 323,
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 90,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#FFFFFF00",
+                                "position": 0
+                              },
+                              {
+                                "color": "#EAF8FF55",
+                                "position": 0.28
+                              },
+                              {
+                                "color": "#D6F0FF77",
+                                "position": 0.7
+                              },
+                              {
+                                "color": "#FFFFFF00",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "N5cHL",
+                              "x": 16,
+                              "y": 169,
+                              "name": "rightGlowV5",
+                              "width": 58,
+                              "height": 6,
+                              "fill": {
+                                "type": "gradient",
+                                "gradientType": "linear",
+                                "enabled": true,
+                                "rotation": 90,
+                                "size": {
+                                  "height": 1
+                                },
+                                "colors": [
+                                  {
+                                    "color": "#FFFFFF00",
+                                    "position": 0
+                                  },
+                                  {
+                                    "color": "#C5EDFF",
+                                    "position": 0.56
+                                  },
+                                  {
+                                    "color": "#5CC7FF",
+                                    "position": 1
+                                  }
+                                ]
+                              },
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "path",
+                              "id": "nPADA",
+                              "x": 49,
+                              "y": 24,
+                              "name": "rightPathV5",
+                              "geometry": "M40 0c-24 18-24 46-4 76 14 22 2 52-22 84-16 24-14 54 14 112",
+                              "width": 104,
+                              "height": 282,
+                              "stroke": {
+                                "thickness": 4,
+                                "fill": "#9FDDF8"
+                              }
+                            },
+                            {
+                              "type": "path",
+                              "id": "4OoCZ",
+                              "x": 30,
+                              "y": 24,
+                              "name": "rightPathV5",
+                              "geometry": "M40 0c-24 18-24 46-4 76 14 22 2 52-22 84-16 24-14 54 14 112",
+                              "width": 104,
+                              "height": 282,
+                              "stroke": {
+                                "thickness": 4,
+                                "fill": "#9FDDF8"
+                              }
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "Gzsbk",
+                              "x": 132,
+                              "y": 96,
+                              "name": "rightNodeTop",
+                              "fill": "#EDFDFF",
+                              "width": 21,
+                              "height": 17,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#67D8F2"
+                              }
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "KfCoW",
+                              "x": 76,
+                              "y": 162,
+                              "name": "rightNodeMid",
+                              "fill": "#95E3F8",
+                              "width": 6,
+                              "height": 6
+                            },
+                            {
+                              "type": "ellipse",
+                              "id": "3wPbM",
+                              "x": 124,
+                              "y": 147,
+                              "name": "rightNodeBottom",
+                              "fill": "#F6F2FF",
+                              "width": 19,
+                              "height": 15,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#9A8BF0"
+                              }
+                            },
+                            {
+                              "type": "polygon",
+                              "polygonCount": 3,
+                              "id": "Ey8KI",
+                              "x": 56,
+                              "y": 274,
+                              "name": "rightArrowMini",
+                              "rotation": 180,
+                              "fill": "#A7B0FF",
+                              "width": 14,
+                              "height": 14
+                            },
+                            {
+                              "type": "text",
+                              "id": "JUQyj",
+                              "x": 74,
+                              "y": 90,
+                              "name": "rightTagTop",
+                              "fill": "#36ABC4",
+                              "content": "验证",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 20,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "text",
+                              "id": "oTJa1",
+                              "x": 153,
+                              "y": 165,
+                              "name": "rightTagBottom",
+                              "fill": "#796EE0",
+                              "content": "迁移",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 20,
+                              "fontWeight": "medium"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "0KYf1",
+                              "x": 215,
+                              "y": 252.7398463085906,
+                              "name": "pentStem",
+                              "rotation": 10.658892270618221,
+                              "width": 4,
+                              "height": 34,
+                              "fill": "#E3E3E3",
+                              "cornerRadius": 999
+                            },
+                            {
+                              "type": "polygon",
+                              "polygonCount": 5,
+                              "id": "5MIOc",
+                              "x": 198,
+                              "y": 237.73188543264223,
+                              "name": "pentMarker",
+                              "rotation": 8,
+                              "fill": {
+                                "type": "gradient",
+                                "gradientType": "linear",
+                                "enabled": true,
+                                "rotation": 135,
+                                "size": {
+                                  "height": 1
+                                },
+                                "colors": [
+                                  {
+                                    "color": "#90FFD2",
+                                    "position": 0
+                                  },
+                                  {
+                                    "color": "#37E7AE",
+                                    "position": 1
+                                  }
+                                ]
+                              },
+                              "width": 34,
+                              "height": 34
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ouTnF",
+                          "x": 0,
+                          "y": 613,
+                          "name": "extensionCard",
+                          "width": 236,
+                          "height": 244,
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": 180,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#F7F8FF",
+                                "position": 0
+                              },
+                              {
+                                "color": "#ECEBFF",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "cornerRadius": 30,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "#D8D8FF"
+                          },
+                          "effect": {
+                            "type": "shadow",
+                            "shadowType": "outer",
+                            "color": "#8D88FF2A",
+                            "offset": {
+                              "x": 0,
+                              "y": 18
+                            },
+                            "blur": 34
+                          },
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "XMVIg",
+                              "x": 18,
+                              "y": 18,
+                              "fill": "#F1EEFF",
+                              "cornerRadius": 999,
+                              "padding": [
+                                8,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "OaADT",
+                                  "fill": "#6657E6",
+                                  "content": "延展 04",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "brgYO",
+                              "x": 18,
+                              "y": 60,
+                              "fill": "#6657E6",
+                              "content": "拓展",
+                              "fontFamily": "Bricolage Grotesque",
+                              "fontSize": 34,
+                              "fontWeight": "bold"
+                            },
+                            {
+                              "type": "text",
+                              "id": "xGptv",
+                              "x": 18,
+                              "y": 118,
+                              "fill": "#7B8FA7",
+                              "textGrowth": "fixed-width",
+                              "width": 200,
+                              "content": "拓展阅读入口与案例内容分离：入口轻量，阅读舞台沉浸，内容本体尽量不改。",
+                              "lineHeight": 1.75,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 16,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "pCwcl",
+                              "x": 18,
+                              "y": 202,
+                              "name": "expandAction",
+                              "width": 200,
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "SQ0VH",
+                                  "fill": "#EEE9FF",
+                                  "cornerRadius": 999,
+                                  "padding": [
+                                    8,
+                                    12
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "pVKNs",
+                                      "fill": "#6657E6",
+                                      "content": "进入 ↗",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 13,
+                                      "fontWeight": "bold"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "path",
+                              "id": "qyIeb",
+                              "x": 144,
+                              "y": 56,
+                              "name": "leafOutline",
+                              "geometry": "M24 0c14 10 18 24 16 36-2 12-12 18-20 16-10-2-16-12-16-22 0-12 6-24 20-30z",
+                              "width": 58,
+                              "height": 62,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#8AB3FF5C"
+                              }
+                            },
+                            {
+                              "type": "path",
+                              "id": "FCxV4",
+                              "x": 166,
+                              "y": 66,
+                              "name": "leafVein",
+                              "geometry": "M4 0c2 12 2 24 0 40",
+                              "width": 14,
+                              "height": 44,
+                              "stroke": {
+                                "thickness": 2,
+                                "fill": "#8AB3FF5C"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WxkvD",
+              "x": 110,
+              "y": 18,
+              "name": "bioTextureTopLeft",
+              "opacity": 0.9,
+              "width": 236,
+              "height": 178,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "tkD76",
+                  "x": 18,
+                  "y": 18,
+                  "name": "hexA",
+                  "fill": "#FFFFFF00",
+                  "width": 48,
+                  "height": 48,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#3B82F60A"
+                  }
+                },
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "3mgaD",
+                  "x": 62,
+                  "y": 42,
+                  "name": "hexB",
+                  "fill": "#FFFFFF00",
+                  "width": 40,
+                  "height": 40,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#06B6D40A"
+                  }
+                },
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "4LhI7",
+                  "x": 98,
+                  "y": 16,
+                  "name": "hexC",
+                  "fill": "#FFFFFF00",
+                  "width": 34,
+                  "height": 34,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#3B82F608"
+                  }
+                },
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "cnkhT",
+                  "x": 118,
+                  "y": 64,
+                  "name": "hexD",
+                  "fill": "#FFFFFF00",
+                  "width": 28,
+                  "height": 28,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#06B6D408"
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "HgWLi",
+                  "x": 56,
+                  "y": 52,
+                  "name": "lineA",
+                  "rotation": 18,
+                  "width": 34,
+                  "height": 1,
+                  "fill": "#3B82F608",
+                  "cornerRadius": 999
+                },
+                {
+                  "type": "frame",
+                  "id": "LHD6O",
+                  "x": 96,
+                  "y": 42,
+                  "name": "lineB",
+                  "rotation": -26,
+                  "width": 28,
+                  "height": 1,
+                  "fill": "#06B6D408",
+                  "cornerRadius": 999
+                },
+                {
+                  "type": "frame",
+                  "id": "LSOkh",
+                  "x": 112,
+                  "y": 72,
+                  "name": "lineC",
+                  "rotation": 34,
+                  "width": 20,
+                  "height": 1,
+                  "fill": "#3B82F606",
+                  "cornerRadius": 999
+                },
+                {
+                  "type": "ellipse",
+                  "id": "lDz21",
+                  "x": 154,
+                  "y": 34,
+                  "name": "nodeA",
+                  "fill": "#3B82F60C",
+                  "width": 10,
+                  "height": 10
+                },
+                {
+                  "type": "ellipse",
+                  "id": "nQrFU",
+                  "x": 178,
+                  "y": 52,
+                  "name": "nodeB",
+                  "fill": "#06B6D40C",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "ellipse",
+                  "id": "mkpkc",
+                  "x": 198,
+                  "y": 28,
+                  "name": "nodeC",
+                  "fill": "#3B82F608",
+                  "width": 6,
+                  "height": 6
+                },
+                {
+                  "type": "frame",
+                  "id": "HEj58",
+                  "x": 160,
+                  "y": 42,
+                  "name": "linkA",
+                  "rotation": 22,
+                  "width": 26,
+                  "height": 1,
+                  "fill": "#3B82F608",
+                  "cornerRadius": 999
+                },
+                {
+                  "type": "frame",
+                  "id": "aaEHu",
+                  "x": 184,
+                  "y": 44,
+                  "name": "linkB",
+                  "rotation": -28,
+                  "width": 20,
+                  "height": 1,
+                  "fill": "#06B6D408",
+                  "cornerRadius": 999
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WU72G",
+              "x": 1440,
+              "y": 848,
+              "name": "bioTextureBottomRight",
+              "opacity": 0.9,
+              "width": 194,
+              "height": 156,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "mqziz",
+                  "x": 118,
+                  "y": 20,
+                  "name": "hexE",
+                  "fill": "#FFFFFF00",
+                  "width": 44,
+                  "height": 44,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#3B82F60A"
+                  }
+                },
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "n4npx",
+                  "x": 76,
+                  "y": 48,
+                  "name": "hexF",
+                  "fill": "#FFFFFF00",
+                  "width": 36,
+                  "height": 36,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#06B6D40A"
+                  }
+                },
+                {
+                  "type": "polygon",
+                  "polygonCount": 6,
+                  "id": "Hclia",
+                  "x": 136,
+                  "y": 68,
+                  "name": "hexG",
+                  "fill": "#FFFFFF00",
+                  "width": 28,
+                  "height": 28,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#3B82F608"
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "lAGEO",
+                  "x": 102,
+                  "y": 60,
+                  "name": "lineD",
+                  "rotation": -24.000000000000004,
+                  "width": 30,
+                  "height": 1,
+                  "fill": "#3B82F608",
+                  "cornerRadius": 999
+                },
+                {
+                  "type": "frame",
+                  "id": "6nZlv",
+                  "x": 132,
+                  "y": 70,
+                  "name": "lineE",
+                  "rotation": 36,
+                  "width": 18,
+                  "height": 1,
+                  "fill": "#06B6D408",
+                  "cornerRadius": 999
+                },
+                {
+                  "type": "ellipse",
+                  "id": "MKmCj",
+                  "x": 28,
+                  "y": 82,
+                  "name": "nodeD",
+                  "fill": "#06B6D40C",
+                  "width": 10,
+                  "height": 10
+                },
+                {
+                  "type": "ellipse",
+                  "id": "kFHKs",
+                  "x": 52,
+                  "y": 66,
+                  "name": "nodeE",
+                  "fill": "#3B82F60C",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "ellipse",
+                  "id": "diAmz",
+                  "x": 70,
+                  "y": 96,
+                  "name": "nodeF",
+                  "fill": "#06B6D408",
+                  "width": 6,
+                  "height": 6
+                },
+                {
+                  "type": "frame",
+                  "id": "CoMEY",
+                  "x": 34,
+                  "y": 76,
+                  "name": "linkF",
+                  "rotation": -24.000000000000004,
+                  "width": 24,
+                  "height": 1,
+                  "fill": "#06B6D408",
+                  "cornerRadius": 999
+                },
+                {
+                  "type": "frame",
+                  "id": "e6X3y",
+                  "x": 56,
+                  "y": 74,
+                  "name": "linkG",
+                  "rotation": 38,
+                  "width": 24,
+                  "height": 1,
+                  "fill": "#3B82F608",
+                  "cornerRadius": 999
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "bg": {
+      "type": "color",
+      "value": "#F4F7F1"
+    },
+    "font-body": {
+      "type": "string",
+      "value": "PingFang SC"
+    },
+    "font-display": {
+      "type": "string",
+      "value": "Songti SC"
+    },
+    "gold": {
+      "type": "color",
+      "value": "#B89656"
+    },
+    "green": {
+      "type": "color",
+      "value": "#5C8A45"
+    },
+    "green-deep": {
+      "type": "color",
+      "value": "#355C2D"
+    },
+    "line": {
+      "type": "color",
+      "value": "#D6E0CE"
+    },
+    "muted": {
+      "type": "color",
+      "value": "#5E6E5C"
+    },
+    "surface": {
+      "type": "color",
+      "value": "#FCFDF8"
+    },
+    "surface-strong": {
+      "type": "color",
+      "value": "#E4EDD9"
+    },
+    "text": {
+      "type": "color",
+      "value": "#1F2A1F"
+    },
+    "edu-bg": {
+      "type": "color",
+      "value": "#EAF3FF"
+    },
+    "edu-bg-soft": {
+      "type": "color",
+      "value": "#F7FBFF"
+    },
+    "edu-cyan": {
+      "type": "color",
+      "value": "#35D3FF"
+    },
+    "edu-cyan-soft": {
+      "type": "color",
+      "value": "#DDF8FF"
+    },
+    "edu-glow": {
+      "type": "color",
+      "value": "#8FD9FF"
+    },
+    "edu-ink": {
+      "type": "color",
+      "value": "#17314F"
+    },
+    "edu-line": {
+      "type": "color",
+      "value": "#D9E8F9"
+    },
+    "edu-mint": {
+      "type": "color",
+      "value": "#DFF6F5"
+    },
+    "edu-muted": {
+      "type": "color",
+      "value": "#5E7698"
+    },
+    "edu-primary": {
+      "type": "color",
+      "value": "#3B82F6"
+    },
+    "edu-primary-deep": {
+      "type": "color",
+      "value": "#1E5FD8"
+    },
+    "edu-shadow": {
+      "type": "color",
+      "value": "#7BA4D21F"
+    },
+    "edu-surface": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "edu-surface-alt": {
+      "type": "color",
+      "value": "#F3F8FE"
+    },
+    "edu-violet": {
+      "type": "color",
+      "value": "#E8E8FF"
+    },
+    "edu-pink": {
+      "type": "color",
+      "value": "#FF8BC7"
+    },
+    "edu-sun": {
+      "type": "color",
+      "value": "#FFD978"
+    },
+    "edu-violet-bright": {
+      "type": "color",
+      "value": "#7C6CFF"
+    }
+  }
+}

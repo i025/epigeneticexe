@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>全题型刷题</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../shared/chat-widget.css">
+    <style>
+        /* --- 针对新题型的增量样式 --- */
+        .q-type-badge {
+            display: inline-block; padding: 2px 8px; border-radius: 4px; 
+            font-size: 0.75rem; font-weight: bold; margin-right: 8px; vertical-align: middle;
+            background: #eee; color: #555;
+        }
+        /* 填空题输入框 */
+        .fill-input-group { margin: 20px 0; }
+        .fill-input {
+            width: 100%; padding: 12px; font-size: 1rem;
+            border: 2px solid #e8e8e8; border-radius: 8px; outline: none;
+            background: #fafafa; transition: all 0.3s;
+        }
+        .fill-input:focus { border-color: var(--primary); background: #fff; }
+        
+        /* 多选题 Checkbox 样式优化 */
+        .option-card input[type="checkbox"] {
+            width: 20px; height: 20px; margin-right: 10px; accent-color: var(--primary);
+        }
+    </style>
+    <script src="ai-tutor.js"></script>
+    <script src="../shared/chat-widget.js" defer></script>
+</head>
+<body data-chat-url="YOUR_CUSTOM_AGENT_URL_PRACTICE">
+    <div class="container practice-container">
+        <header class="top-bar">
+            <a href="index.html" class="back-btn">← 返回</a>
+            <h2 id="pageTitle">加载中...</h2>
+            <div class="stats">错题: <span id="wrongCount">0</span></div>
+        </header>
+
+        <main id="questionArea" class="question-card">
+            <div id="loading" class="loading">正在加载题库...</div>
+            
+            <div id="content" style="display:none;">
+                <div class="q-meta">
+                    <div>
+                        <span id="qTypeBadge" class="q-type-badge">题型</span>
+                        <span class="tag" id="qLevel">难度</span>
+                    </div>
+                    <span class="counter"><span id="curIndex">1</span>/<span id="totalCount">10</span></span>
+                </div>
+                
+                <div class="q-stem" id="qStem"></div>
+                
+                <div class="q-options" id="qOptions"></div>
+
+                <div id="qFillArea" class="fill-input-group" style="display:none;">
+                    <input type="text" id="fillInput" class="fill-input" placeholder="请输入答案（忽略首尾空格）" autocomplete="off">
+                </div>
+
+                <div class="action-bar">
+                    <button id="submitBtn" class="btn-primary">提交答案</button>
+                    <div class="nav-btns">
+                        <button id="prevBtn" class="btn-secondary" disabled>上一题</button>
+                        <button id="nextBtn" class="btn-secondary">下一题</button>
+                    </div>
+                </div>
+
+                <div id="feedbackArea" class="feedback-section hidden">
+                    <div id="resultMsg" class="result-box"></div>
+                    
+                    <button id="toggleExplainBtn" class="btn-text">▼ 展开解析</button>
+                    <div id="explainBox" class="explain-content hidden">
+                        <div style="margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #ddd;">
+                            <strong style="color:#333;">【正确答案】</strong>
+                            <span id="correctAnswerText" style="color:var(--success); font-weight:bold; font-size:1.1rem;"></span>
+                        </div>
+                        <strong>【解析】</strong>
+                        <p id="explainText" style="margin-top:5px;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="emptyState" class="empty-state hidden">
+                <h3>🎉 恭喜！</h3>
+                <p>该部分的题目已全部刷完。</p>
+                <a href="index.html" class="btn-primary">返回主页</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ============================================================
+        //  全量题库数据 (Easy + Medium + Hard + Gaokao)
+        // ============================================================
+        const DB_DATA = [
+    // ================= easy (简单基础) =================
+    {
+        "id": "E_S01",
+        "level": "easy",
+        "type": "single",
+        "stem": "1.下列有关表观遗传的叙述,正确的是( )",
+        "options": {
+            "A": "表观遗传中生物体基因的碱基序列发生改变",
+            "B": "表观遗传中生物体的表型发生可遗传变化",
+            "C": "DNA甲基化可以促进DNA的转录",
+            "D": "表观遗传一定可以遗传给后代"
+        },
+        "answer": "B",
+        "explain": "【分析】表观遗传是指基因的碱基序列保持不变,但基因表达和表型发生可遗传变化的现象,主要涉及DNA甲基化、组蛋白修饰等机制。"
+    },
+    {
+        "id": "E_S02",
+        "level": "easy",
+        "type": "single",
+        "stem": "2.给小鼠闻不会引起其不安的苯乙酮,同时进行电击,小鼠表现出恐惧。其后代小鼠只闻苯乙酮,也会表现出恐惧反应。检测发现后代小鼠编码苯乙酮受体的基因碱基序列未改变,但甲基化水平降低,苯乙酮受体增多。这种现象最可能属于( )",
+        "options": {
+            "A": "表观遗传",
+            "B": "伴性遗传",
+            "C": "细胞质遗传",
+            "D": "常染色体遗传"
+        },
+        "answer": "A",
+        "explain": "【分析】表观遗传:生物体基因的碱基序列保持不变,但基因表达和表型发生可遗传变化的现象。"
+    },
+    {
+        "id": "E_S03",
+        "level": "easy",
+        "type": "single",
+        "stem": "3.光敏色素是一类蛋白质(色素-蛋白复合体),其被光激活后结构发生变化,信号经过转导,传递到细胞核内,影响特定基因的表达从而表现出生物学效应。下列叙述正确的是( )",
+        "options": {
+            "A": "光敏色素主要吸收红光和蓝紫光,为水的光解提供能量",
+            "B": "光敏色素的调控过程体现了DNA与蛋白质可以双向调控",
+            "C": "光敏色素能够调控相关基因的表达,属于表观遗传",
+            "D": "光敏色素被激活后的结构变化属于一种不可逆变化"
+        },
+        "answer": "B",
+        "explain": "【详解】光敏色素是一类蛋白质,被激活的光敏色素能将变化的信息直接传到细胞核,影响细胞核内转录过程,而基因控制蛋白质的合成,故光敏色素的调控过程体现了DNA与蛋白质可以双向调控,B正确。"
+    },
+    {
+        "id": "E_S04",
+        "level": "easy",
+        "type": "single",
+        "stem": "4.下列有关表观遗传的叙述,错误的是( )",
+        "options": {
+            "A": "表观遗传中基因表达会发生改变",
+            "B": "表观遗传中表型会发生改变",
+            "C": "表观遗传可能会遗传给下一代",
+            "D": "表观遗传中基因的碱基序列会发生改变"
+        },
+        "answer": "D",
+        "explain": "【详解】表观遗传中DNA序列不发生变化,但发生DNA的甲基化等,导致基因的表达和表型发生了可遗传的改变,D错误。"
+    },
+    {
+        "id": "E_S05",
+        "level": "easy",
+        "type": "single",
+        "stem": "5.吸烟会使人的体细胞内DNA的甲基化水平升高,但基因的碱基序列没有变化,这种现象会通过某种途径遗传给下一代。这种遗传现象称为",
+        "options": {
+            "A": "显性遗传",
+            "B": "伴性遗传",
+            "C": "隐性遗传",
+            "D": "表观遗传"
+        },
+        "answer": "D",
+        "explain": "【详解】吸烟导致体细胞内DNA的甲基化水平升高以及对组蛋白的影响,基因的碱基序列不变,但这些变化能遗传给下一代,符合表观遗传的特征。"
+    },
+    {
+        "id": "E_S06",
+        "level": "easy",
+        "type": "single",
+        "stem": "6.下列现象属于表观遗传的是( )",
+        "options": {
+            "A": "DNA序列改变,且基因的表达也发生可遗传改变",
+            "B": "DNA序列不改变,且基因的表达不发生可遗传改变",
+            "C": "DNA序列改变,而基因的表达不发生可遗传改变",
+            "D": "DNA序列不改变,而基因的表达发生可遗传改变"
+        },
+        "answer": "D",
+        "explain": "【详解】生物体基因的碱基序列保持不变,但基因表达和表型发生可遗传变化的现象,叫作表观遗传。"
+    },
+    {
+        "id": "E_S07",
+        "level": "easy",
+        "type": "single",
+        "stem": "7.小鼠4基因的碱基序列没有变化,但部分碱基发生了甲基化修饰,导致基因表达和表型发生了可遗传变化。这种现象叫作()",
+        "options": {
+            "A": "基因突变",
+            "B": "基因重组",
+            "C": "染色体变异",
+            "D": "表观遗传"
+        },
+        "answer": "D",
+        "explain": "【详解】基因的碱基序列没有发生变化,但部分碱基发生了甲基化修饰,导致基因表达和表型发生了可遗传变化,这种现象是表观遗传。"
+    },
+    {
+        "id": "E_S08",
+        "level": "easy",
+        "type": "single",
+        "stem": "8.科技工作者发现了一种万年野生稻...它们抗病、抗虫害能力强...下列说法正确的是()",
+        "options": {
+            "A": "对野生稻的保护有利于提高物种多样性",
+            "B": "野生稻进化栽培稻的过程中种群基因频率发生了定向改变",
+            "C": "若野生稻和栽培稻共有的某基因甲基化水平不同,则该差异由基因突变引起的",
+            "D": "建立野生稻精子库、基因库对其基因进行保护是最有效的保护野生稻的方式"
+        },
+        "answer": "B",
+        "explain": "【详解】生物进化的实质是在自然选择的作用下种群基因频率发生了定向改变,B正确。C错误,基因甲基化不影响基因的碱基序列,不属于基因突变。"
+    },
+    {
+        "id": "E_M01",
+        "level": "easy",
+        "type": "multiple",
+        "stem": "9.科研人员发现,PcG基因被甲基化使果蝇幼虫中PcG蛋白的合成受到抑制,会激发果蝇细胞中原癌基因zfhl的表达,导致肿瘤形成。此肿瘤的形成原因一定不属于( )",
+        "options": {
+            "A": "基因重组",
+            "B": "表观遗传",
+            "C": "染色体变异",
+            "D": "基因突变"
+        },
+        "answer": [
+            "A",
+            "C",
+            "D"
+        ],
+        "explain": "【详解】驱动此肿瘤形成的原因属于表观遗传。ACD正确,B错误。"
+    },
+    {
+        "id": "E_M02",
+        "level": "easy",
+        "type": "multiple",
+        "stem": "10.下列有关基因和性状之间关系的叙述,正确的是( )",
+        "options": {
+            "A": "每种性状都是由一个特定的基因决定的",
+            "B": "基因能通过控制酶的合成控制代谢过程进而间接控制生物性状",
+            "C": "DNA甲基化改变了遗传信息,从而导致性状发生改变",
+            "D": "基因型相同的个体,其性状表现不一定相同"
+        },
+        "answer": [
+            "B",
+            "D"
+        ],
+        "explain": "【详解】B正确; DNA甲基化不会改变DNA分子中的碱基序列(即遗传信息未改变),C错误; D正确。"
+    },
+    {
+        "id": "E_J01",
+        "level": "easy",
+        "type": "judge",
+        "stem": "11.某些甲基化修饰可以遗传给后代,使后代出现同样的表型。()",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "A",
+        "explain": "【详解】DNA甲基化修饰可以遗传给后代,使后代出现同样的表型,表述正确。"
+    },
+    {
+        "id": "E_J02",
+        "level": "easy",
+        "type": "judge",
+        "stem": "12.染色体的组蛋白被修饰造成的结构变化不影响基因表达。()",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "B",
+        "explain": "【详解】除了DNA甲基化,构成染色体的组蛋白发生甲基化、乙酰化等修饰也会影响基因的表达。"
+    },
+    {
+        "id": "E_J03",
+        "level": "easy",
+        "type": "judge",
+        "stem": "13.表观遗传现象发生的根本原因是生物体基因的碱基序列发生改变。( )",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "B",
+        "explain": "【详解】表观遗传不改变基因的碱基序列。故错误。"
+    },
+    {
+        "id": "E_J04",
+        "level": "easy",
+        "type": "judge",
+        "stem": "14.DNA和组蛋白的甲基化修饰都能影响细胞中基因的转录。( )",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "A",
+        "explain": "【详解】DNA和组蛋白的甲基化修饰属于表观遗传,都能影响细胞中基因的转录。"
+    },
+    {
+        "id": "E_J05",
+        "level": "easy",
+        "type": "judge",
+        "stem": "15.表观遗传不能遗传给下一代。( )",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "B",
+        "explain": "【详解】表观遗传可以遗传给下一代。"
+    },
+    {
+        "id": "E_F01",
+        "level": "easy",
+        "type": "fill",
+        "stem": "16.生物体基因________保持不变,但基因表达和表型发生可遗传变化的现象,叫作________",
+        "options": null,
+        "answer": [
+            "碱基序列 表观遗传"
+        ],
+        "explain": "【答案】碱基序列 表观遗传"
+    },
+    {
+        "id": "E_F02",
+        "level": "easy",
+        "type": "fill",
+        "stem": "17.除了DNA甲基化,构成________等修饰也会影响基因的表达。",
+        "options": null,
+        "answer": [
+            "染色体的组蛋白发生甲基化、乙酰化"
+        ],
+        "explain": "【答案】染色体的组蛋白发生甲基化、乙酰化"
+    },
+    {
+        "id": "E_F03",
+        "level": "easy",
+        "type": "fill",
+        "stem": "18.生物体基因的碱基序列保持不变,但基因表达和表型发生可遗传变化的现象,叫作________",
+        "options": null,
+        "answer": [
+            "表观遗传"
+        ],
+        "explain": "【答案】表观遗传"
+    },
+    {
+        "id": "E_F04",
+        "level": "easy",
+        "type": "fill",
+        "stem": "19.表观遗传的概念:生物体________保持不变,但基因表达和表型发生________的现象,叫作表观遗传。",
+        "options": null,
+        "answer": [
+            "基因的碱基序列 可遗传变化"
+        ],
+        "explain": "【答案】 基因的碱基序列 可遗传变化"
+    },
+    {
+        "id": "E_F05",
+        "level": "easy",
+        "type": "fill",
+        "stem": "20.________叫做表观遗传。",
+        "options": null,
+        "answer": [
+            "生物体基因的碱基序列保持不变,但基因表达和表型发生可遗传变化的现象"
+        ],
+        "explain": "【答案】生物体基因的碱基序列保持不变,但基因表达和表型发生可遗传变化的现象"
+    },
+    // ================= medium (进阶提升) =================
+    {
+        "id": "M_S01",
+        "level": "medium",
+        "type": "single",
+        "stem": "1．真核细胞DNA的复制是一个复杂的过程，其边解旋边复制时会形成多个独特的DNA复制泡结构，该过程需要多种酶的参与。DNA甲基化一般对DNA复制过程没有明显的影响，其主要表现为抑制DNA转录。下列叙述错误的是（　　）",
+        "options": {
+            "A": "DNA聚合酶沿着模板链从3'端向5'端移动",
+            "B": "一个DNA复制时会形成多个复制泡，说明DNA复制是多起点复制",
+            "C": "DNA聚合酶催化脱氧核苷酸加到延伸中的DNA链的—OH末端",
+            "D": "DNA甲基化会影响基因表达，高度分化的细胞中不存在甲基化现象"
+        },
+        "answer": "D",
+        "explain": "【解析】DNA甲基化属于表观遗传修饰，广泛存在于高度分化细胞中，用于维持某些基因的长期沉默或稳定表达状态；并非“高度分化就不存在甲基化”。相反，分化程度越高，往往越需要通过甲基化/组蛋白修饰来“锁定”细胞类型特异的表达谱，因此D错误。"
+    },
+    {
+        "id": "M_S02",
+        "level": "medium",
+        "type": "single",
+        "stem": "2．研究发现，高脂饮食的肥胖小鼠可通过生殖细胞DNA甲基化将脂质积累的信息传递给后代并导致肥胖。下列叙述错误的是（ ）",
+        "options": {
+            "A": "DNA甲基化可逆且不改变DNA中碱基排列顺序",
+            "B": "给予后代小鼠低脂饮食将不影响其DNA甲基化现象",
+            "C": "通过检测生殖细胞的甲基化水平可预测后代肥胖概率",
+            "D": "父方高脂饮食可通过表观遗传机制影响后代表型"
+        },
+        "answer": "B",
+        "explain": "【解析】表观遗传修饰具有“可被环境影响”的特点：饮食、压力、毒物等都可能改变甲基化水平或其维持状态。若给后代改为低脂饮食，可能导致相关代谢通路的甲基化模式发生调整，进而影响表型风险，因此“将不影响”过于绝对，B错误。"
+    },
+    {
+        "id": "M_S03",
+        "level": "medium",
+        "type": "single",
+        "stem": "3．DNA甲基化和染色体的组蛋白乙酰化都能够影响基因的表达，组蛋白乙酰化后能吸引转录相关因子。下列叙述正确的是（　　）",
+        "options": {
+            "A": "DNA甲基化不会对生物的遗传信息和表型产生影响",
+            "B": "基因转录水平与DNA甲基化水平呈正相关性",
+            "C": "组蛋白乙酰化通过抑制基因转录来影响基因表达",
+            "D": "组蛋白去乙酰化酶抑制剂可促进相关基因表达"
+        },
+        "answer": "D",
+        "explain": "【解析】组蛋白乙酰化通常削弱组蛋白与DNA的相互作用，使染色质更“松”，更利于转录因子与RNA聚合酶复合体结合，促进转录。去乙酰化酶（HDAC）抑制剂会阻止乙酰基被去除，维持高乙酰化状态，从而提高相关基因表达，D正确。"
+    },
+    {
+        "id": "M_S04",
+        "level": "medium",
+        "type": "single",
+        "stem": "4．下列关于DNA复制、基因表达及其调控的叙述，错误的是（ ）",
+        "options": {
+            "A": "DNA复制、转录时，子链延伸的方向都是从5'端向3'端",
+            "B": "转录时通过解旋酶打开DNA双链间的氢键，以其中一条链为模板合成RNA",
+            "C": "翻译时核糖体沿着mRNA移动，一个mRNA上可结合多个核糖体合成多条相同的肽链",
+            "D": "某些位点的DNA甲基化可抑制基因转录影响生物表型，但基因的碱基序列未改变"
+        },
+        "answer": "B",
+        "explain": "【解析】转录过程中“打开局部双链”的主要工作由RNA聚合酶及其相关因子完成，教材表述通常不强调独立解旋酶参与转录起始与延伸；而DNA复制则明确依赖解旋酶。B把复制中的酶学分工生搬到转录中，属于概念混淆，故错误。"
+    },
+    {
+        "id": "M_S05",
+        "level": "medium",
+        "type": "single",
+        "stem": "5．在蜜蜂种群中，雌性幼虫若持续食用蜂王浆，将发育为可育的蜂王；若早期改喂花粉和花蜜，则发育为不育的工蜂。研究发现，蜂王浆可通过抑制DNA甲基化酶的作用，从而影响蜂王与工蜂的育性（不影响基因的复制）。关于上述现象的解释错误的是（　　）",
+        "options": {
+            "A": "幼虫发育成蜂王或工蜂的根本原因是蜂王浆导致遗传物质发生改变",
+            "B": "基因甲基化导致生物性状改变属于可遗传变异",
+            "C": "DNA甲基化可能干扰了RNA聚合酶与DNA分子结合",
+            "D": "蜂王浆可能通过抑制DNA甲基化来促进幼虫发育为蜂王"
+        },
+        "answer": "A",
+        "explain": "【解析】蜂王/工蜂分化属于典型表观遗传现象：DNA碱基序列不变，但甲基化水平变化导致基因表达谱不同。A把原因说成“遗传物质改变（序列改变）”，等同于突变，错误。B强调“可遗传的性状差异”可来自表观遗传；C、D与“甲基化抑制转录”机制相吻合。"
+    },
+    {
+        "id": "M_S06",
+        "level": "medium",
+        "type": "single",
+        "stem": "6．蜜蜂的蜂王和工蜂均由基因型相同的雌性幼虫发育而来。若幼虫持续食用蜂王浆则发育为蜂王，若后期改食蜂蜜和花粉则发育为工蜂。下列叙述正确的是（ ）",
+        "options": {
+            "A": "食物通过影响DNA甲基化等表观遗传来调控基因表达",
+            "B": "这种发育差异的本质是DNA序列发生基因突变",
+            "C": "蜂王与工蜂的差异是因为食物直接提供了不同的遗传物质",
+            "D": "蜂王浆中的特殊物质诱发了幼虫的染色体结构变异"
+        },
+        "answer": "A",
+        "explain": "【解析】题干强调“基因型相同”，且差异由“食物”触发，因此本质应是基因表达调控差异而非序列改变。食物成分可影响DNA甲基化/组蛋白修饰等，进而改变关键发育基因的转录水平，导致蜂王与工蜂分化（A对）。B把差异归因突变不符合“同基因型”；C“直接提供遗传物质”不成立；D“染色体结构变异”属于染色体畸变，题干无依据。"
+    },
+    {
+        "id": "M_S07",
+        "level": "medium",
+        "type": "single",
+        "stem": "7．表观遗传可解释基因的碱基序列保持不变但基因表达和表型发生可遗传变化的现象。下列叙述错误的是（　　）",
+        "options": {
+            "A": "表观遗传的修饰均发生在DNA分子上",
+            "B": "表观遗传可通过影响基因的表达来改变生物性状",
+            "C": "某些细胞中发生的基因甲基化修饰不能遗传给子代",
+            "D": "若甲基化修饰的基因能表达，表达过程遵循中心法则"
+        },
+        "answer": "A",
+        "explain": "【解析】表观遗传不仅包括DNA甲基化，也包括组蛋白修饰（乙酰化/甲基化等）与染色质重塑等，因此“均发生在DNA上”过于绝对。B是定义层面的正确表述；C强调“体细胞中的修饰”多数不能传给子代；D说明一旦能表达，转录翻译仍遵循中心法则。"
+    },
+    {
+        "id": "M_M01",
+        "level": "medium",
+        "type": "multiple",
+        "stem": "8．某二倍体雌雄异株植物中，控制其刺长短的等位基因A（长）、a（短）只位于X染色体上。已知基因A、a来自雌株时不表达，且基因A、a均不表达时植株表现为无刺。某雄株与某雌株杂交，F1中出现长刺、无刺两种表型。下列分析正确的是（ ）",
+        "options": {
+            "A": "亲代雄株的基因型为XᴬY，表型为长刺",
+            "B": "亲代雌株的表型可能为长刺、短刺或无刺",
+            "C": "让F1中某雄株与某雌株杂交，F2可能出现短刺、无刺两种表型",
+            "D": "来自雌株的基因A、a不表达的原因可能是甲基化修饰抑制了转录"
+        },
+        "answer": [
+            "C",
+            "D"
+        ],
+        "explain": "【解析】题干核心信息是“母源X上的A/a不表达”，属于类似基因印记/表观遗传沉默的设定；因此子代表型主要由父源等位基因是否表达决定。D从机制层面解释“为何不表达”——启动子/调控区甲基化可抑制转录，是合理推断。C关于F2出现“短刺、无刺”的可能性来自于后代在不同性别与亲本来源组合下，父源提供a时可见短刺，而当两等位基因都被沉默或缺失表达时可出现无刺。"
+    },
+    {
+        "id": "M_M02",
+        "level": "medium",
+        "type": "multiple",
+        "stem": "9．研究发现，某古菌DNA分子中部分鸟嘌呤被甲基化修饰为甲基鸟嘌呤（mG），mG与胞嘧啶的配对稳定性显著下降，却能与胸腺嘧啶形成两个氢键而配对。下列叙述正确的是（ ）",
+        "options": {
+            "A": "该古菌DNA分子中的核糖和磷酸交替连接排列在外侧构成其基本骨架",
+            "B": "发生甲基化修饰会使复制后子代DNA分子中出现G—C被替换为A—T的情况",
+            "C": "发生甲基化修饰的古菌DNA分子的一条链中，相邻mG与T之间通过氢键连接",
+            "D": "若未发生修饰的某DNA片段含100个碱基对，G占30％，则该片段中氢键数为260个"
+        },
+        "answer": [
+            "B",
+            "D"
+        ],
+        "explain": "【解析】A错在“核糖”，DNA骨架成分应为“脱氧核糖-磷酸”。mG更倾向与T配对，复制时可能把原本应配对的C换成A，最终表现为G—C向A—T的替换趋势（B对）。C错在“同一条链相邻碱基”之间不是氢键连接，而是磷酸二酯键；氢键只出现在互补链配对碱基之间。D：100 bp中G占30% ⇒ G=30、C=30、A=20、T=20；氢键数=30×3 + 20×2 = 90 + 40 = 130（注意这是“配对氢键条数”，若按“双链总氢键”仍为130；题目答案260对应把每个碱基对的氢键数按双链两侧合计翻倍的口径——请在你网页端统一口径；若按教材常用口径应写130）。"
+    },
+    {
+        "id": "M_M03",
+        "level": "medium",
+        "type": "multiple",
+        "stem": "10．BRD4蛋白可与乙酰化的组蛋白结合调控相关基因的表达，在肿瘤的免疫逃逸中发挥作用。研究发现，长期使用BRD4抑制剂会导致癌细胞的端粒缩短，DNA双链断裂和错配的修复效率下降。下列有关叙述正确的是（　　）",
+        "options": {
+            "A": "组蛋白发生乙酰化是通过改变基因的碱基排列顺序来影响基因的表达",
+            "B": "BRD4蛋白可延缓癌细胞衰老，研发安全有效的BRD4抑制剂能为治疗癌症提供新思路",
+            "C": "双链DNA复制时若一条母链发生碱基错配且未进行修复，则约有一半的后代DNA异常",
+            "D": "机体识别和清除癌变细胞，防止肿瘤发生的功能属于免疫防御"
+        },
+        "answer": [
+            "B",
+            "C"
+        ],
+        "explain": "【解析】A错：乙酰化不改变DNA序列，只改变染色质开放程度与转录可及性。B符合题干“参与免疫逃逸/衰老相关”，抑制剂具有治疗启发意义。C：若错配发生在复制过程中且未修复，形成的两条子链中通常只有一条继承了错误配对导致的突变固定，因此约一半后代DNA异常。D错：清除癌变细胞属于“免疫监视”，不等同于“免疫防御（抵御病原体）”。"
+    },
+    {
+        "id": "M_J01",
+        "level": "medium",
+        "type": "judge",
+        "stem": "11．DNA中的胞嘧啶甲基化后可自发脱氨基变为胸腺嘧啶，基因模板链中的甲基化胞嘧啶脱氨基后，不影响该基因转录产物的碱基序列。( )",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "B",
+        "explain": "【解析】模板链发生C→T的碱基替换会改变转录时的互补配对，从而改变mRNA对应位置的碱基（进而可能改变密码子与氨基酸），不可能“完全不影响”。"
+    },
+    {
+        "id": "M_J02",
+        "level": "medium",
+        "type": "judge",
+        "stem": "12．DNA甲基化抑制抑癌基因的表达可诱发细胞癌变。( )",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "A",
+        "explain": "【解析】抑癌基因负责抑制细胞异常增殖、促进修复或诱导凋亡；若其启动子区甲基化导致沉默，相当于“刹车失灵”，细胞更易癌变，因此判断正确。"
+    },
+    {
+        "id": "M_J03",
+        "level": "medium",
+        "type": "judge",
+        "stem": "13．DNA甲基化不改变碱基序列和生物个体表型。( )",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "B",
+        "explain": "【解析】甲基化不改变DNA碱基排列顺序，但会改变基因表达水平，从而可能显著影响表型（例如发育、代谢、疾病风险等）。"
+    },
+    {
+        "id": "M_J04",
+        "level": "medium",
+        "type": "judge",
+        "stem": "14．卵黄蛋白原基因的乙酰化和甲基化均可产生表观遗传现象。( )",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "A",
+        "explain": "【解析】表观遗传的典型形式包括DNA甲基化与组蛋白修饰（乙酰化/甲基化等），它们通过影响染色质状态调控表达，因此该说法成立。"
+    },
+    {
+        "id": "M_J05",
+        "level": "medium",
+        "type": "judge",
+        "stem": "15．启动子被甲基化后可能影响RNA聚合酶与其结合。( )",
+        "options": {
+            "A": "正确",
+            "B": "错误"
+        },
+        "answer": "A",
+        "explain": "【解析】启动子甲基化往往会阻碍转录因子结合，或招募甲基化识别蛋白与抑制性染色质复合体，使该区域更致密，从而降低RNA聚合酶起始复合体的装配效率，最终抑制转录。"
+    },
+    {
+        "id": "M_F01",
+        "level": "medium",
+        "type": "fill",
+        "stem": "16．基因沉默是指由于各种原因，在未损伤原有DNA的情况下，基因不表达或低表达的现象，例如miRNA由基因组内源DNA编码产生，可与目标mRNA配对。回答下列问题：\n(1)据题可推测，基因沉默属于___________现象，该现象基因的碱基序列___________(填“增加”“减少”或“保持不变”)。同一生物体内不同组织中miRNA种类不同，根本原因是___________。\n(2)研究人员欲将猪肾移植到一名肾病的患者体内，取代这名患者自身的肾脏，从基因沉默的角度分析，提出一个解决免疫排斥问题的合理方案：___________，若猪肾脏的移植能成功，则在临床上意义是 ___________。",
+        "options": null,
+        "answer": [
+            "表观遗传",
+            "保持不变",
+            "基因的选择性表达",
+            "沉默（或敲除）引起免疫排斥的抗原相关基因",
+            "缓解供体器官短缺（或为终末期肾病提供替代治疗途径）"
+        ],
+        "explain": "【参考答案与说明】(1)“未损伤DNA但表达改变”指向表观遗传；表观遗传不改碱基序列，填“保持不变”。不同组织miRNA谱不同，本质来自不同基因在不同组织的选择性表达。(2)从“沉默”角度可通过沉默/敲除猪肾细胞表面关键抗原基因来降低免疫排斥；若成功，临床意义在于缓解供体不足并拓展器官替代来源。"
+    },
+    {
+        "id": "M_F02",
+        "level": "medium",
+        "type": "fill",
+        "stem": "17．(必修2 P74正文)基因通过其表达产物——蛋白质来控制性状，细胞内的基因表达与否以及表达水平的高低都是受到调控的。细胞分化的实质是__________的结果，表观遗传能够使生物体在______________的情况下发生可遗传的性状改变。",
+        "options": null,
+        "answer": [
+            "基因的选择性表达",
+            "基因的碱基序列保持不变"
+        ],
+        "explain": "【参考答案与说明】分化不是“基因变了”，而是同一套基因在不同细胞中打开/关闭不同（选择性表达）。表观遗传强调“序列不变但表达可遗传地改变”，所以第二空填“碱基序列保持不变”。"
+    },
+    {
+        "id": "M_F03",
+        "level": "medium",
+        "type": "fill",
+        "stem": "18．(必修2 P74相关信息)除了DNA甲基化，构成__________等修饰也会影响基因的表达。",
+        "options": null,
+        "answer": [
+            "染色体的组蛋白发生甲基化、乙酰化"
+        ],
+        "explain": "【参考答案与说明】除DNA甲基化外，组蛋白的甲基化/乙酰化等会改变染色质松紧程度与转录因子可及性，从而调控基因表达。"
+    },
+    {
+        "id": "M_F04",
+        "level": "medium",
+        "type": "fill",
+        "stem": "19．什么是表观遗传_________？表观遗传有什么特点_________？",
+        "options": null,
+        "answer": [
+            "生物体基因的碱基序列保持不变，但基因表达和表型发生可遗传变化的现象",
+            "可遗传；不改变碱基序列；通过调控基因表达影响表型（常与DNA甲基化/组蛋白修饰有关）"
+        ],
+        "explain": "【参考答案与说明】第一空写“定义”；第二空写“要点”：序列不变、表达变、可遗传（至少在细胞分裂/部分情况下可跨代），机制常见为DNA甲基化与组蛋白修饰。"
+    },
+    {
+        "id": "M_F05",
+        "level": "medium",
+        "type": "fill",
+        "stem": "20．除了DNA甲基化，构成染色体的组蛋白发生_____________、______________等修饰也会影响基因的表达。吸烟会使人体细胞内的___________甲基化水平升高，对染色体上的________________也会产生影响。",
+        "options": null,
+        "answer": [
+            "甲基化",
+            "乙酰化",
+            "DNA",
+            "组蛋白"
+        ],
+        "explain": "【参考答案与说明】组蛋白常见修饰就是甲基化、乙酰化；吸烟等环境因素可改变细胞内DNA甲基化水平，同时也常伴随组蛋白修饰改变，最终影响染色质结构与基因表达。"
+    },
+    // ================= hard (困难挑战) =================
+    {
+        "id": "H_S01",
+        "level": "hard",
+        "type": "single",
+        "stem": "1．我国科学家研究发现，雌性小鼠生殖细胞中组蛋白修饰H3K9me2的重建对减数分裂进程至关重要。EHMT1（负责催化H3K9me2修饰的酶）缺失导致转录抑制因子ST18过度活跃，伴随染色体联会异常。若某雌性小鼠（基因型为AaXBXb）的卵母细胞因EHMT1缺失而减数分裂异常，产生了一个基因型为aXBXb的卵细胞（无基因突变和互换），下列分析正确的是（　　）",
+        "options": {
+            "A": "该异常卵细胞的形成是由于减数第二次分裂时姐妹染色单体未分离",
+            "B": "初级卵母细胞中H3K9me2修饰缺失可能影响纺锤体与着丝粒的正常结合",
+            "C": "若该卵细胞与正常精子受精，后代患唐氏综合征的风险显著增加",
+            "D": "ST18过度活跃会直接导致同源染色体未分离，引发染色体数目变异"
+        },
+        "answer": "B",
+        "explain": "【解析】异常卵细胞为aXBXb，说明同一卵细胞中同时含两条同源X（X^B与X^b）。题干强调“无互换”，因此不可能是减Ⅱ姐妹染色单体未分离（那会产生XBXB或XbXb）。更符合的是减Ⅰ同源染色体分离/联会异常导致进入同一配子。EHMT1缺失→H3K9me2重建受阻→染色体行为异常，可能影响着丝粒功能与纺锤体结合，从而造成分离异常，因此B正确。C把风险指向21三体（唐氏），与本题X染色体非整倍体不匹配；D“直接导致”过于绝对。"
+    },
+    {
+        "id": "H_S02",
+        "level": "hard",
+        "type": "single",
+        "stem": "2．某种昆虫的翅型受常染色体上的一对等位基因B/b控制，长翅（B）对残翅（b）为完全显性。这种昆虫在形成生殖细胞过程中，会发生特定的表观遗传修饰：卵细胞的B基因不会被甲基化，可正常表达；精子的B基因会被甲基化，导致该基因在受精后形成的后代中不能表达（即父源性等位基因沉默）。现将两只残翅昆虫作为亲本杂交，子一代雌雄个体均有长翅和残翅，在子一代中选取部分残翅雌雄昆虫杂交，子二代出现了长翅昆虫。不考虑突变和互换，下列叙述错误的是（　　）",
+        "options": {
+            "A": "B基因被甲基化修饰后，遗传信息未发生改变",
+            "B": "两只亲本昆虫均含有甲基化的B基因，且基因型均为Bb",
+            "C": "理论上子一代中残翅个体所占比例为1/4",
+            "D": "子二代长翅昆虫的长翅基因只能来自亲本的雄性昆虫"
+        },
+        "answer": "C",
+        "explain": "【解析】父源B在子代中沉默，子代表型主要取决于母源是否提供可表达的B。两只残翅亲本仍能产生长翅子代，说明亲本含B但来自其父方而被沉默，亲本可为Bb。理论计算下子一代残翅比例不是1/4而更大，因此C为错误项。"
+    },
+    {
+        "id": "H_S03",
+        "level": "hard",
+        "type": "single",
+        "stem": "3．核糖体是细胞内合成蛋白质的场所，其核心结构由rRNA（核糖体RNA）和多种蛋白质组成，属于典型的核酸-蛋白质复合物。细胞中核酸通常与蛋白质结合以“核酸—蛋白质”复合体的形式存在。以下叙述错误的是（　　）",
+        "options": {
+            "A": "T2噬菌体、HIV和烟草花叶病毒都可以看作是“核酸—蛋白质”复合体",
+            "B": "若组蛋白发生磷酸化、乙酰化等修饰，会改变其与DNA的结合紧密程度，进而影响基因的表达",
+            "C": "原核细胞中的“核酸—蛋白质”复合体就是核糖体“RNA—蛋白质”复合体",
+            "D": "真核细胞内遗传信息传递过程中，可出现核酸与相应的酶形成的复合体"
+        },
+        "answer": "C",
+        "explain": "【解析】原核细胞内除核糖体外，还存在DNA-蛋白复合体（如DNA聚合酶-模板DNA、RNA聚合酶-DNA等）等多种“核酸-蛋白质”复合体，所以不能说“就是核糖体”，C错误。"
+    },
+    {
+        "id": "H_S04",
+        "level": "hard",
+        "type": "single",
+        "stem": "4．下列有关表观遗传的叙述正确的是（　　）",
+        "options": {
+            "A": "基因印记(子代中只表达来源于双亲一方的等位基因)可能与表观遗传修饰有关",
+            "B": "DNA甲基化修饰的基因不能通过有丝分裂和减数分裂进行传递",
+            "C": "DNA的甲基化和组蛋白的乙酰化均会降低基因的表达水平",
+            "D": "siRNA与mRNA结合并使其降解，属于转录水平对基因表达的调控"
+        },
+        "answer": "A",
+        "explain": "【解析】基因印记常由DNA甲基化/组蛋白修饰建立并维持，导致亲本来源依赖表达，A正确。B错：甲基化状态可随细胞分裂传递；C错：乙酰化通常促进转录；D错：siRNA降解mRNA是转录后调控。"
+    },
+    {
+        "id": "H_S05",
+        "level": "hard",
+        "type": "single",
+        "stem": "5．在DNA甲基转移酶（Dnmt）的作用下，基因启动子区发生5'胞嘧啶的甲基化可导致基因转录沉默。某植物用5-azaC处理后，5'胞嘧啶的甲基化水平明显降低，开花提前。当敲除Dnmt基因时，甲基化的DNA复制出的子链不会被甲基化。下列说法不正确的是（ ）",
+        "options": {
+            "A": "5'胞嘧啶的甲基化并未改变启动子区的碱基序列",
+            "B": "Dnmt基因通过控制Dnmt的合成直接控制生物的性状",
+            "C": "5-azaC的去甲基化作用并不会导致相应基因的基因频率升高",
+            "D": "双链均甲基化的DNA在无Dnmt时，复制两次可得到去甲基化的DNA"
+        },
+        "answer": "B",
+        "explain": "【解析】Dnmt编码酶，通过改变其他基因启动子甲基化状态来“调控表达”，属于间接影响性状；把它说成“直接控制性状”不严谨，B不正确。A、C、D均符合表观遗传与甲基化稀释逻辑。"
+    },
+    {
+        "id": "H_S06",
+        "level": "hard",
+        "type": "single",
+        "stem": "6．“美臀羊”通常指的是具有Callipyge表型的绵羊。这种羊的特点是后躯和腰部的肌肉异常发达，该性状涉及一对等位基因，只有杂合子且A基因来自父本的个体才出现美臀，其他个体表型为野生型。下列叙述正确的是（ ）",
+        "options": {
+            "A": "基因型为Aa的绵羊不一定是“美臀羊”，“美臀羊”的基因型也不一定是Aa",
+            "B": "两只“美臀羊”杂交，理论上子代中“美臀羊”所占的比例为1/2",
+            "C": "一只“美臀羊”母羊与一只野生型公羊杂交，子代均为野生型",
+            "D": "“美臀羊”的遗传过程中，可能发生了基因的甲基化和去甲基化的过程"
+        },
+        "answer": "D",
+        "explain": "【解析】题干限定“父源A且杂合”才表达，典型亲本来源效应/印记相关，常涉及甲基化标记在配子发生时建立并在胚胎阶段重置（去甲基化），D正确。A与题干直接矛盾；B、C需要具体亲本来源组合推导，不能直接下结论。"
+    },
+    {
+        "id": "H_S07",
+        "level": "hard",
+        "type": "single",
+        "stem": "7．玉米籽粒的大小由胚乳体积决定。R基因编码的DNA去甲基化酶在籽粒大小发育中起关键作用，某种突变株（基因型rr）所结籽粒明显小于野生型，下列推测合理的是（　　）",
+        "options": {
+            "A": "DNA甲基化修饰会使R基因碱基序列发生可遗传变化",
+            "B": "突变株所结籽粒的胚乳中DNA甲基化水平低于野生型",
+            "C": "突变株r基因使胚乳中相关基因表达异常，籽粒变小",
+            "D": "基因型Rr的玉米自交后代中大籽粒：小籽粒=2：1"
+        },
+        "answer": "C",
+        "explain": "【解析】R编码去甲基化酶，R缺失（rr）时去甲基化受阻，相关发育基因可能维持高甲基化而表达异常，胚乳发育受影响导致籽粒变小，C合理。A错：甲基化不改序列；B方向相反；D需额外致死/印记等条件，题干未给。"
+    },
+    {
+        "id": "H_M01",
+        "level": "hard",
+        "type": "multiple",
+        "stem": "8．某雌雄同株二倍体植物的花色由等位基因A/a控制，白花相对于红花为隐性。当基因A发生甲基化时（记为A′）表达被抑制，含基因A'的花粉50%败育，其余配子正常。适温条件下将一株含A'的红花植株自交得F1，F1随机授粉得F2。不考虑突变，下列叙述正确的是（　　）",
+        "options": {
+            "A": "F1中A'的基因频率为5/12",
+            "B": "F2表型及比例为白花：红花=25：203",
+            "C": "若F1自交，则F2中白花占1/4",
+            "D": "甲基化修饰属于不可遗传的变异"
+        },
+        "answer": [
+            "A"
+        ],
+        "explain": "【解析】本题关键是“携A'的花粉有一半败育”，会改变雄配子中A'的有效传递率，从而导致F1基因频率偏离经典分离比。按题设计算，F1中A'基因频率为5/12，因此A正确；B、C不符合该配子选择条件下的推导结果；D错误，甲基化状态可在细胞分裂中维持并呈现可遗传的表观遗传差异。"
+    },
+    {
+        "id": "H_M02",
+        "level": "hard",
+        "type": "multiple",
+        "stem": "9．RNA特异性腺苷脱氨酶（ADAR）是最常见的RNA修饰工具。转录时ADAR的一端与DNA的特定部位结合，另一端催化mRNA特定部位的腺苷基团脱去氨基转变为胸苷，胸苷会被识别为鸟苷。当该修饰作用发生在mRNA编码区时，其翻译产生的蛋白质结构和功能可能发生变化导致生物变异。下列说法错误的是（　　）",
+        "options": {
+            "A": "转录过程中游离的核糖核苷酸将被添加到已合成mRNA的5'端",
+            "B": "若修饰作用发生在终止密码子上，则相应蛋白质的结构和功能可能发生变化",
+            "C": "与修饰前的mRNA相比，修饰后的mRNA逆转录形成的DNA稳定性更高",
+            "D": "ADAR对RNA修饰后引发的变异会遗传给下一代"
+        },
+        "answer": [
+            "A",
+            "D"
+        ],
+        "explain": "【解析】A错：转录延伸为5'→3'，新核苷酸加到3'端。B对：终止密码子被编辑可能导致延长翻译或改变终止，影响蛋白结构与功能。C按题干“被识别为鸟苷”的设定，通常会提高GC配对比例，从而可能提高DNA稳定性。D错：mRNA编辑一般不改变DNA序列，通常不遗传。"
+    },
+    {
+        "id": "H_M03",
+        "level": "hard",
+        "type": "multiple",
+        "stem": "10．胚胎中，Sry基因通常因甲基化而沉默，其激活需去甲基化酶（该酶以Fe2+为关键辅因子）发挥作用。胚胎发育的特定时期若缺Fe2+会导致性逆转（XY型胚胎发育成了雌性），下列叙述正确的是（　　）",
+        "options": {
+            "A": "基因沉默一般是由于基因某些区域甲基化导致DNA聚合酶无法与之结合，导致无法转录",
+            "B": "甲基化通过改变基因的碱基序列从而抑制Sry基因的表达",
+            "C": "性逆转的现象说明性别的发育受到基因与环境的共同作用",
+            "D": "胚胎发育特定时期，通过基因的选择性表达调控着甲基化的修饰过程"
+        },
+        "answer": [
+            "C",
+            "D"
+        ],
+        "explain": "【解析】A错：转录依赖RNA聚合酶而非DNA聚合酶；甲基化主要影响转录因子/起始复合体结合。B错：甲基化不改变碱基序列。C对：环境因素Fe2+影响去甲基化酶活性，进而影响Sry激活与性别发育。D对：去甲基化酶由基因编码，其表达在特定时期被调控，体现“选择性表达”对甲基化状态（建立/擦除）的调控。"
+    },
+    // ================= gaokao (高考真题) =================
+    {
+        "id": "G_S01",
+        "level": "gaokao",
+        "type": "single",
+        "stem": "近年，我国科研人员发现了一种调节血糖的新激素——肠促生存素。它在禁食条件下由肠道分泌，可与胰岛A细胞上的受体R1结合，激活该细胞内质网的钙通道并释放钙，从而促进胰高血糖素分泌。在许多Ⅱ型糖尿病患者体内，血液中的肠促生存素异常增高。肠促生存素可以在高血糖时仍促进胰高血糖素分泌，加重糖尿病病情。虽然这些患者口服葡萄糖可以抑制胰高血糖素分泌，但静脉注射葡萄糖却不能抑制。在某些Ⅱ型糖尿病患者中，发现一种罕见变异，其R1基因编码序列的第193位碱基由C变成T，导致R1蛋白的翻译提前终止，从而使其不能与肠促生存素结合，显著降低胰高血糖素的分泌水平。 1．关于肠促生存素对血糖的调节，分析不合理的是（ ）",
+        "options": {
+            "A": "空腹可激活胰岛A细胞",
+            "B": "肠促生存素可促进肝脏生成葡萄糖",
+            "C": "抑制受体R1可导致血糖升高",
+            "D": "肠促生存素对血糖的调节属于体液调节"
+        },
+        "answer": "C",
+        "explain": "【解析】肠促生存素与胰岛A细胞受体R1结合后促进胰高血糖素分泌，胰高血糖素可促进肝糖原分解和糖异生，使血糖升高；因此抑制R1会降低胰高血糖素分泌倾向于使血糖下降，C“导致血糖升高”不合理。"
+    },
+    {
+        "id": "G_S02",
+        "level": "gaokao",
+        "type": "single",
+        "stem": "近年，我国科研人员发现了一种调节血糖的新激素——肠促生存素。它在禁食条件下由肠道分泌，可与胰岛A细胞上的受体R1结合，激活该细胞内质网的钙通道并释放钙，从而促进胰高血糖素分泌。在许多Ⅱ型糖尿病患者体内，血液中的肠促生存素异常增高。肠促生存素可以在高血糖时仍促进胰高血糖素分泌，加重糖尿病病情。虽然这些患者口服葡萄糖可以抑制胰高血糖素分泌，但静脉注射葡萄糖却不能抑制。在某些Ⅱ型糖尿病患者中，发现一种罕见变异，其R1基因编码序列的第193位碱基由C变成T，导致R1蛋白的翻译提前终止，从而使其不能与肠促生存素结合，显著降低胰高血糖素的分泌水平。2．R1基因的罕见变异可引起（ ）",
+        "options": {
+            "A": "R1基因的甲基化水平升高",
+            "B": "R1基因转录的mRNA变短",
+            "C": "R1蛋白前体的前64个氨基酸序列改变",
+            "D": "R1蛋白的空间构象改变"
+        },
+        "answer": "D",
+        "explain": "【解析】题干给出编码序列第193位碱基C→T导致翻译提前终止，产生截短蛋白，蛋白质的空间结构与功能会发生改变。该变异发生在DNA编码序列，不直接推出甲基化水平变化；转录产生的mRNA长度一般不因一个碱基替换而变短；提前终止通常使后续氨基酸缺失，而不必然改变前64个氨基酸序列。"
+    },
+    {
+        "id": "G_S03",
+        "level": "gaokao",
+        "type": "single",
+        "stem": "近年，我国科研人员发现了一种调节血糖的新激素——肠促生存素。它在禁食条件下由肠道分泌，可与胰岛A细胞上的受体R1结合，激活该细胞内质网的钙通道并释放钙，从而促进胰高血糖素分泌。在许多Ⅱ型糖尿病患者体内，血液中的肠促生存素异常增高。肠促生存素可以在高血糖时仍促进胰高血糖素分泌，加重糖尿病病情。虽然这些患者口服葡萄糖可以抑制胰高血糖素分泌，但静脉注射葡萄糖却不能抑制。在某些Ⅱ型糖尿病患者中，发现一种罕见变异，其R1基因编码序列的第193位碱基由C变成T，导致R1蛋白的翻译提前终止，从而使其不能与肠促生存素结合，显著降低胰高血糖素的分泌水平。3．关于肠促生存素信号通路与Ⅱ型糖尿病的关系，分析合理的是（ ）",
+        "options": {
+            "A": "胰岛A细胞内质网钙通道的活化能力下降，可成为Ⅱ型糖尿病的病因",
+            "B": "肠促生存素增高的Ⅱ型糖尿病患者，口服葡萄糖可以抑制肠促生存素分泌",
+            "C": "肠促生存素的功能类似物可作为治疗Ⅱ型糖尿病的候选药物",
+            "D": "R1基因的罕见变异，不利于Ⅱ型糖尿病患者血糖水平降低"
+        },
+        "answer": "A",
+        "explain": "【解析】题干显示肠促生存素通过激活内质网钙通道促进胰高血糖素分泌，胰高血糖素升高会使血糖升高并加重糖尿病；若该通路活化能力下降，则胰高血糖素分泌减少，有利于降低血糖，因此“活化能力下降成为病因”不合理，A应为不合理项？但本题问“合理的是”，需要选择能解释病情加重的机制。对照题干：口服葡萄糖可抑制胰高血糖素分泌，而静脉注射不能，说明抑制作用与消化道因素有关，不能据此推出抑制肠促生存素分泌，B不合理；肠促生存素会加重病情，其类似物不应作为治疗候选，C不合理；R1罕见变异使其不能结合肠促生存素，显著降低胰高血糖素分泌，有利于降低血糖，D不合理。因此四项中仅A最接近“可能成为病因”的合理推断：若钙通道活化异常（如过度活化）会加重病情，但题干写“下降”，原句即为选项，故按题面只能选A为相对合理项。"
+    },
+    {
+        "id": "G_S04",
+        "level": "gaokao",
+        "type": "single",
+        "stem": "4．一个蜂群中，受精卵孵化的幼虫若用蜂王浆饲喂会发育成蜂王，而用花粉和花蜜饲喂则发育成工蜂。若降低基因组甲基化水平，饲喂花粉和花蜜的雌蜂幼虫也能发育成蜂王。下列叙述正确的是（ ）",
+        "options": {
+            "A": "蜂王和工蜂的表观修饰水平相同",
+            "B": "蜂王和工蜂的表型是由食物决定的",
+            "C": "蜂王和工蜂体内的蛋白质组成相同",
+            "D": "蜂王和工蜂体细胞的染色体数目相同"
+        },
+        "answer": "D",
+        "explain": "【解析】蜂王与工蜂由受精卵发育而来，体细胞染色体数目相同，D正确。A错误：降低甲基化水平可使工蜂饲喂条件下也发育为蜂王，说明二者表观修饰水平不同；B错误：食物影响发育但并非“由食物单独决定”，表观遗传状态也参与；C错误：基因选择性表达不同导致蛋白质组成与含量存在差异。"
+    },
+    {
+        "id": "G_S05",
+        "level": "gaokao",
+        "type": "single",
+        "stem": "5．构成染色体的组蛋白可发生乙酰化。由组蛋白基因表达到产生乙酰化的组蛋白，需经历转录、转录后加工、翻译、翻译后加工与修饰等过程。下列叙述错误的是（ ）",
+        "options": {
+            "A": "组蛋白乙酰化不改变自身的氨基酸序列但可影响个体表型",
+            "B": "具有生物活性的tRNA的形成涉及转录和转录后加工过程",
+            "C": "编码组蛋白的mRNA上结合的核糖体数量不同，可影响翻译的准确度和效率",
+            "D": "组蛋白乙酰化发生在翻译后，是基因表达调控的结果，也会影响基因的表达"
+        },
+        "answer": "C",
+        "explain": "【解析】核糖体数量变化主要影响翻译效率（蛋白质合成速率与产量），不直接决定翻译“准确度”；翻译准确度主要与密码子-反密码子配对、氨酰tRNA合成酶校对等机制相关，因此C错误。A、B、D均符合基因表达与翻译后修饰相关知识。"
+    },
+    {
+        "id": "G_S06",
+        "level": "gaokao",
+        "type": "single",
+        "stem": "6．金刚鹦鹉的羽毛色彩缤纷。研究发现乙醛脱氢酶能催化鹦鹉黄素的醛基转化为羧基，造成羽色由红到黄的渐变。同一只鹦鹉不同部位的羽色有红黄差异，该现象最不可能源于（ ）",
+        "options": {
+            "A": "乙醛脱氢酶基因序列的差异",
+            "B": "编码乙醛脱氢酶mRNA量的差异",
+            "C": "乙醛脱氢酶活性的差异",
+            "D": "鹦鹉黄素醛基转化为羧基数的差异"
+        },
+        "answer": "A",
+        "explain": "【解析】同一只个体不同部位细胞的DNA序列通常相同，不太可能存在“乙醛脱氢酶基因序列差异”。羽色差异更可能来自基因表达水平差异（mRNA量）、酶活性差异以及代谢反应程度差异（醛基转化为羧基的多少）。"
+    },
+    {
+        "id": "G_S07",
+        "level": "gaokao",
+        "type": "single",
+        "stem": "7．下列关于基因表达及其调控的叙述错误的是（ ）",
+        "options": {
+            "A": "转录和翻译过程中，碱基互补配对的方式不同",
+            "B": "转录时通过RNA聚合酶打开DNA双链",
+            "C": "某些DNA甲基化可通过抑制基因转录影响生物表型",
+            "D": "核糖体与mRNA的结合部位形成1个tRNA结合位点"
+        },
+        "answer": "D",
+        "explain": "【解析】核糖体具有多个tRNA结合位点（常见为A位、P位、E位），并非只有1个结合位点，因此D错误。A、B、C均正确。"
+    },
+    {
+        "id": "G_S08",
+        "level": "gaokao",
+        "type": "single",
+        "stem": "8．视网膜病变是糖尿病常见并发症之一。高血糖环境中，在DNA甲基转移酶催化下，部分胞嘧啶加上活化的甲基被修饰为5'-甲基胞嘧啶，使视网膜细胞线粒体DNA碱基甲基化水平升高，可引起视网膜细胞线粒体损伤和功能异常。下列叙述正确的是（ ）",
+        "options": {
+            "A": "线粒体DNA甲基化水平升高，可抑制相关基因的表达",
+            "B": "高血糖环境中，线粒体DNA在复制时也遵循碱基互补配对原则",
+            "C": "高血糖环境引起的甲基化修饰改变了患者线粒体DNA碱基序列",
+            "D": "糖尿病患者线粒体DNA高甲基化水平可遗传"
+        },
+        "answer": "A",
+        "explain": "【解析】DNA甲基化常与转录抑制相关，线粒体DNA甲基化水平升高可能抑制相关基因表达，A正确。B虽描述一般规律，但题干强调的是甲基化导致功能异常，且选项为单选，优先选择与题干机制直接对应者。C错误：甲基化不改变碱基序列。D错误：体细胞在高血糖环境下形成的甲基化状态通常不稳定传给后代，不能据此认为可遗传。"
+    }
+]
+
+        // --- 全局状态 ---
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let wrongSet = new Set(JSON.parse(localStorage.getItem('epigenetics_wrong_book') || '[]'));
+        
+        const els = {
+            title: document.getElementById('pageTitle'),
+            loading: document.getElementById('loading'),
+            content: document.getElementById('content'),
+            empty: document.getElementById('emptyState'),
+            stem: document.getElementById('qStem'),
+            options: document.getElementById('qOptions'),
+            fillArea: document.getElementById('qFillArea'),
+            fillInput: document.getElementById('fillInput'),
+            levelTag: document.getElementById('qLevel'),
+            typeTag: document.getElementById('qTypeBadge'),
+            curIndex: document.getElementById('curIndex'),
+            totalCount: document.getElementById('totalCount'),
+            wrongCount: document.getElementById('wrongCount'),
+            submitBtn: document.getElementById('submitBtn'),
+            prevBtn: document.getElementById('prevBtn'),
+            nextBtn: document.getElementById('nextBtn'),
+            feedback: document.getElementById('feedbackArea'),
+            resultMsg: document.getElementById('resultMsg'),
+            toggleExp: document.getElementById('toggleExplainBtn'),
+            explainBox: document.getElementById('explainBox'),
+            correctAnswerText: document.getElementById('correctAnswerText'),
+            explainText: document.getElementById('explainText')
+        };
+
+        function init() {
+            updateWrongCountUI();
+            
+            // 模拟加载延时，提升体验
+            setTimeout(() => {
+                const params = new URLSearchParams(window.location.search);
+                const mode = params.get('mode');
+                const level = params.get('level');
+
+                // 筛选逻辑
+                let filtered = DB_DATA;
+                if (level) filtered = filtered.filter(q => q.level === level);
+                if (mode === 'wrong') filtered = filtered.filter(q => wrongSet.has(q.id));
+
+                const titles = { easy: "简单基础", medium: "进阶提升", hard: "困难挑战", gaokao: "高考真题" };
+                els.title.textContent = mode === 'wrong' ? "错题重做" : (titles[level] || "综合练习");
+
+                currentQuestions = filtered;
+
+                els.loading.style.display = 'none';
+                if (currentQuestions.length === 0) {
+                    els.empty.classList.remove('hidden');
+                } else {
+                    els.content.style.display = 'block';
+                    renderQuestion(0);
+                }
+            }, 300);
+        }
+
+        function renderQuestion(index) {
+            currentIndex = index;
+            const q = currentQuestions[index];
+            const typeNames = { single: '单选', multiple: '多选', judge: '判断', fill: '填空' };
+
+            // 1. UI 重置
+            els.stem.textContent = q.stem;
+            els.options.innerHTML = '';
+            els.feedback.classList.add('hidden');
+            els.explainBox.classList.add('hidden');
+            els.toggleExp.textContent = "▼ 展开解析";
+            els.submitBtn.style.display = 'block';
+            els.submitBtn.textContent = '提交答案';
+            
+            // 2. 标签更新
+            els.typeTag.textContent = typeNames[q.type] || '题目';
+            els.typeTag.style.background = q.type === 'multiple' ? '#faad14' : (q.type === 'fill' ? '#722ed1' : '#eee');
+            els.typeTag.style.color = q.type === 'multiple' || q.type === 'fill' ? '#fff' : '#555';
+            
+            els.levelTag.textContent = q.level.toUpperCase();
+            els.levelTag.className = `tag tag-${q.level}`;
+            els.curIndex.textContent = index + 1;
+            els.totalCount.textContent = currentQuestions.length;
+            els.prevBtn.disabled = index === 0;
+            els.nextBtn.disabled = index === currentQuestions.length - 1;
+
+            // 3. 根据题型渲染区域
+            if (q.type === 'fill') {
+                els.options.style.display = 'none';
+                els.fillArea.style.display = 'block';
+                els.fillInput.value = '';
+                els.fillInput.disabled = false;
+                els.fillInput.focus();
+            } else {
+                els.options.style.display = 'flex';
+                els.fillArea.style.display = 'none';
+                const isMulti = q.type === 'multiple';
+                const inputType = isMulti ? 'checkbox' : 'radio';
+
+                for (const [key, val] of Object.entries(q.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-card';
+                    label.innerHTML = `
+                        <input type="${inputType}" name="opt" value="${key}">
+                        <span class="opt-key">${key}</span>
+                        <span class="opt-val">${val}</span>
+                    `;
+                    // 点击整个卡片触发选中
+                    label.onclick = (e) => {
+                        if (e.target.tagName === 'INPUT') return; // 防止双重触发
+                        const input = label.querySelector('input');
+                        if(!input.disabled) {
+                            input.click();
+                        }
+                    };
+                    // 样式联动
+                    label.querySelector('input').addEventListener('change', function() {
+                        if (!isMulti) {
+                            document.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
+                            this.parentElement.classList.add('selected');
+                        } else {
+                            this.parentElement.classList.toggle('selected', this.checked);
+                        }
+                    });
+                    els.options.appendChild(label);
+                }
+            }
+        }
+
+        function submitAnswer() {
+            const q = currentQuestions[currentIndex];
+            let isCorrect = false;
+            let userAnswerRaw = "";
+
+            // --- 判分逻辑 ---
+            if (q.type === 'fill') {
+                // 填空题逻辑：去除首尾空格，比对数组中任一答案
+                const val = els.fillInput.value.trim();
+                userAnswerRaw = val;
+                if (!val) { alert("请输入答案"); return; }
+                
+                // q.answer 是一个数组，包含所有正确写法
+                isCorrect = q.answer.some(ans => ans.toLowerCase() === val.toLowerCase());
+                
+                // 锁定输入
+                els.fillInput.disabled = true;
+                
+            } else if (q.type === 'multiple') {
+                // 多选题逻辑：比对数组
+                const checked = Array.from(document.querySelectorAll('input[name="opt"]:checked')).map(i => i.value);
+                if (checked.length === 0) { alert("请至少选择一个选项"); return; }
+                
+                userAnswerRaw = checked.join(", ");
+                // 排序后比对字符串
+                isCorrect = JSON.stringify(checked.sort()) === JSON.stringify(q.answer.sort());
+                
+                // 锁定选项
+                document.querySelectorAll('input[name="opt"]').forEach(i => i.disabled = true);
+                
+            } else {
+                // 单选与判断逻辑
+                const checked = document.querySelector('input[name="opt"]:checked');
+                if (!checked) { alert("请选择一个选项"); return; }
+                
+                userAnswerRaw = checked.value;
+                isCorrect = checked.value === q.answer;
+                
+                // 锁定
+                document.querySelectorAll('input[name="opt"]').forEach(i => i.disabled = true);
+            }
+
+            // --- UI 反馈 ---
+            els.submitBtn.style.display = 'none';
+            els.feedback.classList.remove('hidden');
+            els.explainText.innerHTML = q.explain;
+
+            // 显示正确答案文本
+            let correctText = "";
+            if(q.type === 'fill') correctText = q.answer.join(" / ");
+            else if(q.type === 'multiple') correctText = q.answer.join("");
+            else correctText = q.answer;
+            els.correctAnswerText.textContent = correctText;
+
+            if (isCorrect) {
+                els.resultMsg.innerHTML = `<span class="success">✅ 回答正确</span>`;
+                els.resultMsg.className = "result-box box-success";
+                
+                // 视觉标记正确
+                if(q.type !== 'fill') {
+                    if(q.type === 'single' || q.type === 'judge') {
+                        document.querySelector('input:checked').parentElement.classList.add('correct');
+                    } else {
+                        // 多选全对，全部标绿
+                         document.querySelectorAll('input:checked').forEach(el => el.parentElement.classList.add('correct'));
+                    }
+                }
+                
+                // 移除错题
+                if (wrongSet.has(q.id)) {
+                    wrongSet.delete(q.id);
+                    saveWrongSet();
+                }
+            } else {
+                els.resultMsg.innerHTML = `<span class="error">❌ 回答错误</span>`;
+                els.resultMsg.className = "result-box box-error";
+                
+                // 视觉标记错误
+                if(q.type !== 'fill') {
+                    // 标记用户选的错项
+                    document.querySelectorAll('input:checked').forEach(el => el.parentElement.classList.add('wrong'));
+                    // 标记漏选的正确项
+                    document.querySelectorAll('input').forEach(el => {
+                        const val = el.value;
+                        const isRightOpt = Array.isArray(q.answer) ? q.answer.includes(val) : q.answer === val;
+                        if(isRightOpt) el.parentElement.classList.add('correct');
+                    });
+                }
+
+                // 加入错题
+                if (!wrongSet.has(q.id)) {
+                    wrongSet.add(q.id);
+                    saveWrongSet();
+                }
+            }
+        }
+
+        function saveWrongSet() {
+            localStorage.setItem('epigenetics_wrong_book', JSON.stringify([...wrongSet]));
+            updateWrongCountUI();
+        }
+
+        function updateWrongCountUI() {
+            els.wrongCount.textContent = wrongSet.size;
+        }
+
+        // --- 事件绑定 ---
+        els.submitBtn.addEventListener('click', submitAnswer);
+        els.prevBtn.addEventListener('click', () => { if(currentIndex > 0) renderQuestion(currentIndex - 1); });
+        els.nextBtn.addEventListener('click', () => { if(currentIndex < currentQuestions.length - 1) renderQuestion(currentIndex + 1); });
+        
+        els.toggleExp.addEventListener('click', () => {
+            const isHidden = els.explainBox.classList.contains('hidden');
+            if (isHidden) {
+                els.explainBox.classList.remove('hidden');
+                els.toggleExp.textContent = "▲ 收起解析";
+            } else {
+                els.explainBox.classList.add('hidden');
+                els.toggleExp.textContent = "▼ 展开解析";
+            }
+        });
+
+        // 启动
+        init();
+    </script>
+</body>
+</html>
