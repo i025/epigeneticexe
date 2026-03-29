@@ -1,16 +1,18 @@
 (function () {
-    const CHAT_URL_PLACEHOLDER = "";
-    const CHAT_TITLE = "AI Assistant";
-    const OPEN_LABEL = "Open assistant";
-    const RESIZE_LABEL = "Resize panel";
-    const KICKER_LABEL = "Interactive Helper";
-    const EXPAND_LABEL = "Toggle expanded panel";
-    const CLOSE_LABEL = "Close chat panel";
-    const PLACEHOLDER_TITLE = "Chat URL required";
+   const CHAT_URL_PLACEHOLDER = "";
+    const CHAT_TITLE = "\u84dd\u6676\u535a\u58eb";
+    const OPEN_LABEL = "\u6253\u5f00\u667a\u80fd\u52a9\u624b";
+    const RESIZE_LABEL = "\u62d6\u52a8\u8c03\u6574\u5927\u5c0f";
+    const KICKER_LABEL = "\u4e92\u52a8\u52a9\u624b";
+    const EXPAND_LABEL = "\u5207\u6362\u5927\u7a97\u53e3";
+    const CLOSE_LABEL = "\u5173\u95ed\u804a\u5929\u9762\u677f";
+    const FRAME_TITLE = "\u804a\u5929\u9762\u677f";
+    const PLACEHOLDER_TITLE = "\u667a\u80fd\u4f53\u5730\u5740\u5f85\u586b";
     const PLACEHOLDER_TEXT =
-        "The widget is using placeholder content because no chat URL is available.";
+        "\u5f53\u524d\u4f7f\u7528\u7684\u662f\u5360\u4f4d\u914d\u7f6e\uff0c\u6240\u4ee5\u8fd9\u91cc\u5148\u663e\u793a\u8bf4\u660e\u9762\u677f\u3002";
     const PLACEHOLDER_HINT =
-        "Set <code>data-chat-url</code> on the current page <code>body</code> to load a page-specific assistant.";
+        "\u540e\u7eed\u5728\u5f53\u524d\u9875\u9762\u7684 <code>body</code> \u4e0a\u8bbe\u7f6e <code>data-chat-url</code>\uff0c\u6bcf\u4e00\u4e2a\u9875\u9762\u90fd\u53ef\u4ee5\u586b\u6210\u4e0d\u540c\u7684\u5b9a\u5236\u667a\u80fd\u4f53\u94fe\u63a5\u3002";
+    const RETRY_DELAYS = [120, 400, 900, 1800, 3200];
     const SCENE_SRC = "../../assets/videos/scene.webm";
 
     function hasValidChatUrl(url) {

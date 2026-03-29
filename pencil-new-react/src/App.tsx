@@ -189,7 +189,7 @@ function getLocationLines(route: AppRoute) {
 
   const activeRoute = routeRegistry[route.routeKey];
   const activeGroup = routeGroupMap[activeRoute.group];
-  return [activeGroup.label, activeRoute.label, "同壳承接"];
+  return [activeGroup.label, activeRoute.label];
 }
 
 type ViewerContentProps = {
@@ -222,8 +222,8 @@ function ViewerContent({ routeKey, onGoHome, onOpenRoute }: ViewerContentProps) 
     isArticleRoute ? ` ${styles.viewerFrameArticle}` : ""
   }`;
   const viewerMetaText = isArticleRoute
-    ? `${headerContent.brandTitle} · 统一阅读壳`
-    : `${headerContent.brandTitle} · 学习页面壳层`;
+    ? `${headerContent.brandTitle} · 统一阅读`
+    : `${headerContent.brandTitle} · 学习页面`;
 
   return (
     <div className={viewerMainClassName}>

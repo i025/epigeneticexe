@@ -60,7 +60,7 @@ export const sideRailContent = {
       tone: "violet",
       items: [
         { label: "CpG 岛案例", target: "cpg" },
-        { label: "饥荒与表观遗传", target: "famine" }
+        { label: "荷兰饥荒案例", target: "famine" }
       ]
     }
   ],
